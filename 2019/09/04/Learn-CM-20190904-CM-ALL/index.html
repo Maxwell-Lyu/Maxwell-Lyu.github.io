@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>CM-ALL | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Course,Combinatorics">
+    <meta name="description" content="Lesson 1 combinatorial $\sim$ discrete &amp;amp; finite  solution combinatorial object constraint combinatorial structure   Enumeration: How many solutions satisfying the constraints  Existence: Does ther">
+<meta name="keywords" content="Course,Combinatorics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CM-ALL">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="Lesson 1 combinatorial $\sim$ discrete &amp;amp; finite  solution combinatorial object constraint combinatorial structure   Enumeration: How many solutions satisfying the constraints  Existence: Does ther">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-09T13:00:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CM-ALL">
+<meta name="twitter:description" content="Lesson 1 combinatorial $\sim$ discrete &amp;amp; finite  solution combinatorial object constraint combinatorial structure   Enumeration: How many solutions satisfying the constraints  Existence: Does ther">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends">
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/">
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CM-ALL</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">CM-ALL</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-04T06:02:01.000Z" itemprop="datePublished" class="page-time">
+  2019-09-04
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Lesson-1"><span class="post-toc-number">1.</span> <span class="post-toc-text">Lesson 1</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Learn-CM-20190904-CM-ALL" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CM-ALL</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-04 14:02:01" datetime="2019-09-04T06:02:01.000Z" itemprop="datePublished">2019-09-04</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Lesson-1"><a href="#Lesson-1" class="headerlink" title="Lesson 1"></a>Lesson 1</h1><ul>
+<li><p>combinatorial $\sim$ discrete &amp; finite</p>
+<ul>
+<li>solution combinatorial object</li>
+<li>constraint combinatorial structure</li>
+</ul>
+</li>
+<li><p>Enumeration: How many solutions satisfying the constraints</p>
+</li>
+<li>Existence: Does there exist a solution</li>
+<li>Extremal: How large/small a solution can be to preserve/avoid structure</li>
+<li>Ramsey: when a solution is sufficiently large, some structures must emerge</li>
+<li>Optimization: find the optimal solution</li>
+<li><p>Construction: construct a solution</p>
+</li>
+<li><p>Enumeration(Counting)</p>
+<ul>
+<li>How many ways are there:<ol>
+<li>$n!$ to rank $n$ people</li>
+<li>$12^n$ to assign $m$ zodiac signs to $n$ people</li>
+<li>$n \choose m$ to choose $m$ people out of $n$ people</li>
+<li>$n-1 \choose m-1$ to partition $n$ people into $m$ groups</li>
+<li>$?$ to distribute $m$ yuan to $n$ people </li>
+<li>$?$ to partition $m$ yuan to $n$ parts </li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Notation</th>
+<th>Number</th>
+<th>Repetition</th>
+<th>Ordered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tuple</td>
+<td>$n$-tuples of $[m]$</td>
+<td>$[m]^n$</td>
+<td>$m^n$</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>Nultiset</td>
+<td>$k$-multiset of $n$-set</td>
+<td>-</td>
+<td>${n+k-1\choose k}$</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>Subset</td>
+<td>$k$-uniform of $n$-set, $\</td>
+<td>S\</td>
+<td>=n$</td>
+<td>-</td>
+<td>$\binom{n}{k}$</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>Partition</td>
+<td>$k$-partition of $n$-set</td>
+<td>-</td>
+<td>$\{ {n\atop k} \}$</td>
+<td>N</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The product rule: $|S\times T|=|S|\cdot|T|$ </li>
+<li>The bijection rule: if there exists a bijection between finite sets $S$ and $T$, then $|S|=|T|$.</li>
+</ul>
+<ul>
+<li>Tuples<ul>
+<li>$[m]=\{1,2,\cdots,m\}$</li>
+<li>$[m]^n=[m] \times [m] \times\cdots\times [m]$</li>
+<li>$#$ of tuples: $|[m]^n|=m^n$</li>
+</ul>
+</li>
+<li>Functions<ul>
+<li>$f:[n]\to[m]$</li>
+<li>$#$ of functions: $m^n$<blockquote>
+<p>Proof: $f:[n]\to[m]\Leftrightarrow v_f\in[m]^n$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Subsets<ul>
+<li>Power set: $2^{[n]}={S|S\subseteq [n]}$</li>
+<li>$|2^{[n]}|=2^n$</li>
+<li>Proof: $S\subseteq [n]\leftrightarrow \{0,1\}^n$</li>
+</ul>
+</li>
+<li>Subsets of fixed size<ul>
+<li>$#$ of $k$-uniform: ${n \choose k}=\frac{n!}{k!(n-k)!}$</li>
+<li>$(n)_k=n(n-1)\cdots(n-k+1)$ is $n$ lower factorial of $k$</li>
+</ul>
+</li>
+<li>Binomial coefficients<ul>
+<li>${n \choose k}={n\choose n-k}$</li>
+<li>$\sum_{k=0}^{n}{n \choose k}=2^n$</li>
+<li>$(1+x)^n=\sum_{k=0}^{n}{n \choose k}x^k$<blockquote>
+<p>Proof: $(1+x)^n=(1+x)(1+x)\cdots(1+x)$, $#$ of $x^k$ is $n\choose k$</p>
+</blockquote>
+</li>
+<li>$S=\{x_1, x_2,\cdots,x_n\}$, $#$ of odd subsets $=$ $#$ of even subsets<blockquote>
+<p>proof: let $x=-1$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Compositions of an integer<ul>
+<li>$k$-composition of $n$: $k$-tuple that $x_1+x_2+\cdots+x_n=n$, $x_i\in\{1,2,\cdots x_n\}$</li>
+<li>$#$ of $k$-composition: $n-1 \choose k-1$</li>
+<li>weak $k$-composition of $n$: $x_i$ can be 0, aka $(x_1+1)+(x_2+1)+\cdots+(x_n+1)=n+k$</li>
+<li>$#$ of weak $k$-composition: $n+k-1\choose k-1$</li>
+</ul>
+</li>
+<li>Multisets<ul>
+<li>Combinations with repetitions can be formally defined as multisets.</li>
+<li>$({n \choose k})={n+k-1\choose k}$</li>
+</ul>
+</li>
+<li>Multinomial coefficients<ul>
+<li>$\binom{n}{m_1,m_2,\cdots, m_k}=\frac{n!}{m_1!m_2!\cdots m_k!}$, $\sum_i m_i=n$</li>
+<li>$\binom{n}{m, n-m}=\binom{n}{m}$</li>
+<li>$(x_1,x_2,\cdots,x_k)^n=\sum_{m_1+m_2+\cdots+m_k=n}\binom{n}{m_1,m_2,\cdots, m_k}x_1^{m_1}\cdots x_k^{m_k}$</li>
+</ul>
+</li>
+<li>Partitions of a set<ul>
+<li>partition of $S$: $P={S_1,S_2,\cdots,S_k}$, $S_i\ne\emptyset$, $S_i\cap S_j$ if $i\ne j$, $\bigcup S_i=S$</li>
+<li>if $|P|=k$, then $P$ is a $k$-partition of $S$</li>
+<li>$#$ of $k$-partitions of a $n$-set is $\{ {n\atop k} \}$</li>
+<li>Stirling number of the second kind</li>
+</ul>
+</li>
+<li>The twelvfold way  </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">$n$ balls</th>
+<th style="text-align:center">$m$ bins</th>
+<th style="text-align:center">unrestricted</th>
+<th style="text-align:center">$\leq 1$ for all bin</th>
+<th style="text-align:center">$\geq 1$ for all bin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">distinct</td>
+<td style="text-align:center">distinct</td>
+<td style="text-align:center">$m^n$</td>
+<td style="text-align:center">$(m)_n=n!\binom{m}{n}$</td>
+<td style="text-align:center">$m!\{ {n\atop m} \}$</td>
+</tr>
+<tr>
+<td style="text-align:center">identical</td>
+<td style="text-align:center">distinct</td>
+<td style="text-align:center">$(\binom{m}{n})$</td>
+<td style="text-align:center">$m\choose n$</td>
+<td style="text-align:center">$\binom{m-1}{n-1}$</td>
+</tr>
+<tr>
+<td style="text-align:center">distinct</td>
+<td style="text-align:center">identical</td>
+<td style="text-align:center">$\sum_{k=1}^m\{ {n\atop k} \}$</td>
+<td style="text-align:center">$1$</td>
+<td style="text-align:center">$\{ {n\atop m} \}$</td>
+</tr>
+<tr>
+<td style="text-align:center">identical</td>
+<td style="text-align:center">identical</td>
+<td style="text-align:center">$-$</td>
+<td style="text-align:center">$-$</td>
+<td style="text-align:center">$-$</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-10-09T13:00:36.000Z" itemprop="dateUpdated">2019-10-09 21:00:36</time>
+</span><br>
+
+
+        
+        Link：<a href="/2019/09/04/Learn-CM-20190904-CM-ALL/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Combinatorics/">Combinatorics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Course/">Course</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/&title=《CM-ALL》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/&title=《CM-ALL》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CM-ALL》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/09/12/Learn-DIP-20190912-DIP-ALL/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">DIP-ALL</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/09/04/Learn-CN-20190904-CN-ALL/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CN-ALL</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/&title=《CM-ALL》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/&title=《CM-ALL》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CM-ALL》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2019/09/04/Learn-CM-20190904-CM-ALL/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

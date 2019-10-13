@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Data Communication Mid-Term | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Course,Data Communication">
+    <meta name="description" content="数据通信：期中复习第二章：网络体系结构 通信模型 源系统（源点，发送器），传输系统，目的系统（接收器，终点)   传输方式 单工：一个信道，只能单向 半双工：一个信道，同一时间只能上/下行，有选择器 全双工：两个信道，同时上下行   数字通信与模拟通信 数字系统：数字-数字编码，模拟-数字编码 模拟系统：模拟信号以固有频率基带传输（不编码），频谱搬移后传输（模拟-模拟编码） 混成系统：同一系统既包">
+<meta name="keywords" content="Course,Data Communication">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Communication Mid-Term">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="数据通信：期中复习第二章：网络体系结构 通信模型 源系统（源点，发送器），传输系统，目的系统（接收器，终点)   传输方式 单工：一个信道，只能单向 半双工：一个信道，同一时间只能上/下行，有选择器 全双工：两个信道，同时上下行   数字通信与模拟通信 数字系统：数字-数字编码，模拟-数字编码 模拟系统：模拟信号以固有频率基带传输（不编码），频谱搬移后传输（模拟-模拟编码） 混成系统：同一系统既包">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-02T01:28:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Data Communication Mid-Term">
+<meta name="twitter:description" content="数据通信：期中复习第二章：网络体系结构 通信模型 源系统（源点，发送器），传输系统，目的系统（接收器，终点)   传输方式 单工：一个信道，只能单向 半双工：一个信道，同一时间只能上/下行，有选择器 全双工：两个信道，同时上下行   数字通信与模拟通信 数字系统：数字-数字编码，模拟-数字编码 模拟系统：模拟信号以固有频率基带传输（不编码），频谱搬移后传输（模拟-模拟编码） 混成系统：同一系统既包">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends">
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/">
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Data Communication Mid-Term</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Data Communication Mid-Term</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-29T03:37:44.000Z" itemprop="datePublished" class="page-time">
+  2019-04-29
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据通信：期中复习"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据通信：期中复习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第二章：网络体系结构"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">第二章：网络体系结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第三章：数据传输"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">第三章：数据传输</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第四章：传输媒体"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">第四章：传输媒体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第五章：信号编码技术"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">第五章：信号编码技术</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第六章：差错检测与矫正"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">第六章：差错检测与矫正</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Learn-DC-20190429-DC-MID" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Data Communication Mid-Term</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-29 11:37:44" datetime="2019-04-29T03:37:44.000Z" itemprop="datePublished">2019-04-29</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="数据通信：期中复习"><a href="#数据通信：期中复习" class="headerlink" title="数据通信：期中复习"></a>数据通信：期中复习</h1><h2 id="第二章：网络体系结构"><a href="#第二章：网络体系结构" class="headerlink" title="第二章：网络体系结构"></a>第二章：网络体系结构</h2><ul>
+<li>通信模型<ul>
+<li>源系统（源点，发送器），传输系统，目的系统（接收器，终点)</li>
+</ul>
+</li>
+<li>传输方式<ul>
+<li>单工：一个信道，只能单向</li>
+<li>半双工：一个信道，同一时间只能上/下行，有选择器</li>
+<li>全双工：两个信道，同时上下行</li>
+</ul>
+</li>
+<li>数字通信与模拟通信<ul>
+<li>数字系统：数字-数字编码，模拟-数字编码</li>
+<li>模拟系统：模拟信号以固有频率基带传输（不编码），频谱搬移后传输（模拟-模拟编码）</li>
+<li>混成系统：同一系统既包含模拟也包含数字</li>
+</ul>
+</li>
+<li>网络体系结构：TCP/IP<ul>
+<li>应用层，传输层，网际层，数据链路层，物理层</li>
+</ul>
+</li>
+<li>套接字及其类型<ul>
+<li>流套接字：TCP：可靠，按时</li>
+<li>数据包套接字：UDP：快速乱序无保证</li>
+<li>原始套接字：IP：直接访问底层</li>
+</ul>
+</li>
+</ul>
+<h2 id="第三章：数据传输"><a href="#第三章：数据传输" class="headerlink" title="第三章：数据传输"></a>第三章：数据传输</h2><ul>
+<li>概念与术语<ul>
+<li>导向媒体：电磁波沿某一物理路径前进（光纤，双绞线，同轴电缆<ul>
+<li>点对点：直连链路</li>
+<li>多点：共享</li>
+</ul>
+</li>
+<li>非导向媒体：无线传输，不引导传输方向（空气，真空，海水</li>
+</ul>
+</li>
+<li>数据与信号<ul>
+<li>数据：信源产生，可能为模拟或数字</li>
+<li>信号：经过调制，电磁信号居多</li>
+</ul>
+</li>
+<li>周期信号的傅里叶级数表示<ul>
+<li>傅里叶表示：<br>$$x(t)=\frac{A_0}{2}+\sum_{n=1}^{\infty}(A_n\cos(2\pi nf_0t)+B_n\sin(2\pi nf_0t))$$<br>$$A_n = \frac{2}{T}\int_{0}^{T}x(t)\cos(2\pi nf_0t)dt$$<br>$$B_n = \frac{2}{T}\int_{0}^{T}x(t)\sin(2\pi nf_0t)dt$$</li>
+<li>方波的傅里叶表示<br>$$f(x)=\frac{4}{\pi}\sum_{n=2k-1}^\infty \frac{1}{n}\sin(\frac{n\pi x}{L})$$</li>
+</ul>
+</li>
+<li>信号功率计算<ul>
+<li>任意时段功率：<br>$$P_x=\frac{1}{t_2-t_1}\int_{t_1}^{t_2}|x(t)|^2dt$$</li>
+<li>周期平均功率<br>$$P=\frac{1}{T}\int_{0}^{T}|x(t)|^2dt$$   </li>
+</ul>
+</li>
+<li>信号的频谱与带宽<ul>
+<li>频谱：信号的频率范围</li>
+<li>绝对带宽：频谱宽度，最大减最小</li>
+<li>有效带宽：包含绝大多数能量的带宽，某频率区间的功率积分是总功率的一半（-3dB）</li>
+<li>直流分量：频率为0的部分</li>
+</ul>
+</li>
+<li>数据率与带宽的关系<ul>
+<li>$R_b=2f$，$R_b$数据率，$f$带宽</li>
+</ul>
+</li>
+<li>模拟/数字数据与模拟/数字传输<ul>
+<li>模拟信号：放大器</li>
+<li>数字信号：转发器</li>
+</ul>
+</li>
+<li>数字信号传输的优势<ul>
+<li>大规模集成电路</li>
+<li>数据完整性</li>
+<li>容量利用率</li>
+<li>安全和保密</li>
+<li>综合性、存储</li>
+</ul>
+</li>
+<li>传输损伤<ul>
+<li>衰减：放大器与转发器解决</li>
+<li>失真<ul>
+<li>衰减失真：高频失真多，衰减均衡和高频高倍放大解决</li>
+<li>时延失真：中心频率附近传输快，仅限数字信号，码间串扰</li>
+</ul>
+</li>
+<li>噪声<ul>
+<li>信噪比：$SNR_{db}=1o\lg{\frac{S}{N}}$</li>
+<li>热噪声：$N_0=kT$，$k$玻尔兹曼常量，$T$热力学温度</li>
+<li>互调噪声、串扰（双绞线扭绞）、冲激噪声</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>信道容量：最大数据传输速率<ul>
+<li>数据率bps，带宽Hz，噪声，误码率</li>
+<li>奈奎斯特带宽：信道无噪声时：$C=2B\log_2{M}$，$M$指信号的电平数</li>
+<li>香农容量公式：只有热噪声时：$C=B\log_2(1+SNR)$，$SNR=10^{0.1SNR_{db}}$为信噪比</li>
+</ul>
+</li>
+</ul>
+<h2 id="第四章：传输媒体"><a href="#第四章：传输媒体" class="headerlink" title="第四章：传输媒体"></a>第四章：传输媒体</h2><ul>
+<li>光纤<ul>
+<li>优势：容量大，体积小，衰减小，电磁隔离，转发器间隔远</li>
+<li>折射率分类：<ul>
+<li>阶跃型：折射率阶跃，会有失真</li>
+<li>渐变型：光路周期性汇聚</li>
+</ul>
+</li>
+<li>模式分类<ul>
+<li>单模、多模</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>无线传播：高频天线小<ul>
+<li>地波：-2MHz</li>
+<li>天波：2MHz-30MHz</li>
+<li>视距传播：30MHz-</li>
+</ul>
+</li>
+<li>视距传播损伤<ul>
+<li>自由空间损耗模型<br>$$L=10\lg(\frac{4\pi d}{\lambda})^2dB$$</li>
+</ul>
+</li>
+</ul>
+<h2 id="第五章：信号编码技术"><a href="#第五章：信号编码技术" class="headerlink" title="第五章：信号编码技术"></a>第五章：信号编码技术</h2><ul>
+<li>编码与调制技术<ul>
+<li>数字信号传输：数字或模拟数据-&gt;(编码器)-&gt;数字信号-&gt;(解码器)-&gt;原数据</li>
+<li>模拟信号传输：数字或模拟基带信号<->(调制解调器)<->模拟信号</-></-></li>
+</ul>
+</li>
+<li>数字信号编码格式<ul>
+<li>NRZ-L：高电平0，低电平1</li>
+<li>NRZI：区间起始无变化0，区间起始有变化1</li>
+<li>双极性AMI：零电平0，正电平负电平1交替出现</li>
+<li>伪三进制：正电平负电平0交替出现，零点平1</li>
+<li>曼彻斯特：区间正中高到低0，低到高1</li>
+<li>差分曼彻斯特：区间正中总是变化，区间起始变化0，区间起始不变1</li>
+</ul>
+</li>
+<li>扰码<ul>
+<li>扰码产生替代连续电压的序列</li>
+<li>填充序列：提供足够的信息用于同步，可被识别替换还原，长度相同</li>
+<li>目标：不含直流，定时信息丰富，不降低数据率，可检错，易于判断还原</li>
+</ul>
+</li>
+<li>HDB3：会给出编码方式  </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">自上一次替换后双极性</th>
+<th style="text-align:center">脉冲（比特1）数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">前面脉冲的极性</td>
+<td style="text-align:center">奇数</td>
+<td style="text-align:center">偶数</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">000-</td>
+<td style="text-align:center">+00+</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">000+</td>
+<td style="text-align:center">-00-</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>调制技术：开关键控载波<ul>
+<li>振幅ASK：01由振幅表示<ul>
+<li>相干解调：乘上同周期的信号，低通滤波</li>
+</ul>
+</li>
+<li>频移FSK：不同频率表示01<ul>
+<li>应用：话音，高频无线电（天波，同轴电缆局域网</li>
+</ul>
+</li>
+<li>相移PSK：不同相位表示信息<ul>
+<li>二进制相移键控：$0,\pi$</li>
+<li>QPSK：四个相位，$\pm\frac{\pi}{4},\pm\frac{3\pi}{4}$</li>
+</ul>
+</li>
+<li>正交调幅QAM：两个载波正交（差90相位，分别ASK，两个独立信号</li>
+<li>补点公式：<ul>
+<li>ASK，PSK<br>$$B_T=(1+r)R$$</li>
+<li>FSK<br>$$B_T=2\Delta f+(1+r)R$$</li>
+<li>MPSK<br>$$B_T=\frac{1+r}{\log_2M}R$$</li>
+<li>MFSK<br>$$B_T=\frac{(1+r)M}{\log_2M}R$$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>模拟数据数字化<ul>
+<li>脉码调制PCM<ul>
+<li>定时采样，每次采样有几个bit进行量化</li>
+<li>压扩函数：非线性编码，振幅低的地方密集</li>
+</ul>
+</li>
+<li>增量调制DM<ul>
+<li>近似信号的导数，有过载噪声</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>模拟调制系统<ul>
+<li>模拟数据加载到载波，利于传输，允许频分复用，扩展带宽，抗干扰</li>
+<li>调幅AM<ul>
+<li>数据与载波相加<br>$$s_{AM}=[A_0+m(t)]\cos\omega_ct$$<br>归一化，小于1时可以包络解调，否则只能正交解调<br>$$s(t)=[1+n_ax(t)]\cos2\pi f_ct, n_a&lt;1$$</li>
+</ul>
+</li>
+<li>调频FM<br>$$s(t)=A_c\cos[2\pi f_c+\varphi(t)],\varphi’(t)=n_fm(t)$$</li>
+<li>调相PM<br>$$s(t)=A_c\cos[2\pi f_c+\varphi(t)],\varphi(t)=n_pm(t)$$<br>与FM转化：频率可定义为相位变化率，因此将PM后面的积分即可得到FM</li>
+</ul>
+</li>
+</ul>
+<h2 id="第六章：差错检测与矫正"><a href="#第六章：差错检测与矫正" class="headerlink" title="第六章：差错检测与矫正"></a>第六章：差错检测与矫正</h2><ul>
+<li>奇偶校验<ul>
+<li>偶校验：末尾加校验比特，整个字符中的1的个数为偶数</li>
+</ul>
+</li>
+<li>因特网校验和<ul>
+<li>两个数字视为无符号二进制整数，相加，高位进位就在最低位加1</li>
+</ul>
+</li>
+<li>循环冗余检验CRC<ul>
+<li>k位信息，生成n-k位比特，作为检验序列（会给出公式，公式最高位$X^{n-k}$</li>
+</ul>
+</li>
+<li>块码原理<ul>
+<li>2k+1的距离，最多检2k=$d_{min}-1$，最多纠k=$\lfloor\frac{d_{min}-1}{2}\rfloor$</li>
+<li>冗余度：(n-k)/k，码字共n位，k个信息位</li>
+<li>编码率：k/n</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-09-02T01:28:16.000Z" itemprop="dateUpdated">2019-09-02 09:28:16</time>
+</span><br>
+
+
+        
+        Link：<a href="/2019/04/29/Learn-DC-20190429-DC-MID/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Course/">Course</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Communication/">Data Communication</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/&title=《Data Communication Mid-Term》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/&title=《Data Communication Mid-Term》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Data Communication Mid-Term》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/05/09/Learn-PMS-20190509-PMS-06/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Probability Ch6</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/28/Learn-PMS-20190428-PMS-05/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Probability Ch5</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/&title=《Data Communication Mid-Term》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/&title=《Data Communication Mid-Term》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Data Communication Mid-Term》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2019/04/29/Learn-DC-20190429-DC-MID/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

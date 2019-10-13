@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Problem Solving IV 01 | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Course,Problem Solving,Abstract Algebra">
+    <meta name="description" content="My note when  previewing Copying the Textbook of   abstract algebra.">
+<meta name="keywords" content="Course,Problem Solving,Abstract Algebra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Problem Solving IV 01">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="My note when  previewing Copying the Textbook of   abstract algebra.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-06-19T08:29:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Problem Solving IV 01">
+<meta name="twitter:description" content="My note when  previewing Copying the Textbook of   abstract algebra.">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends">
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/">
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Problem Solving IV 01</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Problem Solving IV 01</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-30T03:07:53.000Z" itemprop="datePublished" class="page-time">
+  2019-01-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Chapter-3：Groups"><span class="post-toc-number">1.</span> <span class="post-toc-text">Chapter 3：Groups</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Integer-Equivalence-Classes-and-Symmetries"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Integer Equivalence Classes and Symmetries</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#The-Integers-mod-n"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">The Integers mod n</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Symmetries"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">Symmetries</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Definitions-and-Examples"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Definitions and Examples</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Definitions"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">Definitions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Examples"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">Examples</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Basic-Properties-of-Groups"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">Basic Properties of Groups</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Subgroups"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Subgroups</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Definitions-1"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">Definitions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Examples-1"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">Examples</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Some-Subgroup-Theorems"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">Some Subgroup Theorems</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Chapter-4-Cyclic-Groups"><span class="post-toc-number">2.</span> <span class="post-toc-text">Chapter 4: Cyclic Groups</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Cyclic-Subgroups"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Cyclic Subgroups</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Definitions-2"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">Definitions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Subgroups-of-Cyclic-Groups"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">Subgroups of Cyclic Groups</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Multiplicative-Group-of-Complex-Numbers"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Multiplicative Group of Complex Numbers</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Definitions-3"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">Definitions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Theorems"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">Theorems</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#The-Circle-Group-and-the-Roots-of-Unity"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">The Circle Group and the Roots of Unity</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-Method-of-Repeated-Squares"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">The Method of Repeated Squares</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Learn-PS-20190130-PS-IV-01" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Problem Solving IV 01</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-30 11:07:53" datetime="2019-01-30T03:07:53.000Z" itemprop="datePublished">2019-01-30</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>My note when <ruby> previewing<rt> Copying the Textbook of</rt> </ruby>  abstract algebra.<br><a id="more"></a> </p>
+<h1 id="Chapter-3：Groups"><a href="#Chapter-3：Groups" class="headerlink" title="Chapter 3：Groups"></a>Chapter 3：Groups</h1><h2 id="Integer-Equivalence-Classes-and-Symmetries"><a href="#Integer-Equivalence-Classes-and-Symmetries" class="headerlink" title="Integer Equivalence Classes and Symmetries"></a>Integer Equivalence Classes and Symmetries</h2><h3 id="The-Integers-mod-n"><a href="#The-Integers-mod-n" class="headerlink" title="The Integers mod n"></a>The Integers mod n</h3><ul>
+<li>模n和: addition modulo n: $(a+b)\%n$  </li>
+<li><p>模n积: multiplication modulo n: $(ab)\%n$  </p>
+</li>
+<li><p><strong>Proposition 3.4</strong><br>Let $\mathbb{Z}_n$ be the set of equivalence classes of the integers mod $n$ and $a$, $b$, $c$ $\in$ $\mathbb{Z}_n$.</p>
+<ol>
+<li>communicative  交换律<blockquote>
+<p>$a+b \equiv b+a\quad(mod\ n)$<br>$a\times b \equiv b\times a\quad(mod\ n)$  </p>
+</blockquote>
+</li>
+<li>associative 结合律<blockquote>
+<p>$(a+b)+c \equiv a+(b+c)\quad(mod\ n)$<br>$(a\times b)\times c \equiv a\times (b\times c)\quad(mod\ n)$   </p>
+</blockquote>
+</li>
+<li>identities 特征值（0元素，数1<blockquote>
+<p>$a+0 \equiv a\quad(mod\ n)$<br>$a\times1\equiv a\quad(mod\ n)$</p>
+</blockquote>
+</li>
+<li>distribution 分配律<blockquote>
+<p>$a\times(b+c)\equiv ab+ac\quad(mod\ n)$</p>
+</blockquote>
+</li>
+<li>inverse 相反数（负元素<blockquote>
+<p>$a+(-a)\equiv0\quad(mod\ n)$</p>
+</blockquote>
+</li>
+<li>multiplicative inverse 倒数<blockquote>
+<p>$a\ne 0$ required.<br>$gcd(a,n)=1\Leftrightarrow \exists b$, $a\times b \equiv 1\quad (mod\ n)$</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="Symmetries"><a href="#Symmetries" class="headerlink" title="Symmetries"></a>Symmetries</h3><ul>
+<li><strong>Permutation</strong> of a set:</li>
+<li><blockquote>
+<p>a one-to-one and onto map $\pi:S\to S$</p>
+</blockquote>
+</li>
+<li><strong>Symmetry</strong> of a geometric figure:  <blockquote>
+<p>a rearrangement of the figure preserving the arrangement of its sides and vertices as well as its distances and angles.<br>边布局、点布局、长度和角度均不变，<ruby> [布局]<rt> Arrangement</rt> </ruby> 不考虑顶点标号的<ruby> [排列]<rt> Permutation</rt> </ruby> </p>
+</blockquote>
+</li>
+<li><strong>Rigid Motion</strong> of an object：<blockquote>
+<p>a map from the plane to itself preserving the symmetry.<br>不造成形变，到自身的映射，相当于重新分配点的标号<br>$A\to B, B\to C, A\to A$ is denoted as:<br>$$\begin{pmatrix}A &amp; B &amp; C \\ B &amp; C &amp; A\end{pmatrix}$$</p>
+</blockquote>
+</li>
+<li><strong>Composing</strong> motion<blockquote>
+<p>similar to composing functions/maps</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Definitions-and-Examples"><a href="#Definitions-and-Examples" class="headerlink" title="Definitions and Examples"></a>Definitions and Examples</h2><h3 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h3><ul>
+<li><strong>Binary operations</strong> or <strong>Law of Composition</strong> on a set $G$:  <blockquote>
+<p>$f:G\times G\to G$<br> every $(a,b)\in G\times G$ is mapped to a unique element denoted as $a\circ b$ or $ab$<br> 双射</p>
+</blockquote>
+</li>
+<li><strong>Composition</strong> of 2 elements:  <blockquote>
+<p>$a\circ b$ or $ab$</p>
+</blockquote>
+</li>
+<li><strong>Group</strong> $(G,\circ)$<blockquote>
+<p>a set $G$ together with a law of composition $(a,b)\mapsto a\circ b$ that satisfies the following 3 axioms:  </p>
+<ol>
+<li><strong>Associative</strong><br>$\forall a,b,c\in G$, $(a\circ b)\circ c=a\circ(b\circ c)$</li>
+<li><strong>Identity Element</strong><br>$\forall a\in G$, $\exists e\in G$, $e\circ a=a\circ e=a$</li>
+<li><strong>Inverse Element</strong><br>$\forall a\in G$, $\exists a^{-1}$ that $a\circ a^{-1}=a^{-1}\circ a=e$</li>
+</ol>
+</blockquote>
+</li>
+<li><strong>Abelian Group</strong> or <strong>Commutative Group</strong><blockquote>
+<p>a group $(G,\circ )$ that $\forall a,b\in G$, $a\circ b=b\circ a$</p>
+</blockquote>
+</li>
+<li><strong>Cayley Table</strong><blockquote>
+<p>describe a group in terms of an addition or multiplication table<br>类似乘法表的形式，将每对元素映射的结果记录在表中</p>
+</blockquote>
+</li>
+<li><strong>Order</strong> of a group<blockquote>
+<p>A group is <strong>finite</strong>, or has <strong>finite order</strong>, if it contains a finite number of elements.<br>The order is $|G|=n$<br>Otherwise, the group is said to be <strong>infinite</strong> or to have <strong>infinite order</strong>.<br>The order is $|G|=\infty$  </p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h3><ul>
+<li><strong>Group of Units</strong> of $\mathbb{Z}_n$<blockquote>
+<p>The set of all elements in $\mathbb{Z}_n$ that is relatively prime to $n$</p>
+</blockquote>
+</li>
+<li><strong>Symmetries</strong> of an equilateral triangle form a nonabelian group.<blockquote>
+<p>Described in Section 3.1</p>
+</blockquote>
+</li>
+<li><strong>General Linear Group</strong><blockquote>
+<p>The set of invertible matrices forms a group<br>只有可逆阵满足，群定义<ruby> [公理3]<rt> Inverse Element</rt> </ruby> </p>
+</blockquote>
+</li>
+<li><strong>Quaternion Group</strong><blockquote>
+<p>$Q_8=\{\pm 1,\pm I,\pm J,\pm K\}$<br>$1=\begin{pmatrix}1 &amp; 0 \\ 0 &amp; 1\end{pmatrix}$, $I=\begin{pmatrix}0 &amp; 1 \\ -1 &amp; 0\end{pmatrix}$, $J=\begin{pmatrix}0 &amp; i \\ i &amp; 0\end{pmatrix}$, $K=\begin{pmatrix}i &amp; 0 \\ 0 &amp; -i\end{pmatrix}$<br>$I^2=J^2=K^2=-1$<br>$IJ=K$, $JK=I$, $KI=J$, $JI=-K$, $KJ=-I$, $IK=-J$  </p>
+</blockquote>
+</li>
+<li><strong>Nonzero Complex Number</strong><blockquote>
+<p>$$z^{-1}=\frac{a-bi}{a^2+b^2}$$  </p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Basic-Properties-of-Groups"><a href="#Basic-Properties-of-Groups" class="headerlink" title="Basic Properties of Groups"></a>Basic Properties of Groups</h3><ul>
+<li><strong>Proposition 3.17</strong> 特征元素唯一<br>The <strong>identity element</strong> in a group G is <strong>unique</strong>.<blockquote>
+<p><strong>Proof</strong>:<br>$e=e’e=e’$</p>
+</blockquote>
+</li>
+<li><strong>Proposition 3.18</strong> 逆元素唯一<br>The <strong>inverse</strong> of an element in a group G is <strong>unique</strong>.<blockquote>
+<p><strong>Proof</strong>:<br>$(g^{-1})=e(g^{-1})=(g^{-1})’g(g^{-1})=(g^{-1})’e=(g^{-1})’$</p>
+</blockquote>
+</li>
+<li><strong>Proposition 3.19</strong> 取逆分配<br>Let $G$ be a group. If $a,b\in G$, then $(ab)^{-1}=b^{-1}a^{-1}$.<blockquote>
+<p><strong>Proof</strong>:<br>$abb^{-1}a^{-1}=aea^{-1}=aa^{-1}=e$<br>$b^{-1}a^{-1}ab=b^{-1}eb=b^{-1}b=e$<br>Inverse is unique</p>
+</blockquote>
+</li>
+<li><strong>Proposition 3.20</strong> 两次取逆<br>Let $G$ be a group. For any $a\in G$, $(a^{-1})^{-1}=a$.<blockquote>
+<p><strong>Proof</strong>:<br>$(a^{-1})^{-1}=e(a^{-1})^{-1}=aa^{-1}(a^{-1})^{-1}=ae=a$  </p>
+</blockquote>
+</li>
+<li><strong>Proposition 3.21</strong> 方程唯一解<br>Let $G$ be a group and $a,b\in G$. Then the equations $ax = b$ and $xa = b$ have unique solutions in $G$. The <strong>right and left cancellation laws</strong> are true in groups.<blockquote>
+<p><strong>Proof</strong>:<br>$x_1=a^{-1}ax_1=a^{-1}ax_2=x_2$<br>$x_1=x_1aa^{-1}=x_2aa^{-1}=x_2$</p>
+</blockquote>
+</li>
+<li><strong>Proposition 3.22</strong> 消去律<br>If $G$ is a group and $a,b,c\in G$, then $ba=ca\Rightarrow b=c$ and $ab=ac\Rightarrow b=c$. <blockquote>
+<p><strong>Proof</strong>:<br>$ba=ca\Rightarrow baa^{-1}=caa^{-1}\Rightarrow b=c$<br>$ab=ac\Rightarrow a^{-1}ab=a^{-1}ac\Rightarrow b=c$</p>
+</blockquote>
+</li>
+<li><strong>Exponential Notation</strong> for $g\in G$ and $n\in\mathbb{N}$ 幂  <blockquote>
+<p>$g^0=e$<br>$g^n=g\cdot g\cdots g$(n times)<br>$g^{-n}=g^{-1}\cdot g^{-1}\cdots g^{-1}$(n times)</p>
+</blockquote>
+</li>
+<li><strong>Theorem 3.23</strong>  <blockquote>
+<ol>
+<li>$g^mg^n=g^{m+n}$, $\forall m,n\in\mathbb{Z}$</li>
+<li>$(g^m)^n=g^{mn}$, $\forall m,n\in\mathbb{Z}$</li>
+<li>$(gh)^n=(h^{-1}g^{-1})^{-n}$, $\forall n\in\mathbb{Z}$</li>
+<li>Only for abelian groups, $(gh)^n=g^nh^n$, $\forall n\in\mathbb{Z}$</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="Subgroups"><a href="#Subgroups" class="headerlink" title="Subgroups"></a>Subgroups</h2><h3 id="Definitions-1"><a href="#Definitions-1" class="headerlink" title="Definitions"></a>Definitions</h3><ul>
+<li><strong>Subgroup</strong> $H$ of a group $G$ 子群  <blockquote>
+<p>A subset H of G such that when the group operation of G is restricted to H, H is a group in its own right.<br>元素为子集，二元操作不变，仍满足群公理</p>
+</blockquote>
+</li>
+<li><strong>Trivial Subgroup</strong><blockquote>
+<p>$H=\{e\}$</p>
+</blockquote>
+</li>
+<li><strong>Proper Subgroup</strong> 真子群<blockquote>
+<p>$H\ne G$</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Examples-1"><a href="#Examples-1" class="headerlink" title="Examples"></a>Examples</h3><ul>
+<li><strong>$\mathbb{Q}^*$</strong> is a subgroup of <strong>$\mathbb{R}^*$</strong><blockquote>
+<p><strong>Proof</strong>:</p>
+<ol>
+<li>1 is the identity element</li>
+<li>$(p/q)^{-1}=q/p$</li>
+<li>Multiplication is associative in both $\mathbb{Q}^<em>$ and $\mathbb{R}^</em>$  </li>
+</ol>
+</blockquote>
+</li>
+<li><strong>$\{1,-1,i,-i\}$</strong> is a subgroup of <strong>$\mathbb{C}^*$</strong>  </li>
+<li><p><strong>$SL_2(\mathbb{R})$</strong> is a subgroup of <strong>$GL_2(\mathbb{R})$</strong>  </p>
+<blockquote>
+<p><strong>$GL_2(\mathbb{R})$</strong>: general linear group.<br><strong>$SL_2(\mathbb{R})$</strong>: special linear group, matrices of determinant 1.  </p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:</p>
+<ol>
+<li>$I_2$ is the identity element.  </li>
+<li>$A=\begin{pmatrix}a &amp; b \\ c &amp; d\end{pmatrix}$, $A^{-1}=\begin{pmatrix}d &amp; -b \\ -c &amp; a\end{pmatrix}$</li>
+<li>Multiplication is associative.</li>
+<li>The product also has determinant 1, by $|AB|=|A||B|$.</li>
+</ol>
+</blockquote>
+</li>
+<li>A subset $H$ of a group $G$ can be a group without being a subgroup of $G$.<blockquote>
+<p>$(\mathbb{M}<em>{2\times 2},+)$ is a subset of but not a subgroup of $GL</em>{2}$.<br>此处二元操作不同，因而不是子群  </p>
+</blockquote>
+</li>
+<li>One way of telling whether or not two groups are the same is by examining their subgroups.  <blockquote>
+<p>判断群是否同构，可判断子群的数量及各自的大小是否相同  </p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Some-Subgroup-Theorems"><a href="#Some-Subgroup-Theorems" class="headerlink" title="Some Subgroup Theorems"></a>Some Subgroup Theorems</h3><ul>
+<li><p><strong>Proposition 3.30</strong> 子群充要条件1</p>
+<blockquote>
+<p>A subset H of G is a subgroup if and only if it satisfies the following conditions:  </p>
+<ol>
+<li>The identity $e$ of $G$ is in $H$.  </li>
+<li>If $h_1$, $h_2\in H$, then $h_1h_2\in H$.  </li>
+<li>If $h\in H$, then $h^{-1}\in H$.  </li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>$\Rightarrow$: </p>
+<ol>
+<li>$ee_H=e_H=e_He_H\Rightarrow e=e_H$</li>
+<li>$H$ is a group</li>
+<li>$H$ is a group, then $h(h^{-1})’=e$, $(h^{-1})’\in H$, also (h^{-1})’\in G$. By uniqueness of inverse, $(h^{-1})’=h^{-1}$.  </li>
+</ol>
+<p>$\Leftarrow$:<br>These conditions plus the associativity of the binary operation will prove that $H$ is a group.</p>
+</blockquote>
+</li>
+<li><p><strong>Proposition 3.31</strong> 子群充要条件2</p>
+<blockquote>
+<p>Let $H$ be a subset of a group $G$. Then $H$ is a subgroup of $G$ if and only if $H\ne \emptyset$, and whenever $g$, $h\in H$ then $gh^{−1}$ is in $H$.  </p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>$\Rightarrow$:<br>$h\in H\Rightarrow h^{-1}\in H\Rightarrow gh^{-1}\in H$</p>
+<p>$\Leftarrow$:   </p>
+<ol>
+<li>Let $g=h$, we have $e\in H$</li>
+<li>Let $g=h_1$, $h=h_2^{-1}$, we have $gh^{-1}=h_1(h_2^{-1})^{-1}=h_1h_2\in H$</li>
+<li>Let $g=e$, we have $h^{-1}\in H$</li>
+<li>By Proposition 3.30  </li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h1 id="Chapter-4-Cyclic-Groups"><a href="#Chapter-4-Cyclic-Groups" class="headerlink" title="Chapter 4: Cyclic Groups"></a>Chapter 4: Cyclic Groups</h1><h2 id="Cyclic-Subgroups"><a href="#Cyclic-Subgroups" class="headerlink" title="Cyclic Subgroups"></a>Cyclic Subgroups</h2><h3 id="Definitions-2"><a href="#Definitions-2" class="headerlink" title="Definitions"></a>Definitions</h3><ul>
+<li><strong>Cyclic Subgroup</strong> of a group $G$ generated by $a$: 循环子群<blockquote>
+<p>$\langle a\rangle=\{a^k:k\in\mathbb{Z}\}$, $a\in G$  </p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 4.3</strong></p>
+<blockquote>
+<p>$\langle a\rangle$ is a subgroup of $G$.<br>$\langle a\rangle$ is the smallest subgroup of $G$ that contains a.  </p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:  </p>
+<ol>
+<li>$e=a^0\in \langle a\rangle$</li>
+<li>$g=a^m\in \langle a\rangle$，$h=a^n\in \langle a\rangle$, then $gh=a^{m+n}\in \langle a\rangle$</li>
+<li>$g=a^n\in \langle a\rangle$，then $g^{-1}=a^{-n}\in \langle a\rangle$  </li>
+<li>Any subgroup $H$ containing $a$ must contain all powers of $a$, then $\langle a\rangle\subset H$, $\langle a\rangle$ is the smallest</li>
+</ol>
+</blockquote>
+</li>
+<li><strong>Cyclic Group</strong> $G$ 循环群<blockquote>
+<p>$\exists a\in G$, $G=\langle a\rangle$</p>
+</blockquote>
+</li>
+<li><strong>Generator</strong> of a cyclic group 生成元<blockquote>
+<p>$a$ in $\langle a\rangle$</p>
+</blockquote>
+</li>
+<li><strong>Order</strong> of a cyclic group $G$: 阶<blockquote>
+<p>$a\in G$, the smallest positive integer $n$ that $a^n=e$<br>$|a|=n$<br>If there is no such $n$, $|a|=\infty$</p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 4.9</strong></p>
+<blockquote>
+<p>Every cyclic group is abelian.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>$g=a^r\in \langle a\rangle$，$h=a^s\in \langle a\rangle$, $gh=a^ra^s=a^{r+s}=a^{s+r}=a^sa^r=hg$</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Subgroups-of-Cyclic-Groups"><a href="#Subgroups-of-Cyclic-Groups" class="headerlink" title="Subgroups of Cyclic Groups"></a>Subgroups of Cyclic Groups</h3><ul>
+<li><p><strong>Theorem 4.10</strong></p>
+<blockquote>
+<p>Every subgroup of a cyclic group is cyclic.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>: (Brief Version)<br>Let $m$ be the smallest natural number such that $a^m\in H$. Such an $m$ exists by the Principle of Well-Ordering.<br>$h=a^m\in H$, we must show that every $h’\in H$ can be written as a power of $h$<br>$h’=a^k=a^{mq+r}=(a^m)^qa^r=h^qa^r\in H$, where $0\leq r&lt;m$<br>$a^r=a^kh^{-q}$, then $a^r\in H$<br>$r=0$, because $m$ is the smallest positive integer that $a^m\in H$<br>$h’=h^q$<br>$H=\langle h\rangle$ is a cyclic group</p>
+</blockquote>
+</li>
+<li><strong>Corollary 4.11</strong><blockquote>
+<p>The The subgroups of $\mathbb{Z}$ are exactly $n\mathbb{Z}$ for $n=1,2,\cdots$.</p>
+</blockquote>
+</li>
+<li><p><strong>Proposition 4.12</strong></p>
+<blockquote>
+<p>Let $G$ be a cyclic group of order $n$ and suppose that $a$ is a generator for $G$. Then $a^k = e$ if and only if $n$ divides $k$.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>$\Rightarrow$:<br>$e=a^k=a^{nq+r}=a^{nq}a^r=ea^r=a^r$<br>$r=0$, $n$ divides $k$ </p>
+<p>$\Leftarrow$:<br>$a^k=a^{ns}=(a^n)^s=e^s=e$</p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 4.13</strong></p>
+<blockquote>
+<p>Let G be a cyclic group of order n and suppose that $a\in G$ is a generator of the group. If $b=a^k$, then the order of $b$ is $n/d$, where $d = gcd(k,n)$.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>Suppose $e=b^m=a^{km}$<br>The order $m$ is the smallest integer $n$ that $n$ divides $km$<br>The smallest $km$ is $lcm(k,m)$, which is $kn/d$<br>Then $m=n/d$  </p>
+</blockquote>
+</li>
+<li><strong>Corollary 4.14</strong>  <blockquote>
+<p>The generators of $\mathbb{Z}_n$ are the integers r such that $1\leq r&lt;n$ and $gcd(r,n) = 1$.<br>See the <strong>Group of Units</strong> of $\mathbb{Z}_n$  </p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Multiplicative-Group-of-Complex-Numbers"><a href="#Multiplicative-Group-of-Complex-Numbers" class="headerlink" title="Multiplicative Group of Complex Numbers"></a>Multiplicative Group of Complex Numbers</h2><h3 id="Definitions-3"><a href="#Definitions-3" class="headerlink" title="Definitions"></a>Definitions</h3><ul>
+<li><strong>Complex Numbers</strong> 复数<blockquote>
+<p>$\mathbb{C}=\{a+bi:a,b\in\mathbb{R}\}$<br>$a$ is <strong>Real Part</strong> 实部<br>$b$ is <strong>Imaginary Part</strong> 虚部  </p>
+</blockquote>
+</li>
+<li><strong>Rectangular</strong> or <strong>Cartesian</strong><blockquote>
+<p>$z=a+bi$</p>
+</blockquote>
+</li>
+<li><strong>Complex Conjugate</strong> 共轭复数<blockquote>
+<p>$z^*=a-bi$</p>
+</blockquote>
+</li>
+<li><strong>Absolute Value</strong> or <strong>Modulus</strong><blockquote>
+<p>$|z|=\sqrt{a^2+b^2}$</p>
+</blockquote>
+</li>
+<li><strong>Polar Coordinates</strong>  <blockquote>
+<p>$z=r(\cos\theta+i\sin\theta)=r\textrm{cis}(\theta)$<br>$r=|z|$  </p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Theorems"><a href="#Theorems" class="headerlink" title="Theorems"></a>Theorems</h3><ul>
+<li><strong>Proposition 4.20</strong>  <blockquote>
+<p>$z=r\textrm{cis}\theta$, $w=s\textrm{cis}\phi$<br>$zw=rs\textrm{cis}(\theta+\phi)$  </p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 4.22</strong> DeMoivre</p>
+<blockquote>
+<p>$[r\textrm{cis}\theta]^n=r^n\textrm{cis}(n\theta)$</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>Induction on n.</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="The-Circle-Group-and-the-Roots-of-Unity"><a href="#The-Circle-Group-and-the-Roots-of-Unity" class="headerlink" title="The Circle Group and the Roots of Unity"></a>The Circle Group and the Roots of Unity</h3><ul>
+<li><strong>Circle Group</strong><blockquote>
+<p>$\mathbb{T}=\{z\in\mathbb{C}:|z|=1\}$</p>
+</blockquote>
+</li>
+<li><strong>Proposition 4.24</strong>  <blockquote>
+<p>The circle group is a subgroup of $\mathbb{C}$</p>
+</blockquote>
+</li>
+<li><strong>$n$-th Roots of Unity</strong><blockquote>
+<p>The $z$ satisfying $z^n=1$</p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 4.25</strong>  </p>
+<blockquote>
+<p>The $n$-th roots of unity is $z=\textrm{cis}(\frac{2k\pi}{n})$  </p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>$z^n=\textrm{cis}(2k\pi)=1$  </p>
+</blockquote>
+</li>
+<li><strong>Primitive $n$-th Root of Unity</strong>  <blockquote>
+<p>A generator for the group of the nth roots of unity.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="The-Method-of-Repeated-Squares"><a href="#The-Method-of-Repeated-Squares" class="headerlink" title="The Method of Repeated Squares"></a>The Method of Repeated Squares</h2><ul>
+<li>Calculate $x^a(\textrm{mod }b)$  </li>
+<li>First: $a=\sum{2^{a_i}}$  </li>
+<li>Calculate: $x^{2^{a_i}}(\textrm{mod }b)$ (This is quick)</li>
+<li>Add up.</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-06-19T08:29:54.000Z" itemprop="dateUpdated">2019-06-19 16:29:54</time>
+</span><br>
+
+
+        
+        Link：<a href="/2019/01/30/Learn-PS-20190130-PS-IV-01/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Abstract-Algebra/">Abstract Algebra</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Course/">Course</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Problem-Solving/">Problem Solving</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/&title=《Problem Solving IV 01》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/&title=《Problem Solving IV 01》 — Maxwell's Blog&source=My note when  previewing Copying the Textbook of   abstract algebra." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Problem Solving IV 01》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/02/28/Learn-PMS-20190228-PMS-01/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Probability Ch1</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/16/Tests-test/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Tag &amp; Category Test</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/&title=《Problem Solving IV 01》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/&title=《Problem Solving IV 01》 — Maxwell's Blog&source=My note when  previewing Copying the Textbook of   abstract algebra." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Problem Solving IV 01》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2019/01/30/Learn-PS-20190130-PS-IV-01/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

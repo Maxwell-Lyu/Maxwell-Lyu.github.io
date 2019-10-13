@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>DIP-ALL | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Course,Digital Image Processing">
+    <meta name="description" content="第二章: 空间域图像增强(Part I)图像内插 用已知的数据来估计未知位置的数值 按照边角对齐像素点阵, 之后有如下插值方法  最近邻内插法 取最近邻像素的灰度为此像素的灰度  双线性内插法 4个最近邻进行估计, 解有4个等式组成的方程组$$v(x,y)=ax+by+cxy+d$$  双三次内插法 16个最近邻去估计, 解16个等式组成的方程组$$v(x,y)=\sum_{i=0}^3\sum_">
+<meta name="keywords" content="Course,Digital Image Processing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DIP-ALL">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="第二章: 空间域图像增强(Part I)图像内插 用已知的数据来估计未知位置的数值 按照边角对齐像素点阵, 之后有如下插值方法  最近邻内插法 取最近邻像素的灰度为此像素的灰度  双线性内插法 4个最近邻进行估计, 解有4个等式组成的方程组$$v(x,y)=ax+by+cxy+d$$  双三次内插法 16个最近邻去估计, 解16个等式组成的方程组$$v(x,y)=\sum_{i=0}^3\sum_">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-12T07:44:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DIP-ALL">
+<meta name="twitter:description" content="第二章: 空间域图像增强(Part I)图像内插 用已知的数据来估计未知位置的数值 按照边角对齐像素点阵, 之后有如下插值方法  最近邻内插法 取最近邻像素的灰度为此像素的灰度  双线性内插法 4个最近邻进行估计, 解有4个等式组成的方程组$$v(x,y)=ax+by+cxy+d$$  双三次内插法 16个最近邻去估计, 解16个等式组成的方程组$$v(x,y)=\sum_{i=0}^3\sum_">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends">
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/">
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">DIP-ALL</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">DIP-ALL</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-12T04:53:15.000Z" itemprop="datePublished" class="page-time">
+  2019-09-12
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第二章-空间域图像增强-Part-I"><span class="post-toc-number">1.</span> <span class="post-toc-text">第二章: 空间域图像增强(Part I)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#图像内插"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">图像内插</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最近邻内插法"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">最近邻内插法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#双线性内插法"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">双线性内插法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#双三次内插法"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">双三次内插法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#像素间的基本关系"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">像素间的基本关系</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#相邻像素"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">相邻像素</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#邻接性"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">邻接性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#连通性"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">连通性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#区域"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">区域</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#边界"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">边界</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#距离度量"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">距离度量</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#空间域图像增强背景知识"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">空间域图像增强背景知识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本灰度变换"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">基本灰度变换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#直方图处理"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">直方图处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第三章-空间与图像增强-Part-II"><span class="post-toc-number">2.</span> <span class="post-toc-text">第三章: 空间与图像增强(Part II)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#直方图均衡化"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">直方图均衡化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#直方图匹配-规定化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">直方图匹配(规定化)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#局部直方图均衡化"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">局部直方图均衡化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#直方图统计量用于局部图像增强"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">直方图统计量用于局部图像增强</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第四章"><span class="post-toc-number">3.</span> <span class="post-toc-text">第四章</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#空间滤波"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">空间滤波</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#空间滤波基础"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">空间滤波基础</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#平滑空间滤波器"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">平滑空间滤波器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#锐化空间滤波器"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">锐化空间滤波器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#混合空间增强法"><span class="post-toc-number">3.1.4.</span> <span class="post-toc-text">混合空间增强法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#算术操作增强"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">算术操作增强</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#频率域图像变化"><span class="post-toc-number">4.</span> <span class="post-toc-text">频率域图像变化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本概念"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">基本概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#连续冲激与采样"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">连续冲激与采样</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#傅里叶级数"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">傅里叶级数</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Learn-DIP-20190912-DIP-ALL" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">DIP-ALL</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-12 12:53:15" datetime="2019-09-12T04:53:15.000Z" itemprop="datePublished">2019-09-12</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="第二章-空间域图像增强-Part-I"><a href="#第二章-空间域图像增强-Part-I" class="headerlink" title="第二章: 空间域图像增强(Part I)"></a>第二章: 空间域图像增强(Part I)</h1><h2 id="图像内插"><a href="#图像内插" class="headerlink" title="图像内插"></a>图像内插</h2><ul>
+<li>用已知的数据来估计未知位置的数值</li>
+<li>按照边角对齐像素点阵, 之后有如下插值方法</li>
+</ul>
+<h3 id="最近邻内插法"><a href="#最近邻内插法" class="headerlink" title="最近邻内插法"></a>最近邻内插法</h3><ul>
+<li>取最近邻像素的灰度为此像素的灰度</li>
+</ul>
+<h3 id="双线性内插法"><a href="#双线性内插法" class="headerlink" title="双线性内插法"></a>双线性内插法</h3><ul>
+<li>4个最近邻进行估计, 解有4个等式组成的方程组<br>$$v(x,y)=ax+by+cxy+d$$</li>
+</ul>
+<h3 id="双三次内插法"><a href="#双三次内插法" class="headerlink" title="双三次内插法"></a>双三次内插法</h3><ul>
+<li>16个最近邻去估计, 解16个等式组成的方程组<br>$$v(x,y)=\sum_{i=0}^3\sum_{j=0}^3a_{ij}x^iy^j$$</li>
+</ul>
+<h2 id="像素间的基本关系"><a href="#像素间的基本关系" class="headerlink" title="像素间的基本关系"></a>像素间的基本关系</h2><h3 id="相邻像素"><a href="#相邻像素" class="headerlink" title="相邻像素"></a>相邻像素</h3><p>设$p:(x,y)$为一像素</p>
+<ul>
+<li>4邻域: 上下左右<br>$$N_4(p)=(x-1,y), (x+1,y), (x,y-1), (x,y+1)$$</li>
+<li>4对角邻域: 对角线四个方向<br>$$N_D(p)=(x-1,y-1), (x-1,y+1), (x+1,y-1), (x+1,y+1)$$</li>
+<li>8邻域(p): 周围的8个像素<br>$$N_8=N_4+N_D$$</li>
+</ul>
+<h3 id="邻接性"><a href="#邻接性" class="headerlink" title="邻接性"></a>邻接性</h3><ul>
+<li>定义: 令$V$为用于定义邻接性的灰度值集合<ul>
+<li>二值图像: $V=\{1\}$或$V=\{0\}$</li>
+<li>非二值图像: 灰度级的子集, 如$V=\{128, 129,\cdots, 255\}$</li>
+</ul>
+</li>
+<li>$V$集合将灰度级化为2个等价类, 也可认为它将灰度图像染成二值图像</li>
+<li>4邻接: $q\in N_4(p)$, $q$与$p$的灰度都在$V$中</li>
+<li>8邻接: $q\in N_8(p)$, $q$与$p$的灰度都在$V$中</li>
+<li>m邻接(混合邻接): $q$与$p$的灰度都在$V$中, 且:<br>若$q\in N_4(p)$;<br>或$q\in N_D(p)$, 且$N_4(p)\cap N_4(q)$的灰度都不在集合$V$中</li>
+</ul>
+<h3 id="连通性"><a href="#连通性" class="headerlink" title="连通性"></a>连通性</h3><ul>
+<li>通路: $(x_0=x, y_0=y),(x_1, y_1), \cdots, (x_{N-1}, y_{N-1}),(x_N=s,y_N=t)$<ul>
+<li>相邻的像素点是邻接的</li>
+<li>长度为$N$</li>
+<li>若$(x,y)=(s,t)$, 则为闭合通路</li>
+</ul>
+</li>
+<li>连通集<ul>
+<li>在$S$中是连通: 取$S$额外i图像中像素的子集. 如果在$S$中全部u像素之间存在一条$p$到$q$的通路, 则说明$p$和$q$在$S$中是连通的</li>
+<li>连通分量: 对于$S$中任何像素$p$, $S$中连通到该像素的像素集叫做$S$的连通分量</li>
+<li>连通集: 若$S$仅有一个连通分量, 则$S$叫做连通集</li>
+</ul>
+</li>
+</ul>
+<h3 id="区域"><a href="#区域" class="headerlink" title="区域"></a>区域</h3><ul>
+<li>区域: $R$为连通集, 则$R$称为区域</li>
+<li>邻接区域: 如果两个区域联合形成一个连通集, 那么他们是邻接区域</li>
+<li>假设图像包括$K$个不连接的区域, 即$R_1, R_2, \cdots, R_K$, 且不接触边界<ul>
+<li>前景: $K$个区域的并集$R_u$</li>
+<li>背景: 其补集$(R_u)^C$</li>
+</ul>
+</li>
+</ul>
+<h3 id="边界"><a href="#边界" class="headerlink" title="边界"></a>边界</h3><ul>
+<li>一个区域R的边界（也称为边缘或轮廓线）是区域$R$中像素的集合<ul>
+<li>这些点与R补集中的点邻近</li>
+<li>这些点至少有一个背景邻点</li>
+</ul>
+</li>
+<li>用8连通定义</li>
+<li>边界与边缘<ul>
+<li>边界：一个有限区域的边界（通常）形成一条闭合通路, 是个“整体”概念</li>
+<li>边缘：具有某些导数值（超过预先设定的阈值）的像素形成, 是个“局部”概念</li>
+<li>边界只考察其邻点是否属于集合V, 属于二值判断。边缘考察灰度级的差别, 粒度更细。边缘可能不闭合</li>
+<li>什么时候边缘=边界？二值图像</li>
+</ul>
+</li>
+</ul>
+<h3 id="距离度量"><a href="#距离度量" class="headerlink" title="距离度量"></a>距离度量</h3><ul>
+<li>$D$为距离函数, 若<ul>
+<li>$D(p,q)\geq 0$, 且$D(p,q)=0$当且仅当$p=q$</li>
+<li>$D(p,q)=D(q,p)$</li>
+<li>$D(p,z)\leq D(p,q)+D(q,z)$</li>
+</ul>
+</li>
+<li>欧式距离<br>$$D_r(p,q)=\sqrt{(x-s)^2+(y-t)^2}$$</li>
+<li>$D_4$距离(曼哈顿距离)<br>$$D_4(p,q)=|x-s| + |y-t|$$</li>
+<li>$D_8$距离(棋盘距离)<br>$$D_8(p,q)=\max(|x-s|,|y-t|)$$</li>
+</ul>
+<h2 id="空间域图像增强背景知识"><a href="#空间域图像增强背景知识" class="headerlink" title="空间域图像增强背景知识"></a>空间域图像增强背景知识</h2><ul>
+<li>增强的首要目标是处理图像, 使其比原始图像更适合于特定应用, 没有通用的理论和标准</li>
+<li>方法<ul>
+<li>空间域方法: 图像平面本身, 直接处理像素: 离散</li>
+<li>变换域方法: 频域(傅里叶变换): 连续<blockquote>
+<p>空间域-&gt;变换域-&gt;处理-&gt;空间域</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>空间域方法是直接对像素操作的过程<br>$g(x,y)=T(f(x,y))$<br>$g$: 输出图像; $T$: 操作算子, 定义在$(x,y)$的邻域; $f$: 原始图像<blockquote>
+<p>边界: 忽略外部, 填充</p>
+</blockquote>
+</li>
+<li>类型<ul>
+<li>空间滤波<ul>
+<li>空间滤波器: 邻域, 预定义的操作</li>
+</ul>
+</li>
+<li>灰度变换<ul>
+<li>邻域大小为1的空间滤波</li>
+<li>灰度变换函数$s=T(r)$</li>
+<li>函数可以存储在一维数组, 查表实现映射</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="基本灰度变换"><a href="#基本灰度变换" class="headerlink" title="基本灰度变换"></a>基本灰度变换</h2><ul>
+<li>线性函数<ul>
+<li>图像反转公式: $s=L-1-r$, $L=2^b$</li>
+<li>改变分析图象的难易</li>
+</ul>
+</li>
+<li>对数函数<ul>
+<li>低灰度值拉伸, 高灰度值压缩: $s=c\log(1+r)$</li>
+<li>看到更多细节</li>
+</ul>
+</li>
+<li>幂律函数<ul>
+<li>伽马变换: $s=cr^\gamma$</li>
+<li>更接近真实值(显示器)</li>
+<li>调节参数$\gamma$可以在细节和对比度当中权衡</li>
+</ul>
+</li>
+<li><p>分段线性函数</p>
+<blockquote>
+<p>折线: $(0,0)-&gt;(r_1,s_1)-&gt;(r_2,s_2)-&gt;(L-1, L-1)$</p>
+<ul>
+<li>对比拉伸变换: 单调递增</li>
+<li>线性函数: $s_1=r_1$, $s_2=r_2$</li>
+<li>阈值处理函数: $r_1=r_2$, $s_1=0$, $s_2=L-1$</li>
+<li>灰度级分层: 突出特定灰度范围的亮度<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   +---+</span><br><span class="line">   |   |</span><br><span class="line">---+   +---</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p>比特平面分层</p>
+<ul>
+<li>突出特定比特的作用: 8比特图像可认为有8个1比特平面组成</li>
+<li>高阶比特: 视觉上重要的数据</li>
+<li>低阶比特: 精细的灰度细节</li>
+<li>函数实现: 第$n$比特平面: $r=(s&gt;&gt;(n-1)) \&amp; 1$</li>
+<li>应用: 确定量化该图像比特数的充分性, 图像压缩(伪轮廓)</li>
+</ul>
+</li>
+</ul>
+<h2 id="直方图处理"><a href="#直方图处理" class="headerlink" title="直方图处理"></a>直方图处理</h2><ul>
+<li>灰度直方图$H(D)$<ul>
+<li>横坐标: 灰度级</li>
+<li>纵坐标: 该灰度级出现的频率(此灰度级像素的数量)</li>
+</ul>
+</li>
+<li>阈值面积函数$A(D)$<ul>
+<li>连续图像中具有灰度级$\geq D$的轮廓线所包围的面积<br>$$A(D)-\int_D^\infty H(p)dp$$</li>
+</ul>
+</li>
+<li>概率密度函数(PDF)<ul>
+<li>归一化到单位面积的直方图<br>$$PDF=P(D)=\frac{1}{A_0}H(D)$$</li>
+</ul>
+</li>
+<li>累计分布函数(CDF)<ul>
+<li>归一化后灰度级$\geq D$的轮廓线所包围的面积<br>$$CDF=P(D)=\inf_0^Dp(u)du=\frac{1}{A_0}H(u)du$$</li>
+</ul>
+</li>
+<li>严格的数学定义<br>$$H(D=\lim_{\delta D\to 0}\frac{A(D)-A(D+\delta D)}{D+\delta D-D}=\lim_{\delta D\to 0}\frac{A(D)-A(D+\delta D)}{\delta D}=-\frac{d}{dD}A(D)$$<ul>
+<li>数字图像时, 简化为<br>$$H(D)=A(D)-A(D+1)$$</li>
+</ul>
+</li>
+<li>实现<ol>
+<li>初始化hist[k]=0; k=0, …, L-1</li>
+<li>统计hist[f(x,y)]++; x=0, …, M-1; y=0, …,N-1</li>
+<li>归一化hist[f(x,y)]/(M*N)</li>
+</ol>
+</li>
+<li>应用<ol>
+<li>图像快速检测: 是否合理的利用了全部被允许的灰度级范围, 从而及早发现数字化中出现的问题</li>
+<li>分割前景背景: 双峰直方图, 取低谷灰度值作为分割点</li>
+<li>面积计算: 类似前景背景, 用直方图计数像素</li>
+</ol>
+</li>
+</ul>
+<h1 id="第三章-空间与图像增强-Part-II"><a href="#第三章-空间与图像增强-Part-II" class="headerlink" title="第三章: 空间与图像增强(Part II)"></a>第三章: 空间与图像增强(Part II)</h1><h2 id="直方图均衡化"><a href="#直方图均衡化" class="headerlink" title="直方图均衡化"></a>直方图均衡化</h2><ul>
+<li>直方图均匀分布时, 对比度会有明显增强</li>
+<li>通过灰度变换函数, 将原图像直方图的分布均衡化, 这一过程称为直方图均衡化用灰度变换函数让直方图均匀分布</li>
+<li>线性运算: $s=T(r)=a\times r + b$</li>
+<li>灰度变换函数与直方图<ul>
+<li>输入图像的概率密度: $p_r(r)$; 输出图像的概率密度: $p_s(s)$; 变换函数$T$<blockquote>
+<p>这里只考虑单调递增函数</p>
+</blockquote>
+</li>
+<li>单调连续函数<ul>
+<li>$r\in [0,L-1]$<br>$$s=T(r)$$<ul>
+<li>$T(r)$在区间$[0,L-1]$内是单调递增函数</li>
+<li>当$0\leq r\leq L-1$时, $0\leq T(r)\leq L-1$</li>
+</ul>
+</li>
+<li>更强的假设<ul>
+<li>$T(r)$在区间$[0,L-1]$是严格单调递增函数, 此时有逆函数<br>$$r=T^{-1}(s)$$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>概率密度公式<br>$$p_s(s)=p_r(r)|\frac{dr}{ds}|=p_r(r)|(\frac{ds}{dr}06{-1}|=p_r(T^{-1}(s))|\frac{1}{T’(T^{-1}(s))}|$$</li>
+</ul>
+</li>
+<li>连续函数<ul>
+<li>设计$T(r)$, 使得$p_s(s)$是均匀分布<br>$$s=T(r)=(L-1)\int_0^rp_r(w)dw$$</li>
+</ul>
+</li>
+<li>离散直方图<br>$$s_k=T(r_k)=(L-1)\sum_{j=0}^k p_r(r_j)$$<h2 id="直方图匹配-规定化"><a href="#直方图匹配-规定化" class="headerlink" title="直方图匹配(规定化)"></a>直方图匹配(规定化)</h2></li>
+<li>处理后的图像具有某种指定的直方图形状</li>
+<li>这种用于产生处理后有特殊直方图的图像的方法, 叫做直方图匹配或直方图规定化处理</li>
+<li>以均衡化直方图为桥梁: A:$p_r(r)$–&gt;B(均衡化图像):$p_s(s)$–&gt;C:$p_z(z)$<ul>
+<li>输入图像灰度值概率密度$p_r(r)$<br>$$s=T(r)=(L-1)\int_0^rp_r(w)dw$$</li>
+<li>指定灰度值概率密度$p_z(z)$<br>$$G(z)=(L-1)\int_0^zp_z(t)dt=s$$</li>
+<li>反函数唯一<br>$$z=G^{-1}(s)=G^{-1}(T(r))$$</li>
+</ul>
+</li>
+<li>离散直方图<ul>
+<li>输入离散直方图$p_r(r_k)$<br>$$s_k=\frac{L-1}{MN}\sum_{j=0}^kn_j$$</li>
+<li>指定离散直方图$p_z(z_k)$<br>$$G(z_q)=(L-1)\sum_{i=0}^qp_z(z_i)=s_k$$</li>
+<li>查表实现: 取邻近值, 不唯一时取最小的<br>$$z_q=G^{-1}(s_k)$$<h2 id="局部直方图均衡化"><a href="#局部直方图均衡化" class="headerlink" title="局部直方图均衡化"></a>局部直方图均衡化</h2></li>
+</ul>
+</li>
+<li>特性<ul>
+<li>整体处理, 小细节易被忽略</li>
+<li>只希望对局部进行增强</li>
+<li>图像中每个像素的邻域中灰度分布为基础设计变换函数</li>
+</ul>
+</li>
+<li>步骤<ul>
+<li>定义一个邻域, 不断平移中心位置<ul>
+<li>每一位置, 计算该领域中, 点的直方图</li>
+<li>利用直方图均衡化或匹配得到变换函数</li>
+<li>将变换函数作用到邻域中心像素</li>
+</ul>
+</li>
+<li>重复上述过程<h2 id="直方图统计量用于局部图像增强"><a href="#直方图统计量用于局部图像增强" class="headerlink" title="直方图统计量用于局部图像增强"></a>直方图统计量用于局部图像增强</h2></li>
+</ul>
+</li>
+<li>局部均值<br>$$m_{s_{xy}}=\sum_{i=0}^{L-1}r_ip_{s_{xy}}(r_i)$$</li>
+<li>局部方差<br>$$\sigma^2_{s_{xy}}=\sum_{i=0}^{L-1}(r_i-m_{s_{xy}})^2p_{s_{xy}}(r_i)$$</li>
+<li>局部直方图统计增强<br>$$g(x,y)=\begin{cases}<br>  E\cdot f(x,y) &amp;\textrm{if }m_{s_{xy}}\leq k_0m_G\textrm{ AND }k_1\sigma_G\leq \sigma_{s_{xy}}\leq k_2\sigma_G \\<br>  f(x,y) &amp;\textrm{otherwise}<br>\end{cases}$$</li>
+</ul>
+<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1><h2 id="空间滤波"><a href="#空间滤波" class="headerlink" title="空间滤波"></a>空间滤波</h2><h3 id="空间滤波基础"><a href="#空间滤波基础" class="headerlink" title="空间滤波基础"></a>空间滤波基础</h3><ul>
+<li>空间滤波机理<ul>
+<li>空间滤波器<ul>
+<li>邻域(矩形)</li>
+<li>预定义的操作</li>
+</ul>
+</li>
+<li>$m\times n$的模板<ul>
+<li>$m=2a+1$, $n=2b+1$</li>
+<li>最小为$3\times3$</li>
+</ul>
+</li>
+<li>滤波操作</li>
+<li>线性滤波<->频率域滤波</-></li>
+</ul>
+</li>
+<li>空间相关与卷积<ul>
+<li>相关: 平移滤波器模板, 计算每个位置乘积求和<ul>
+<li>补零, 计算, 滑动, 裁剪</li>
+<li>[补公式]</li>
+<li>寻找匹配: 归一化乘积(向量长度为1), 值最大时, 图像与模板相同</li>
+</ul>
+</li>
+<li>卷积: 滤波器要旋转180, 其他与相关相同<ul>
+<li>旋转, 补零, 计算, 滑动, 裁剪</li>
+<li>[补公式]</li>
+</ul>
+</li>
+<li>线性滤波的向量表示: 矩阵相乘拉成向量相乘</li>
+</ul>
+</li>
+<li>空间滤波器模板<ul>
+<li>计算平均灰度</li>
+<li>两变量的连续函数</li>
+<li>非线性滤波器<h3 id="平滑空间滤波器"><a href="#平滑空间滤波器" class="headerlink" title="平滑空间滤波器"></a>平滑空间滤波器</h3></li>
+</ul>
+</li>
+<li>均值滤波器<ul>
+<li>优点: 降低噪声; 缺点: 边缘模糊</li>
+<li>先求和, 再归一化(先乘全1矩阵, 后除以9)</li>
+</ul>
+</li>
+<li>加权线性滤波器<ul>
+<li>非均匀权重, 降低模糊</li>
+</ul>
+</li>
+<li>非线性滤波器<ul>
+<li>对滤波器覆盖的像素排序, 排序决定的值替代中心线像素</li>
+</ul>
+</li>
+<li>中值滤波器, 最大值滤波器, 最小值滤波器<h3 id="锐化空间滤波器"><a href="#锐化空间滤波器" class="headerlink" title="锐化空间滤波器"></a>锐化空间滤波器</h3>突出灰度的过渡部分</li>
+<li>数学基础<ul>
+<li>微分取值<br>||恒定灰度|恒定斜率|突变|<br>|-|-|-|-|<br>|一阶微分|0|非0|非0|<br>|二阶微分|0|0|非0|</li>
+<li>使用二阶微分对图像锐化</li>
+</ul>
+</li>
+<li>各向同性滤波器</li>
+<li>拉普拉斯算子<ul>
+<li>标准形式: 四角0, 四边1, 中间-4</li>
+<li>对角形式: 四角四边1, 中间-8</li>
+<li>拉普拉斯算子的结果叠加到图像中, 取中心系数为-1</li>
+</ul>
+</li>
+<li>非锐化掩蔽<ul>
+<li>模糊图像, 原图减去模糊图像得到模板, 加到原图像</li>
+</ul>
+</li>
+<li>梯度<ul>
+<li>利用梯度的大小<ul>
+<li>梯度: 最大变化率的方向<br>$$\nabla f\equiv\mathrm{grad}(f)\equiv \begin{bmatrix} g_x \\ g_y \end{bmatrix} = \begin{bmatrix} \frac{\partial f}{\partial x} \\ \frac{\partial f}{\partial y} \end{bmatrix}$$</li>
+<li>大小:<br>$$M(x,y)=\mathrm{mag}(\nabla f)=\sqrt{g_x^2 + g_y^2}\approx |g_x|+|g_y|$$</li>
+</ul>
+</li>
+<li>梯度的离散近似<ul>
+<li>最简单的近似:<br>$$\begin{aligned}<br>  g_x &amp;= z_8 - z_5\\<br>  g_y &amp;= z_6 - z_5\\<br>\end{aligned}$$</li>
+<li>交叉差分: 罗伯特交叉梯度算子<br>$$\begin{aligned}<br>  g_x &amp;= (z_7+2z_8+z_9) - (z_1+2z_2+z_3)\\<br>  g_y &amp;= (z_3+2z_6+z_9) - (z_1+2z_4+z_7)\\<br>\end{aligned}$$</li>
+<li>对称模板: Soble算子<h3 id="混合空间增强法"><a href="#混合空间增强法" class="headerlink" title="混合空间增强法"></a>混合空间增强法</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>综合使用各种增强方法</li>
+</ul>
+<h2 id="算术操作增强"><a href="#算术操作增强" class="headerlink" title="算术操作增强"></a>算术操作增强</h2><p>像素对像素为基础, 在两幅或多幅图像之间进行</p>
+<ul>
+<li>加法<ul>
+<li>定理: 对M幅加性噪声图像进行平均, 可以使图像的平方信噪比提高M倍</li>
+</ul>
+</li>
+<li>减法<ul>
+<li>图像差别的细节被观察到</li>
+</ul>
+</li>
+<li>乘法：通常用来进行掩模运算</li>
+<li>除法：通常可以用来归一化</li>
+</ul>
+<h1 id="频率域图像变化"><a href="#频率域图像变化" class="headerlink" title="频率域图像变化"></a>频率域图像变化</h1><p>## </p>
+<ul>
+<li>图像是连续信号的量化采样<ul>
+<li>信号通常包括丰富的频域信息</li>
+<li>傅里叶级数<ul>
+<li>周期函数: 表示为不同频率的正/余弦函数的 加权之和</li>
+<li>非周期函数: 表示为不同频率的正/余弦函数 加权求和的积分</li>
+</ul>
+</li>
+<li>意义: 热扩散, 信号处理</li>
+</ul>
+</li>
+</ul>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>复数$C$<br>  $$C=R+jH$$<br>$R,H\in\mathbb{R}, i=\sqrt{-1}$ </li>
+<li>欧拉公式<br>$$e^{j\theta}=\cos\theta+j\sin\theta$$</li>
+</ul>
+<h3 id="连续冲激与采样"><a href="#连续冲激与采样" class="headerlink" title="连续冲激与采样"></a>连续冲激与采样</h3><ul>
+<li>在0处的连续单位冲激<br>$$\delta=\begin{cases}<br>  \infty\quad&amp;\text{if }t=0\\<br>  0\quad &amp;\text{if }t\ne0<br>\end{cases}$$<br>$$\int_{-\infty}^{\infty}\delta(t)dt=1$$</li>
+<li><p>采样性质</p>
+<ul>
+<li>$\int_{1}^{2}$</li>
+</ul>
+</li>
+<li><p>离散冲激</p>
+</li>
+<li>连续离散冲激</li>
+</ul>
+<h3 id="傅里叶级数"><a href="#傅里叶级数" class="headerlink" title="傅里叶级数"></a>傅里叶级数</h3><ul>
+<li>周期为$T$的连续函数$f(t)$可以表示为正弦和余弦函数的加权之和<br>$$\mathfrak{J}\{f(t)\}=\sum_{n=-\infty}^\infty c_ne^{j\frac{2\pi n}{T}t}$$<br>其中<br>$$c_n=\int_{}^{}$$</li>
+<li>傅里叶变换的幅值<br>$|F(\mu)|=AT\mathfrak{J}$</li>
+</ul>
+<ul>
+<li><p>连续卷积<br>$$f(t)\star h(t)=\int_{-\infty}^\infty f(\tau)h(t-\tau)d\tau$$<br>$$\mathfrak{J}\{f(t)\star h(t)\}=H(\mu)F(\mu)$$<br>$$\mathfrak{J}\{f(t)h(t)\}=H(\mu)\star F(\mu)$$</p>
+</li>
+<li><p>连续函数采样<br>采样是有限的</p>
+<p>带限函数一定是$-\infty$到$\infty$的<br>有限长度的采样, 混淆是不可避免的</p>
+<p>平滑输入函数, 减少高频分量(图像散焦)</p>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-10-12T07:44:26.000Z" itemprop="dateUpdated">2019-10-12 15:44:26</time>
+</span><br>
+
+
+        
+        Link：<a href="/2019/09/12/Learn-DIP-20190912-DIP-ALL/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Course/">Course</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Digital-Image-Processing/">Digital Image Processing</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/&title=《DIP-ALL》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/&title=《DIP-ALL》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《DIP-ALL》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/10/11/Tech-20191011-juptyer-vscode/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">在VSCode中使用Jupyter Notebook</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/09/04/Learn-CM-20190904-CM-ALL/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CM-ALL</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/&title=《DIP-ALL》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/&title=《DIP-ALL》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《DIP-ALL》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2019/09/12/Learn-DIP-20190912-DIP-ALL/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
