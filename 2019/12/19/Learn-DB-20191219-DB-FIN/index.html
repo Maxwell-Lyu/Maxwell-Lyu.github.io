@@ -31,7 +31,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/20191219-DB-FIN/01.png">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/20191219-DB-FIN/02.png">
-<meta property="og:updated_time" content="2019-12-28T11:41:36.122Z">
+<meta property="og:updated_time" content="2019-12-28T12:22:20.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DB-FIN">
 <meta name="twitter:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
@@ -855,7 +855,7 @@
 <li><p>意向锁锁相容矩阵</p>
 <p>|已经有的锁|S|X|IS|IX|SIX||<br>|-|-|-|-|-|-|-|<br>|已经持有S|✔||✔|||S加了, 当前及其下层没有X<br>|已经持有X||||||X排他, 加了别的都没有|<br>|已经持有IS|✔||✔|✔|✔|IS加了, 当前没X|<br>|已经持有IX|||✔|✔||IX加了, 当前没S没X|<br>|已经持有SIX|||✔|||SIX加了, 相当于同时S和IX|</p>
 </li>
-<li>意向锁锁申请算法，意向锁锁释放算法: PPT没有</li>
+<li>意向锁锁申请算法，意向锁锁释放算法: 对任何一个节点加锁, 必须先对其父节点加意向锁(也就是从根开始加)</li>
 </ul>
 </li>
 </ul>
@@ -988,14 +988,54 @@
 </li>
 </ul>
 <h1 id="第六章-amp-第七章"><a href="#第六章-amp-第七章" class="headerlink" title="第六章&amp;第七章"></a>第六章&amp;第七章</h1><ul>
-<li>游标管理<ul>
-<li>游标的作用</li>
-<li>游标的定义、打开、使用、关闭</li>
-<li>可滚动游标的定义及其在数据更新命令中的使用</li>
+<li><p>游标管理</p>
+<ul>
+<li>游标的作用: 集合量逐个取出后送入应用程序变量内供其使用从</li>
+<li><p>定义: 查询结果为多个元组时, 必须使用游标获取每个元组</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">EXEC SQL <span class="keyword">DECLARE</span> <span class="keyword">cursor</span>-<span class="keyword">name</span> <span class="keyword">CURSOR</span> <span class="keyword">FOR</span></span><br><span class="line">	subquery</span><br><span class="line">	[ <span class="keyword">ORDER</span> <span class="keyword">BY</span> ...... ]</span><br><span class="line">	[ <span class="keyword">FOR</span> &#123; <span class="keyword">READ</span> <span class="keyword">ONLY</span> |</span><br><span class="line">		   <span class="keyword">UPDATE</span> [ <span class="keyword">OF</span> columnname, ...... ] &#125; ] ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开: <code>EXEC  SQL  OPEN agent_dollars</code></p>
+</li>
+<li><p>使用</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while (TRUE) &#123;		/* loop to fetch rows */</span><br><span class="line">    exec  sql  fetch agent_dollars</span><br><span class="line">                     into :agent_id, :dollar_sum;</span><br><span class="line"></span><br><span class="line">    printf("%s %11.2f\n", agent_id, dollar_sum);</span><br><span class="line">&#125;				/* end fetch loop */</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭: <code>exec  sql  whenever  not  found  goto  finish</code>定义结束, <code>exec  sql  close  agent_dollars</code>关闭游标</p>
+</li>
+<li><p>可滚动游标的定义</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">EXEC  SQL  <span class="keyword">DECLARE</span>  cursor_name</span><br><span class="line">  [ INSENSITIVE ]  [ <span class="keyword">SCROLL</span> ]</span><br><span class="line">  <span class="keyword">CURSOR</span>  [ <span class="keyword">WITH</span>  HOLD ]  <span class="keyword">FOR</span></span><br><span class="line">    subquery  &#123; <span class="keyword">UNION</span>  subquery &#125;</span><br><span class="line">    [ <span class="keyword">ORDER</span>  <span class="keyword">BY</span> ...... ]</span><br><span class="line">  [ <span class="keyword">FOR</span>  <span class="keyword">READ</span>  <span class="keyword">ONLY</span>  |</span><br><span class="line">    <span class="keyword">FOR</span>  <span class="keyword">UPDATE</span>  <span class="keyword">OF</span>  columnname ...... ];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在数据更新命令中的使用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EXEC  SQL  FETCH</span><br><span class="line">  [ &#123; NEXT | PRIOR | FIRST | LAST |</span><br><span class="line">    &#123; ABSOLUTE | RELATIVE &#125; value_spec &#125; FROM ]</span><br><span class="line">  cursor_name INTO ......;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
-<li>索引 (index)<ul>
-<li>B+索引的数据结构，搜索算法</li>
+<li><p>索引 (index)</p>
+<ul>
+<li>B+索引的数据结构: 定义秩为n<ul>
+<li>结点: 取m&lt;=n, 结点含有m个键$K_i$和m+1个指针$P_i$, 五花肉式存放,</li>
+<li>约束<ul>
+<li>叶节点: $\lfloor (n+1)/2\rfloor\leq m\leq n$, $P_i$指向$K_i$, $P_{m+1}$指向下一个叶子</li>
+<li>根结点: $1\leq m\leq n$; 内部结点: $\lceil (n-1)/2\rceil\leq m\leq n$, $P_i$均指向子树根节点</li>
+</ul>
+</li>
+<li>性质<ul>
+<li>非叶节点, 在$P_i$所指子树的任意关键字$K$, 有$K_{i-1}\leq K&lt; K_i$</li>
+<li>只有一个结点, 则根节点也是叶节点; 否则, 根节点跟内部节点类似</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>搜索算法<ul>
+<li>随机查找<ul>
+<li>结点上的关键字划分了值域, 层层向下在相应区间中搜索合适的叶节点, 最后在叶结点遍历搜索</li>
+</ul>
+</li>
+<li>区间查找<ul>
+<li>先找区间下限a, 之后在叶节点(类似链表)中遍历, 直到超过上限b</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1174,7 +1214,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-28T11:41:36.122Z" itemprop="dateUpdated">2019-12-28 19:41:36</time>
+    Last updated: <time datetime="2019-12-28T12:22:20.868Z" itemprop="dateUpdated">2019-12-28 20:22:20</time>
 </span><br>
 
 
