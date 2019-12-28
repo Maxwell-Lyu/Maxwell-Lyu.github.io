@@ -29,10 +29,13 @@
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-28T05:59:54.791Z">
+<meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/20191219-DB-FIN/01.png">
+<meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/20191219-DB-FIN/02.png">
+<meta property="og:updated_time" content="2019-12-28T11:41:36.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DB-FIN">
 <meta name="twitter:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
+<meta name="twitter:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/20191219-DB-FIN/01.png">
     
         <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
     
@@ -741,79 +744,248 @@
 </li>
 </ul>
 <h1 id="第五章-事务处理并发控制与故障恢复技术"><a href="#第五章-事务处理并发控制与故障恢复技术" class="headerlink" title="第五章:事务处理并发控制与故障恢复技术"></a>第五章:事务处理并发控制与故障恢复技术</h1><h2 id="事务处理（概念）"><a href="#事务处理（概念）" class="headerlink" title="事务处理（概念）"></a>事务处理（概念）</h2><ul>
-<li>事务的定义与ACID性质</li>
-<li>事务活动及其状态转换图</li>
-<li>事务控制及相关的参数设置语句：事务的提交与回滚，事务的读/写类型与隔离级别</li>
-<li>事务的语句组成成分</li>
+<li>事务的定义: 某个用户所执行的一个不能被打断的对数据库的操作序列</li>
+<li>ACID性质<ul>
+<li>A原子性: 不可分割的操作序列, 要么全部, 要么不执行</li>
+<li>C一致性: 执行前后都满足一致性</li>
+<li>I隔离性: 并发结果与某种串行执行结果相同, 即相互独立</li>
+<li>D持久性: 事务完成，它对数据库的所有更新应永久地反映在数据库中</li>
+</ul>
+</li>
+<li>事务活动图<br><img src="20191219-DB-FIN/01.png" alt="image"></li>
+<li>状态转换图<br><img src="20191219-DB-FIN/02.png" alt="image"></li>
+<li>事务控制语句<ul>
+<li>commit transaction</li>
+<li>rollback transaction: 可以恢复到存在的保存点, 或者回到事务起点</li>
+<li>savepoint: 设置保存点</li>
+</ul>
+</li>
+<li>相关的参数设置语句<ul>
+<li>自动提交: <code>SET AUTOCOMMIT ON|OFF</code></li>
+<li>读写: <code>SET TRANSACTION READONLY|READWRITE</code></li>
+<li>隔离级别: <code>SET TRANSACTION ISOLATION LEVEL READUNCOMMITTED|READCOMMITTED|   READREPEATABLE|SERIALIZABLE</code><blockquote>
+<p>READUNCOMMITTED无封锁; READCOMMITTED读加共享锁到读完; READREPEATABLE读加共享锁到事务结束; SERIALIZABLE串行化调度执行</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>事务的语句组成成分: 开始, 结束(正常结束-&gt;提交事务, 非正常结束-&gt;回滚)</li>
 </ul>
 <h2 id="并发控制技术（概念）"><a href="#并发控制技术（概念）" class="headerlink" title="并发控制技术（概念）"></a>并发控制技术（概念）</h2><ul>
 <li>事务<ul>
-<li>事务的并发性，并发控制</li>
-<li>调度，串行调度，可串行化调度，冲突与冲突可串行化，视图可串行化</li>
-<li>冲突可串行化的判定方法</li>
-<li>不正确的事务并发所导致的数据不一致现象：丢失修改lost-update，脏读dirty-read，不可重复读unrepeatable-read</li>
+<li>事务的并发性: 数据库是一个多用户共享系统, 以事务为单位访问</li>
+<li>并发控制: 实现多个用户事务的并发执行的技术</li>
+<li>调度: DBMS中事务执行的操作序列, 按时间排序</li>
+<li>串行调度: 做完一个接下一个事务(首先是一个事务的所有操作，然后是另一个事务的所有操作, 原句真啰嗦)</li>
+<li>可串行化调度: 一个调度对数据库状态的影响和某个串行调度相同</li>
+<li>冲突: 调度中一对相邻操作, 交换顺序，涉及的事务中至少有一个的行为会改变</li>
+<li>冲突可串行化(可串行化的充分条件): 冲突可串行化调度”冲突等价”于一个串行调度<blockquote>
+<p>冲突等价: 如果通过一系列相邻操作的非冲突交换能够将一个调度转换为另一个调度，则我们称这两个调度是冲突等价的</p>
+</blockquote>
+</li>
+<li>视图可串行化: 视图可串行化调度”视图等价”于一个串行调度<blockquote>
+<p>视图等价<br>  [视图等价]相同的一组事务，两个不同的调度S与H。S和H被称为“视图等价”当且仅当满足下列三个条件：<br>  对每一个数据项D<br>  如果在调度S中事务Tk读到D的初始值，则在调度H中事务Tk也必须读到D的初始值；<br>  如果在调度S中事务Tk执行了rk(D)，并且读到的是由事务Tj写入的D的值，则在调度H中事务Tk的rk(D)读到的也必须是由事务Tj 所写入的D的值；<br>  如果在调度S中是由事务Tk来执行最后一条关于D的写操作wk(D)，则在调度H中也一定是事务Tk执行最后一条关于D的写操作wk(D)。  </p>
+</blockquote>
+</li>
+<li>冲突可串行化的判定方法: 事务优先图没环 <-> 是冲突可串行化  <blockquote>
+<p>事务优先图<br>  优先: 给出的调度H中, 两个动作来自不同事务, 若其涉及同一个数据库对象且至少一个为写, 则这两个事务不可交换, 定义了优先关系<br>  优先关系画出有向图<br>盲写: 没读就写</p>
+</blockquote>
+</-></li>
+<li>不正确的事务并发所导致的数据不一致现象<ul>
+<li>丢失修改lost-update: 一个修改破坏另一个修改结果(原因: 并发修改同一个)</li>
+<li>脏读dirty-read: 读到错误的数据(原因: 读到未提交的结果)</li>
+<li>不可重复读unrepeatable-read: 前后两次读不一致(原因: 被插入了写)</li>
+<li>幻像读: 一个事务中, 执行相同的查询多次, 结果不同</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>封锁<ul>
-<li>共享锁（S锁），排它锁（X锁），锁相容矩阵，锁申请/锁释放算法</li>
+<li>排它锁（X锁）: 一个对象同时只能上一次, 维持到事务结束<blockquote>
+<p>自己可以读写, 别人啥也不行</p>
+</blockquote>
+</li>
+<li>共享锁（S锁）: 可以与其他S锁并存<blockquote>
+<p>全员只读</p>
+</blockquote>
+</li>
+<li>锁申请: 能锁就锁, 锁了就睡, 被叫醒且能锁就锁</li>
+<li>锁释放: 解锁, 唤醒</li>
 <li>基于封锁技术的并发控制实现方法<ul>
-<li>三级封锁协议，三级封锁协议与数据不一致现象之间的关系</li>
-<li>两阶段封锁协议</li>
-<li>两阶段封锁协议与冲突可串行化的关系</li>
+<li>过程: 访问发给调度器-&gt;调度器申请锁, 封锁管理器-&gt;管理器返回结果-&gt;(成功, 操作发给执行引擎; 失败, 进队列)</li>
+<li>三级封锁协议<ul>
+<li>一级: 写之前加X锁, 事务结束释放</li>
+<li>二级: 一级 + 读前加S锁, 读完释放</li>
+<li>三级: 二级 + 读前加S锁, 事务结束释放</li>
+</ul>
+</li>
+<li>三级封锁协议防止的不一致<ul>
+<li>一级: 丢失修改</li>
+<li>二级: 丢失修改, 脏读</li>
+<li>三级: 丢失修改, 脏读, 不可重复读</li>
+</ul>
+</li>
+<li>两阶段封锁协议<ul>
+<li>一阶段: 申请整个过程需要的锁</li>
+<li>二阶段: 释放所有锁, 不能再申请</li>
+</ul>
+</li>
+<li>两阶段封锁协议与冲突可串行化的关系: 两阶段任意合法调度S都是冲突可串行化的</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>多粒度封锁<ul>
-<li>封锁粒度/并发度/并发控制实现开销 之间的关系</li>
-<li>多粒度树，多粒度封锁</li>
-<li>基于意向锁的多粒度封锁协议<ul>
-<li>意向锁：IS, IX, SIX</li>
-<li>意向锁锁相容矩阵：S，X，IS, IX, SIX</li>
-<li>意向锁锁申请算法，意向锁锁释放算法</li>
+<li><p>多粒度封锁</p>
+<ul>
+<li>封锁粒度/并发度/并发控制实现开销 之间的关系<ul>
+<li>锁粒度大, 并发度低, 控制开销小</li>
+<li>锁粒度小, 并发度高, 控制开销大</li>
+</ul>
+</li>
+<li>多粒度封锁: 同时支持多种封锁粒度供事务选择</li>
+<li>多粒度树: 按照封锁粒度的大小构造出一棵 ‘多粒度树’，以树中的每个结点作为封锁对象，可以构成一个‘多粒度封锁协议’</li>
+<li><p>基于意向锁的多粒度封锁协议</p>
+<ul>
+<li>意向锁: 节点加意向锁, 其下层节点正被加锁(必须上层先加意向锁, 才能给下层加锁)<ul>
+<li>IS: 下层打算加S</li>
+<li>IX: 下层打算加X</li>
+<li>SIX: 当前加S, 下层加X</li>
+</ul>
+</li>
+<li><p>意向锁锁相容矩阵</p>
+<p>|已经有的锁|S|X|IS|IX|SIX||<br>|-|-|-|-|-|-|-|<br>|已经持有S|✔||✔|||S加了, 当前及其下层没有X<br>|已经持有X||||||X排他, 加了别的都没有|<br>|已经持有IS|✔||✔|✔|✔|IS加了, 当前没X|<br>|已经持有IX|||✔|✔||IX加了, 当前没S没X|<br>|已经持有SIX|||✔|||SIX加了, 相当于同时S和IX|</p>
+</li>
+<li>意向锁锁申请算法，意向锁锁释放算法: PPT没有</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>死锁的检测与预防<ul>
-<li>死锁 &amp; 活锁</li>
+<li>死锁: 每个事务持有部分锁, 循环等待</li>
+<li>活锁: 有部分事务长期等待锁, 其他事务可以继续运行</li>
 <li>死锁的检测及其处理办法<ul>
 <li>等待图法</li>
-<li>超时死锁检测法：锁申请等待超时 &amp; 事务执行超时</li>
-<li>时间戳死锁检测法</li>
+<li>超时死锁检测法<ul>
+<li>锁申请等待超时</li>
+<li>事务执行超时</li>
+</ul>
+</li>
+<li>时间戳死锁检测法: (时间戳反映事务已经执行的时间)当T要等待U持有的锁<ul>
+<li>等待-死亡方案: T比U老, T等待; U比T老, 则T被回滚</li>
+<li>伤害-等待方案: T比U老, U回滚; U比T老, T等待</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <h2 id="数据库恢复技术"><a href="#数据库恢复技术" class="headerlink" title="数据库恢复技术"></a>数据库恢复技术</h2><ul>
-<li>数据库恢复的含义、方法和常用措施</li>
-<li>数据库故障的分类</li>
-<li>数据库故障恢复三大技术：数据转储，日志，数据库镜像</li>
-<li>数据转储：静态转储/动态转储，海量转储/增量转储，</li>
+<li>数据库恢复的含义: 在数据库遭受破坏后及时进行恢复的功能</li>
+<li>方法: 不同介质上冗余存储，利用冗余信息恢复</li>
+<li>常用措施: 数据转储, 日志, 数据库镜像</li>
+<li>数据库故障的分类<ul>
+<li>小型: 事务内部故障, 不影响系统</li>
+<li>中型: 系统停止, 磁盘不坏, 重启靠日志能恢复<ul>
+<li>系统故障</li>
+<li>外部影响</li>
+</ul>
+</li>
+<li>大型: 内存磁盘严重破坏, 需要彻底恢复<ul>
+<li>磁盘故障</li>
+<li>计算机病毒</li>
+<li>黑客入侵</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据库故障恢复三大技术<ul>
+<li>数据转储: 定期将数据库中的内容复制到其它存储设备中去的过程</li>
+<li>日志: 自动记载数据库中修改型操作的数据更新情况的文件</li>
+<li>数据库镜像: 整个数据库中的数据实时复制到另一个磁盘</li>
+</ul>
+</li>
+<li>数据转储<ul>
+<li>静态转储</li>
+<li>动态转储: 修改前记录原值<blockquote>
+<p>需要结合日志恢复(记录转储开始和结束点, 事务更新的对象和前后值, 事务结束状态)</p>
+</blockquote>
+</li>
+<li>海量转储</li>
+<li>增量转储</li>
+</ul>
+</li>
 <li>日志：<ul>
-<li>日志的内容、组成、作用与记载原则</li>
-<li>在日志中设置检查点的作用</li>
+<li>内容: 事务标识、更新对象、更新前的值 和/或 更新后的值; 每个事务执行情况; 其他</li>
+<li>组成: 日志记录 的序列, 并发时, 各个事务的日志是交错的</li>
+<li>作用: 确保原子性, 实现增量转储, 实现故障恢复</li>
+<li>记载原则: 操作执行的先后次序, 先写日志, 后修改数据库</li>
+<li>在日志中设置检查点的作用: 降低数据库故障恢复的开销, 到<code>&lt;CKPT&gt;</code>就可以结束恢复过程<ul>
+<li>停止接收新任务 -&gt; 等待当前所有事物提交或终止 -&gt; 刷新日志到磁盘</li>
+<li>写入<code>&lt;CKPT&gt;</code> -&gt; 刷新日志到磁盘</li>
+<li>继续接收新事务</li>
+</ul>
+</li>
 <li>事务的撤销（UNDO）与重做（REDO）</li>
 <li>UNDO日志<ul>
-<li>UNDO日志的内容，记载规则，作用</li>
-<li>基于UNDO日志的故障恢复流程</li>
+<li>UNDO日志的内容<ul>
+<li>开始事务: <code>&lt;Start T&gt;</code></li>
+<li>提交事务: <code>&lt;Commit T&gt;</code></li>
+<li>放弃事务: <code>&lt;Abort T&gt;</code></li>
+<li>更新记录: <code>&lt;T, X, V&gt;</code>事务T修改了X, 原值是V</li>
+</ul>
+</li>
+<li>记载规则: 更新记录 先于 更新操作; 事务提交 先于 提交日志</li>
+<li>作用: 用于被放弃事务(故障时中断的事务)的撤消工作</li>
+<li>基于UNDO日志的故障恢复流程<ul>
+<li>从后向前扫, 对每一个<code>&lt;T, X, V&gt;</code>:<ul>
+<li>若<code>&lt;Commit T&gt;</code>被扫到过, 则继续扫</li>
+<li>否则将X改成V</li>
+</ul>
+</li>
+<li>日志尾部为所有未结束事务写入<code>&lt;Abort T&gt;</code>, 刷新日志</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>REDO日志<ul>
-<li>REDO日志的内容，记载规则，作用</li>
-<li>基于REDO日志的故障恢复流程</li>
+<li>REDO日志的内容: 跟UNDO一样, 唯一不同: 更新记录<code>&lt;T, X, V&gt;</code>中记载的是更新后的值</li>
+<li>记载规则: 修改前, 必须有更新记录和事务提交记录</li>
+<li>作用: 已提交事务的重做工作</li>
+<li>基于REDO日志的故障恢复流程<ul>
+<li>确定所有已提交的事务</li>
+<li>从后向前扫, 对每条更新<ul>
+<li>如果未提交, 继续扫</li>
+<li>如果提交了, 写入新值</li>
+</ul>
+</li>
+<li>日志尾部为所有未结束事务写入<code>&lt;Abort T&gt;</code>, 刷新日志</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>UNDO/REDO日志<ul>
-<li>UNDO/REDO日志的内容，记载规则，作用</li>
-<li>基于UNDO/REDO日志的故障恢复流程</li>
+<li>UNDO/REDO日志的内容: 跟UNDO一样, 唯一不同: 更新记录<code>&lt;T, X, V, W&gt;</code>中记载前与后的值</li>
+<li>记载规则: 修改前需要有更新记录</li>
+<li>作用: 兼有两者</li>
+<li>基于UNDO/REDO日志的故障恢复流程<ul>
+<li>根据提交记录, 确定事务是否被提交<ul>
+<li>按照从后往前的顺序，撤消(undo)所有未提交的事务</li>
+<li>按照从前往后的顺序，重做(redo)所有已提交的事务<!-- + UNDO日志、REDO日志、UNDO/REDO日志的优点与缺点 --></li>
 </ul>
 </li>
-<li>UNDO日志、REDO日志、UNDO/REDO日志的优点与缺点</li>
 </ul>
 </li>
-<li>恢复策略：小型/中型/大型故障的恢复策略</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>恢复策略<ul>
+<li>小型: 未结束的事务的undo</li>
+<li>中型: 非正常终止: undo; 完成提交: redo</li>
+<li>大型: 先用后备副本恢复, 之后用日志undo + redo</li>
+</ul>
+</li>
 </ul>
 <h1 id="第六章-amp-第七章"><a href="#第六章-amp-第七章" class="headerlink" title="第六章&amp;第七章"></a>第六章&amp;第七章</h1><ul>
 <li>游标管理<ul>
@@ -1002,7 +1174,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-28T05:59:54.791Z" itemprop="dateUpdated">2019-12-28 13:59:54</time>
+    Last updated: <time datetime="2019-12-28T11:41:36.122Z" itemprop="dateUpdated">2019-12-28 19:41:36</time>
 </span><br>
 
 
