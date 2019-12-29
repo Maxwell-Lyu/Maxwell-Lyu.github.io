@@ -31,7 +31,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/20191219-DB-FIN/01.png">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/20191219-DB-FIN/02.png">
-<meta property="og:updated_time" content="2019-12-28T12:22:20.868Z">
+<meta property="og:updated_time" content="2019-12-29T02:38:20.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DB-FIN">
 <meta name="twitter:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
@@ -656,7 +656,7 @@
 <p>语义: 对于符合要求的SC中sno, (对于任意的C中cno, 都有sno选修过cno的记录)<br>等价于: 对于符合要求的SC中元组S, 对于任意C中元组x, 都能找到元组y,使得y.sno=S.sno and y.cno=x.cno<br>任意-&gt;不存在不满足-&gt;不存在(不存在):</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对SC中S, 不存在  </span><br><span class="line">  对C中x, 不存在</span><br><span class="line">    SC中的S-x元组y, 即y.sno=S.sno and y.cno=x.cno</span><br></pre></td></tr></table></figure>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> SC.sno                        </span><br><span class="line"><span class="comment"># </span></span><br><span class="line">    <span class="keyword">FROM</span> SC S                                     </span><br><span class="line"><span class="comment"># 被除数当中的元组, 作为目标元组, 将目标属性传入(S.sno)</span></span><br><span class="line">    <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (                            </span><br><span class="line"><span class="comment"># 不存在不满足条件的元组</span></span><br><span class="line">        <span class="keyword">SELECT</span> *                                  </span><br><span class="line"><span class="comment"># </span></span><br><span class="line">        <span class="keyword">FROM</span> S y                                  </span><br><span class="line"><span class="comment"># 除数当中的元组, 被要求对任意S.sno全都有</span></span><br><span class="line">        <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (                        </span><br><span class="line"><span class="comment"># 为了表示"不满足", 构造对S.sno不含有, 即不存在满足的元组</span></span><br><span class="line">            <span class="keyword">SELECT</span> *                              </span><br><span class="line"><span class="comment"># </span></span><br><span class="line">            <span class="keyword">FROM</span> SC y                             </span><br><span class="line"><span class="comment"># 被除数元组的任意元组, 寻找满足的元组</span></span><br><span class="line">            <span class="keyword">WHERE</span> y.sno = S.sno <span class="keyword">AND</span> y.cno = x.cno </span><br><span class="line"><span class="comment"># 一个[除数,被除数]的元组, 两组相等关系, 分别约束: (对被除数进行查询), (对除数进行查询)</span></span><br><span class="line">        )                                         </span><br><span class="line"><span class="comment"># 这个子查询可以由NOT IN代替, 表示不含有</span></span><br><span class="line">    )                                             </span><br><span class="line"><span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> SC.sno                        <span class="comment"># </span></span><br><span class="line"><span class="keyword">FROM</span> SC S                                     <span class="comment"># 被除数当中的元组, 作为目标元组, 将目标属性传入(S.sno)</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (                            <span class="comment"># 不存在不满足条件的元组</span></span><br><span class="line">    <span class="keyword">SELECT</span> *                                  <span class="comment"># </span></span><br><span class="line">    <span class="keyword">FROM</span> S y                                  <span class="comment"># 除数当中的元组, 被要求对任意S.sno全都有</span></span><br><span class="line">    <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (                        <span class="comment"># 为了表示"不满足", 构造对S.sno不含有, 即不存在满足的元组</span></span><br><span class="line">        <span class="keyword">SELECT</span> *                              <span class="comment"># </span></span><br><span class="line">        <span class="keyword">FROM</span> SC y                             <span class="comment"># 被除数元组的任意元组, 寻找满足的元组</span></span><br><span class="line">        <span class="keyword">WHERE</span> y.sno = S.sno <span class="keyword">AND</span> y.cno = x.cno <span class="comment"># 一个[除数,被除数]的元组, 两组相等关系, 分别约束: (对被除数进行查询), (对除数进行查询)</span></span><br><span class="line">    )                                         <span class="comment"># 这个子查询可以由NOT IN代替, 表示不含有</span></span><br><span class="line">)                                             <span class="comment">#</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <!-- + 多层嵌套的NOT EXISTS查询 -->
@@ -1040,57 +1040,270 @@
 </li>
 </ul>
 <h1 id="第八章-关系数据库规范化理论"><a href="#第八章-关系数据库规范化理论" class="headerlink" title="第八章:关系数据库规范化理论"></a>第八章:关系数据库规范化理论</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
-<li>模式设计质量的评价指标：数据冗余度，插入/删除等更新异常</li>
-<li>为什么要研究关系的规划化设计：规范化的目的与手段</li>
+<li>模式设计质量的评价指标<ul>
+<li>数据冗余度: 合理的数据冗余度</li>
+<li>插入/删除等更新异常: 没有插入和删除操作异常<!-- + 为什么要研究关系的规划化设计：规范化的目的与手段: 按照给定范式要求设计关系模式 --></li>
 </ul>
-<h2 id="规范化理论"><a href="#规范化理论" class="headerlink" title="规范化理论"></a>规范化理论</h2><h3 id="函数依赖（FD）"><a href="#函数依赖（FD）" class="headerlink" title="函数依赖（FD）"></a>函数依赖（FD）</h3><ul>
-<li>函数依赖的定义</li>
-<li>如何寻找函数依赖：函数依赖与数据完整性约束的关系</li>
-<li>完全/部分FD，平凡/非平凡FD，直接/传递FD</li>
-<li>Armstrong公理系统：3条基本规则 + 3条扩充规则</li>
-<li>基于函数依赖的关键字定义</li>
-<li>属性集闭包的计算算法</li>
-<li>关键字的计算算法</li>
+</li>
+<li>关系的规范化<ul>
+<li>按照给定范式要求设计关系模式</li>
+<li>范式: 对一个关系中允许存在的函数依赖的要求<h2 id="规范化理论"><a href="#规范化理论" class="headerlink" title="规范化理论"></a>规范化理论</h2></li>
+</ul>
+</li>
+</ul>
+<h3 id="函数依赖（FD）"><a href="#函数依赖（FD）" class="headerlink" title="函数依赖（FD）"></a>函数依赖（FD）</h3><ul>
+<li>函数依赖: 一个关系中 两组属性之间的 取值约束<ul>
+<li>表示: $X\to Y$: $Y$函数依赖于$X$</li>
+<li>直观: 在关系$R$中, 每个$X$的值都有唯一的一个$Y$值与之对应</li>
+<li>定义: 关系模式$R(U)$中, 关系$r$中元组$r_i$在$X$中的取值确定后, $Y$中取值必被确定, 则$X\to Y$</li>
+<li>$X$决定因素, $Y$依赖因素</li>
+</ul>
+</li>
+<li>发现函数依赖<ul>
+<li>直接根据语义</li>
+<li>根据取值对应关系<ul>
+<li>一一对应: $X\to Y$, $Y\to X$</li>
+<li>一多对应/多一对应: $Y\to X$, $X\to Y$</li>
+<li>多多对应: 没有</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>平凡函数依赖<ul>
+<li>非平凡函数依赖: $X\to Y, Y\not\subseteq X$, 默认是这个</li>
+<li>平凡函数依赖: 反之</li>
+</ul>
+</li>
+<li>完全函数依赖<ul>
+<li>完全函数依赖: $X\to Y, \forall X’\subset X, X’\not\to Y$, 则$X\overset{f}{\to}Y$</li>
+<li>部分函数依赖: $X\to Y, \exists X’\subset X, X’\to Y$, 则$X\overset{p}{\to}Y$</li>
+</ul>
+</li>
+<li>传递函数依赖<ul>
+<li>$X\to Y, Y\not\subset X, Y\not\to X, Y\to Z$, 则 $X\to Z$为传递函数依赖</li>
+</ul>
+</li>
+<li>Armstrong公理系统<ul>
+<li>基本规则<ul>
+<li>自反规则: $Y\subseteq X$, 则$X\to Y$</li>
+<li>增广规则: $X\to Y$, 则$XZ\to YZ$</li>
+<li>传递规则: $X\to Y\wedge Y\to Z$, 则$X\to Z$</li>
+</ul>
+</li>
+<li>扩充规则<ul>
+<li>分解规则: $X\to YZ$, 则$X\to Y\wedge X\to Z$</li>
+<li>合并规则: $X\to Y\wedge X\to Z$则$X\to YZ$</li>
+<li>伪传递规则: $X\to Y\wedge WY\to Z$, 则$WX\to Z$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>函数依赖的逻辑蕴含概念<ul>
+<li>$F$为关系模式$R(U)$的一个函数依赖集</li>
+<li>从已有的函数依赖出发, 利用公理系统可以推导出$X\to Y$, 则$F\vDash X\to Y$</li>
+</ul>
+</li>
+<li>函数依赖集$F$的闭包$F^+$: $F^+=\{X\to Y|F\vDash X\to Y\}$</li>
+<li>函数依赖集的等价<ul>
+<li>可以互相推导出其中的函数依赖</li>
+</ul>
+</li>
+<li>属性集$X$在函数依赖集$F^+$上的闭包$X_F^+$: $X_F^+=\{A|F\vDash X\to A\}$<ul>
+<li>[解题] 计算闭包<ul>
+<li>$X^+=X$</li>
+<li>不断重复: 对每一个$F$中的依赖$Y\to Z$, 若$Y\subseteq X^+$, 则$X^+ = X^+ \cup Z$</li>
+<li>直到不再变化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>关键字<ul>
+<li>若$K\subseteq U, K\overset{f}{\to}U$, 则$K$是$R$的关键字</li>
+<li>主属性集: 所有关键字中的属性构成的集合</li>
+<li>非主属性集: 不属于任何一个关键字的属性构成的集合</li>
+<li>关键字与闭包: $K_F^+=U$, $\forall Z\subset F, Z_F^+\ne U$</li>
+<li>[解题] 寻找关键字<ul>
+<li>计算最小依赖集</li>
+<li>不断重复从$U$中删除属性, 直到其闭包不等X于$U$</li>
+<li>将得到一个关键字</li>
+<li>技巧<ul>
+<li>只在左边出现过的属性 属于 每一个关键字</li>
+<li>只在右边出现过的属性 不属于 任何一个关键字</li>
+<li>只需要对两边都有的属性尝试删除即可</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="与函数依赖有关的范式"><a href="#与函数依赖有关的范式" class="headerlink" title="与函数依赖有关的范式"></a>与函数依赖有关的范式</h3><ul>
-<li>范式定义：1NF，2NF，3NF，BCNF</li>
-<li>理解各级范式与数据冗余度、插入/删除异常的关系</li>
+<li>模式分解<ul>
+<li>分解结果: 子关系模式, 满足<ul>
+<li>$\textrm{Head}(R)=\bigcup^n\textrm{Head}(R_i)$</li>
+<li>$F_i=\{X\to Y|X\to Y\in F^+ \wedge (X\cup Y)\in \textrm{Head}(R_i)\}$</li>
+</ul>
+</li>
+<li>分解方法<ul>
+<li>找出所有不满足范式的依赖</li>
+<li>选择一个依赖, 设$X\overset{f}{\to}Y$为这个依赖, 则将这个依赖所在的关系$R$分解为<ul>
+<li>$R_1=\{X\cup Y, \{X\to Y\}\}$</li>
+<li>$R_2=\{\textrm{Head}(R)-Y, F_2\}$</li>
+<li>其中$F_2=\{A\to B|A\to B\in F^+\wedge (A\cup B)\subseteq \textrm{Head}(R_2)\}$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>1NF: 属性值不可分割, 全都满足</li>
+<li>2NF: 满足1NF, 每个非主属性都完全依赖于关键字<ul>
+<li>检查:<ul>
+<li>找到所有非主属性 和 所有候选关键字</li>
+<li>检查每一个非主属性$A$和每一个候选关键字$K$之间的函数依赖, 看看有没有部分依赖</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3NF: 满足2NF, 每个非主属性都不传递依赖于关键字<ul>
+<li>检查: 不满足3NF, 则必然存在下列情况之一, 其中$X\overset{f}{\to} Y$<ul>
+<li>$X$是某个关键字的真子集</li>
+<li>$X$不是关键字</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BCNF: 满足1NF, 若$X\to Y$则$X$必含有该模式的关键字<ul>
+<li>检查: 每个函数依赖, 是否满足$X$是关键字</li>
+</ul>
+</li>
+<li>BCNF -&gt; 3NF</li>
 </ul>
 <h3 id="多值依赖与第四范式"><a href="#多值依赖与第四范式" class="headerlink" title="多值依赖与第四范式"></a>多值依赖与第四范式</h3><ul>
-<li>多值依赖，平凡多值依赖，非平凡多值依赖</li>
-<li>多值依赖与函数依赖的关系</li>
-<li>4NF</li>
+<li>多值依赖: $X\to\to Y$<ul>
+<li>定义: 对$X$的一个取值, 存在一组$Y$与其对应; $Y$的取值与$U-X-Y$不相关</li>
+<li>成因: 两个一对多关系$C\to T$, $C\to L$, 其合并后$T$与$L$就是多值依赖</li>
+<li>平凡多值依赖<ul>
+<li>非平凡多值依赖: $U-X-Y$不为空集</li>
+<li>平凡多值依赖: 反之</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多值依赖有关的推理规则(需要掌握)<ul>
+<li>求补规则: 若$X\to Y$, 则$U-X-Y$</li>
+<li>转换规则: 若$X\to Y$, 则$X\to\to Y$</li>
+</ul>
+</li>
+<li>4NF<ul>
+<li>定义: 若$X\to\to Y$是非平凡多值依赖, 则$X$必含有关键字</li>
+<li>特点: 函数依赖需要满足BCNF; 不是函数依赖的多值依赖只有平凡多值依赖</li>
+</ul>
+</li>
 </ul>
 <h2 id="规范化所引起的一些问题"><a href="#规范化所引起的一些问题" class="headerlink" title="规范化所引起的一些问题"></a>规范化所引起的一些问题</h2><ul>
-<li>函数依赖的逻辑蕴涵，函数依赖集的等价</li>
-<li>最小函数依赖集及其判定方法</li>
-<li>最小函数依赖集的计算算法</li>
-<li>模式分解的无损联结性、依赖保持性及其判定方法</li>
-<li>直接到3NF且满足无损联结性和依赖保持性的模式分解算法</li>
-<li>从3NF到BCNF、4NF的分解方法</li>
+<li>函数依赖的逻辑蕴涵: 函数依赖集的逻辑蕴含</li>
+<li>函数依赖集的等价: 可以互相推导出其中的函数依赖</li>
+<li>最小函数依赖集<ul>
+<li>与$F$等价的, 最小的集合</li>
+</ul>
+</li>
+<li>最小函数依赖集的计算算法<ul>
+<li>首先得到题目中的所有函数依赖, 分解成右端只有一个的依赖</li>
+<li>消除部分函数依赖: 右边相同, 左边更多; 左边含右</li>
+<li>消除冗余函数依赖: 能推导就是冗余</li>
+<li>合并依赖</li>
+</ul>
+</li>
+<li>无损联结性<ul>
+<li>设$\rho=\{R_1,\cdots,R_k\}$是对$R$的一个分解</li>
+<li>如果对每个满足$F$的关系实例$r$都满足$r=\pi_{R_1}(r)\Join\cdots\Join\pi_{R_k}(r)$</li>
+<li>则$\rho$是无损联接分解</li>
+<li>充要条件($\rho=\{R_1,R_2\}$)<ul>
+<li>$R_1\cap R_2\to (R_1-R_2)$ 或 $R_1\cap R_2\to (R_2-R_1)$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>依赖保持性<ul>
+<li>表示$\pi_Z(F)=\{X\to Y|X\to Y\in F^+\wedge (X\cup Y)\subseteq Z\}$</li>
+<li>$F^+=(\pi_{R_1}(F)\cup\cdots\cup\pi_{R_1}(F))^+$</li>
+</ul>
+</li>
+<li>直接到3NF且满足无损联结性和依赖保持性的模式分解算法<ul>
+<li>计算最小依赖集, 代替$F$进行分解</li>
+<li>$S=\emptyset$</li>
+<li>对每一个函数$X\to Y$依赖进行<ul>
+<li>若在$S$中找不到子关系模式$Z$, 使得$X\cup Y\subseteq\textrm{Head}(Z)$</li>
+<li>$X$和$Y$合并成新的子关系模式, 加入$S$</li>
+</ul>
+</li>
+<li>如果$R$中的每个候选关键字$K$均不在$S$中, 则任选一个关键字, 其属性单独构成一个子关系模式, 加入$S$</li>
+</ul>
+</li>
+<li>从3NF到BCNF、4NF的分解方法: &lt;&lt;&lt;&lt;&lt;<todo>&gt;&gt;&gt;&gt;&gt;</todo></li>
 </ul>
 <h1 id="第九章-数据库设计"><a href="#第九章-数据库设计" class="headerlink" title="第九章:数据库设计"></a>第九章:数据库设计</h1><h2 id="数据库设计概述"><a href="#数据库设计概述" class="headerlink" title="数据库设计概述"></a>数据库设计概述</h2><ul>
-<li>数据库设计的基本任务</li>
-<li>数据库的生命周期</li>
+<li>数据库设计的基本任务<ul>
+<li>根据用户对象的信息需求、处理需求和数据库的支持环境（包括硬件、操作系统与DBMS）设计出数据模式</li>
+</ul>
+</li>
+<li>数据库的生命周期<ul>
+<li>需求分析: 数据库设计的第1阶段</li>
+<li>概念设计: 数据库设计的第2阶段</li>
+<li>逻辑设计: 数据库设计的第3阶段</li>
+<li>物理设计: 数据库设计的第4阶段</li>
+<li>编码</li>
+<li>测试</li>
+<li>运行</li>
+<li>进一步修改</li>
+</ul>
+</li>
 </ul>
 <h2 id="数据库设计的需求分析"><a href="#数据库设计的需求分析" class="headerlink" title="数据库设计的需求分析"></a>数据库设计的需求分析</h2><ul>
-<li>需求说明书</li>
+<li>需求说明书<ul>
+<li>用户单位对数据的需求 -&gt;</li>
+<li>需求分析(确定数据库中保存信息的客观事物和相互关系) -&gt;<ul>
+<li>事物, 事物属性, 事物关系</li>
+</ul>
+</li>
+<li>需求分析说明书</li>
+</ul>
+</li>
 </ul>
 <h2 id="数据库的概念设计"><a href="#数据库的概念设计" class="headerlink" title="数据库的概念设计"></a>数据库的概念设计</h2><ul>
-<li>数据库概念设计的过程</li>
-<li>E-R模型与扩充E-R模型的设计</li>
+<li>数据库概念设计的过程<ul>
+<li>用户分解: 用户 -&gt; 功能独立的用户组</li>
+<li>视图设计: 根据用户需求设计视图</li>
+<li>视图集成: 局部视图*n -&gt; 全局视图</li>
+</ul>
+</li>
+<li>E-R模型: 实体，属性，联系</li>
+<li>EE-R模型: E-R + 嵌套（实体集属性）、继承</li>
 </ul>
 <h2 id="数据库的逻辑设计"><a href="#数据库的逻辑设计" class="headerlink" title="数据库的逻辑设计"></a>数据库的逻辑设计</h2><ul>
-<li>从E－R模型和扩充E－R模型向关系模型的转换</li>
+<li>从E－R模型和扩充E－R模型向关系模型的转换<ul>
+<li>实体集: 关系模式</li>
+<li>联系: 关系</li>
+</ul>
+</li>
 <li>对转换得到的关系模式进行规范化设计<ul>
-<li>根据给定的数据完整性约束发现函数依赖（最小函数依赖集）</li>
-<li>关键字的计算</li>
-<li>范式的判断及分解</li>
+<li>根据给定的数据完整性约束发现函数依赖（最小函数依赖集）: 第八章内容</li>
+<li>关键字的计算: 第八章内容</li>
+<li>范式的判断及分解: 第八章内容, 至少满足3NF才行</li>
 </ul>
 </li>
 </ul>
 <h2 id="数据库的物理设计"><a href="#数据库的物理设计" class="headerlink" title="数据库的物理设计"></a>数据库的物理设计</h2><ul>
-<li>索引的作用及其设计策略</li>
+<li>索引: 将文件中的记录与其物理地址(即磁盘块)间建立一张对应关系表</li>
+<li>作用: 加速</li>
+<li>设计策略<ul>
+<li>在主关键字及外关键字上建立索引: 提速联接查询; 利于检查完整性</li>
+<li>读为主的关系应尽可能多地建立索引</li>
+<li>属性的等值查询所得到的结果元组数量较少，则可以考虑对该属性建立索引</li>
+<li>经常用于统计查询的属性建立索引</li>
+</ul>
+</li>
 </ul>
 <h1 id="答题解法"><a href="#答题解法" class="headerlink" title="答题解法"></a>答题解法</h1><h2 id="数据库设计-ER图"><a href="#数据库设计-ER图" class="headerlink" title="数据库设计(ER图)"></a>数据库设计(ER图)</h2><ul>
 <li>基本概念表示: 图形内写名称<ul>
@@ -1214,7 +1427,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-28T12:22:20.868Z" itemprop="dateUpdated">2019-12-28 20:22:20</time>
+    Last updated: <time datetime="2019-12-29T02:38:20.893Z" itemprop="dateUpdated">2019-12-29 10:38:20</time>
 </span><br>
 
 
