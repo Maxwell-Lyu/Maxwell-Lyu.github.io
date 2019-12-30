@@ -31,7 +31,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/01.png">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/02.png">
-<meta property="og:updated_time" content="2019-12-30T07:31:07.017Z">
+<meta property="og:updated_time" content="2019-12-30T07:52:00.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DB-FIN">
 <meta name="twitter:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
@@ -1175,9 +1175,14 @@
 </li>
 <li>BCNF: 满足1NF, 若$X\to Y$则$X$必含有该模式的关键字<ul>
 <li>检查: 每个函数依赖, 是否满足$X$是关键字</li>
+<li>BCNF -&gt; 3NF</li>
 </ul>
 </li>
-<li>BCNF -&gt; 3NF</li>
+<li>理解各级范式与数据冗余度、插入/删除异常的关系<ul>
+<li>插入删除异常: 3NF消除异常</li>
+<li>冗余: 2NF存在冗余, 3NF冗余较小</li>
+</ul>
+</li>
 </ul>
 <h3 id="多值依赖与第四范式"><a href="#多值依赖与第四范式" class="headerlink" title="多值依赖与第四范式"></a>多值依赖与第四范式</h3><ul>
 <li>多值依赖: $X\to\to Y$<ul>
@@ -1427,7 +1432,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-30T07:31:07.017Z" itemprop="dateUpdated">2019-12-30 15:31:07</time>
+    Last updated: <time datetime="2019-12-30T07:52:00.675Z" itemprop="dateUpdated">2019-12-30 15:52:00</time>
 </span><br>
 
 
