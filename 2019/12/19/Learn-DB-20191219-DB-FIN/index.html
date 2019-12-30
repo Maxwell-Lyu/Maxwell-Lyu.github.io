@@ -29,13 +29,13 @@
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/20191219-DB-FIN/01.png">
-<meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/20191219-DB-FIN/02.png">
-<meta property="og:updated_time" content="2019-12-29T02:38:20.893Z">
+<meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/01.png">
+<meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/02.png">
+<meta property="og:updated_time" content="2019-12-30T07:29:14.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DB-FIN">
 <meta name="twitter:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
-<meta name="twitter:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/20191219-DB-FIN/01.png">
+<meta name="twitter:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/01.png">
     
         <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
     
@@ -656,7 +656,7 @@
 <p>语义: 对于符合要求的SC中sno, (对于任意的C中cno, 都有sno选修过cno的记录)<br>等价于: 对于符合要求的SC中元组S, 对于任意C中元组x, 都能找到元组y,使得y.sno=S.sno and y.cno=x.cno<br>任意-&gt;不存在不满足-&gt;不存在(不存在):</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对SC中S, 不存在  </span><br><span class="line">  对C中x, 不存在</span><br><span class="line">    SC中的S-x元组y, 即y.sno=S.sno and y.cno=x.cno</span><br></pre></td></tr></table></figure>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> SC.sno                        <span class="comment"># </span></span><br><span class="line"><span class="keyword">FROM</span> SC S                                     <span class="comment"># 被除数当中的元组, 作为目标元组, 将目标属性传入(S.sno)</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (                            <span class="comment"># 不存在不满足条件的元组</span></span><br><span class="line">    <span class="keyword">SELECT</span> *                                  <span class="comment"># </span></span><br><span class="line">    <span class="keyword">FROM</span> S y                                  <span class="comment"># 除数当中的元组, 被要求对任意S.sno全都有</span></span><br><span class="line">    <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (                        <span class="comment"># 为了表示"不满足", 构造对S.sno不含有, 即不存在满足的元组</span></span><br><span class="line">        <span class="keyword">SELECT</span> *                              <span class="comment"># </span></span><br><span class="line">        <span class="keyword">FROM</span> SC y                             <span class="comment"># 被除数元组的任意元组, 寻找满足的元组</span></span><br><span class="line">        <span class="keyword">WHERE</span> y.sno = S.sno <span class="keyword">AND</span> y.cno = x.cno <span class="comment"># 一个[除数,被除数]的元组, 两组相等关系, 分别约束: (对被除数进行查询), (对除数进行查询)</span></span><br><span class="line">    )                                         <span class="comment"># 这个子查询可以由NOT IN代替, 表示不含有</span></span><br><span class="line">)                                             <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> SC.sno                        <span class="comment"># </span></span><br><span class="line"><span class="keyword">FROM</span> SC S                                     <span class="comment"># 被除数当中的元组, 作为目标元组, 将目标属性传入(S.sno)</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (                            <span class="comment"># 不存在不满足条件的元组</span></span><br><span class="line">    <span class="keyword">SELECT</span> *                                  <span class="comment"># </span></span><br><span class="line">    <span class="keyword">FROM</span> C x                                  <span class="comment"># 除数当中的元组, 被要求对任意S.sno全都有</span></span><br><span class="line">    <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (                        <span class="comment"># 为了表示"不满足", 构造对S.sno不含有, 即不存在满足的元组</span></span><br><span class="line">        <span class="keyword">SELECT</span> *                              <span class="comment"># </span></span><br><span class="line">        <span class="keyword">FROM</span> SC y                             <span class="comment"># 被除数元组的任意元组, 寻找满足的元组</span></span><br><span class="line">        <span class="keyword">WHERE</span> y.sno = S.sno <span class="keyword">AND</span> y.cno = x.cno <span class="comment"># 一个[除数,被除数]的元组, 两组相等关系, 分别约束: (对被除数进行查询), (对除数进行查询)</span></span><br><span class="line">    )                                         <span class="comment"># 这个子查询可以由NOT IN代替, 表示不含有</span></span><br><span class="line">)                                             <span class="comment">#</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <!-- + 多层嵌套的NOT EXISTS查询 -->
@@ -752,8 +752,8 @@
 <li>D持久性: 事务完成，它对数据库的所有更新应永久地反映在数据库中</li>
 </ul>
 </li>
-<li>事务活动图<br><img src="20191219-DB-FIN/01.png" alt="image"></li>
-<li>状态转换图<br><img src="20191219-DB-FIN/02.png" alt="image"></li>
+<li>事务活动图<br><img src="01.png" alt="image"></li>
+<li>状态转换图<br><img src="02.png" alt="image"></li>
 <li>事务控制语句<ul>
 <li>commit transaction</li>
 <li>rollback transaction: 可以恢复到存在的保存点, 或者回到事务起点</li>
@@ -1191,7 +1191,7 @@
 </ul>
 </li>
 <li>多值依赖有关的推理规则(需要掌握)<ul>
-<li>求补规则: 若$X\to Y$, 则$U-X-Y$</li>
+<li>求补规则: 若$X\to\to Y$, 则$U-X-Y\to\to Y$</li>
 <li>转换规则: 若$X\to Y$, 则$X\to\to Y$</li>
 </ul>
 </li>
@@ -1427,7 +1427,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-29T02:38:20.893Z" itemprop="dateUpdated">2019-12-29 10:38:20</time>
+    Last updated: <time datetime="2019-12-30T07:29:14.197Z" itemprop="dateUpdated">2019-12-30 15:29:14</time>
 </span><br>
 
 
