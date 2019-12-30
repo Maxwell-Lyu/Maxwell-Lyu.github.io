@@ -31,7 +31,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/01.png">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/02.png">
-<meta property="og:updated_time" content="2019-12-30T07:29:14.197Z">
+<meta property="og:updated_time" content="2019-12-30T07:31:07.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DB-FIN">
 <meta name="twitter:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
@@ -1356,7 +1356,7 @@
 <li>“所有A都…的B”, 用除法, 被除的对象应当先投影, 以免遗漏</li>
 <li>用公共属性查私有属性, 先笛卡尔积, 之后用选择, 条件设为同名属性取值相等, 最后投影</li>
 <li>正面难构造, 就构造反面, 然后用笛卡尔积减去反面</li>
-<li>最大值最小值, 例子: 取C中最大, C为key-value对<br>$$D\coloneqq C$$<br>$$M = C - \pi_{C.key,C.val}\sigma_{C.val &lt; D.val}(C\times D)$$<br>原理: 每取值跟所有取值比较, 存在更大就会保留, 找出所有的非最大值, 之后减去</li>
+<li>最大值最小值, 例子: 取C中最大, C为key-value对<br>$$D := C$$<br>$$M = C - \pi_{C.key,C.val}\sigma_{C.val &lt; D.val}(C\times D)$$<br>原理: 每取值跟所有取值比较, 存在更大就会保留, 找出所有的非最大值, 之后减去</li>
 <li>同时满足多个条件, 则取交; 满足多个条件中的一个, 则取并</li>
 <li>联接可以实现”之一”的效果, 也可以实现相等关系</li>
 <li>差运算<ul>
@@ -1427,7 +1427,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-30T07:29:14.197Z" itemprop="dateUpdated">2019-12-30 15:29:14</time>
+    Last updated: <time datetime="2019-12-30T07:31:07.017Z" itemprop="dateUpdated">2019-12-30 15:31:07</time>
 </span><br>
 
 
