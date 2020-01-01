@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-01T12:19:47.467Z">
+<meta property="og:updated_time" content="2020-01-01T12:28:38.865Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CN-FIN">
 <meta name="twitter:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
@@ -1021,7 +1021,7 @@
 </ul>
 <h2 id="网际协议"><a href="#网际协议" class="headerlink" title="网际协议"></a>网际协议</h2><h3 id="IPv4数据报格式"><a href="#IPv4数据报格式" class="headerlink" title="IPv4数据报格式"></a>IPv4数据报格式</h3><ul>
 <li><p>数据报格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">|    版本 4    |  首部长度 4  |  服务类型 8  | 数据报长度16 |</span><br><span class="line">|          标识16             | 标志 3 |       片偏移13     |</span><br><span class="line">|    寿命 8    |  上层协议 8  |         首部检验和16        |</span><br><span class="line">|                       源地址32                            |</span><br><span class="line">|                      目的地址32                           |</span><br><span class="line">|                      选项(可选)                           |</span><br><span class="line">|                         数据                              |</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">|    $版本 4   |  首部长度 4  |  服务类型 8  | 数据报长度16 |</span><br><span class="line">|          $标识16             | 标志 3 |       片偏移13    |</span><br><span class="line">|    寿命 8    |  $上层协议 8  |         首部检验和16       |</span><br><span class="line">|                  (NoNAT)$源地址32                         |</span><br><span class="line">|                 (NoNAT)$目的地址32                        |</span><br><span class="line">|                      选项(可选)                           |</span><br><span class="line">|                         数据                              |</span><br></pre></td></tr></table></figure>
 <ul>
 <li>服务类型: 优先级(3bit), 可靠性(1bit, 一般/高), 时延(1bit, 一般/低), 吞吐量(1bit, 一般/高)</li>
 <li>标识, 标志, 片偏移: 与IPv4分片有关</li>
@@ -1035,7 +1035,7 @@
 <h3 id="IPv4数据报分片"><a href="#IPv4数据报分片" class="headerlink" title="IPv4数据报分片"></a>IPv4数据报分片</h3><ul>
 <li>原因: 链路层最大传输单元MTU, 限制IP数据报的长度</li>
 <li>对数据报分片, 并设置标识等<ul>
-<li>标识: 每个数据报+1, 一个数据报的各个分片相同</li>
+<li>标识: 每个数据报一样, 一个数据报的各个分片相同</li>
 <li>标志: 最后一个为0, 其他是1</li>
 <li>片偏移: 以64bit为单位</li>
 </ul>
@@ -1705,7 +1705,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-01-01T12:19:47.467Z" itemprop="dateUpdated">2020-01-01 20:19:47</time>
+    Last updated: <time datetime="2020-01-01T12:28:38.865Z" itemprop="dateUpdated">2020-01-01 20:28:38</time>
 </span><br>
 
 
