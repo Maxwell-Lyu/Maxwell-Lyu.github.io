@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-01T11:38:38.007Z">
+<meta property="og:updated_time" content="2020-01-01T12:19:47.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CN-FIN">
 <meta name="twitter:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
@@ -885,9 +885,19 @@
 </li>
 <li>TCP拥塞控制: 回顾<ul>
 <li>TCP Tahoe: 没有快速恢复, 3个ACK也进入慢启动</li>
-<li>TCP Reno: 上文的方案</li>
+<li>TCP Reno: 上文的方案<blockquote>
+<p>加3根据协议不同, 看具体情况做<br>慢启动: 其实是收到的每个ACK都加1, 因为ACK数等于发送数, 相当于翻倍</p>
+</blockquote>
+</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>需要拥塞控制的原因: 浪费带宽<ul>
+<li>速率接近容量 -&gt; 队列满 + 大排队时延</li>
+<li>大时延 -&gt; 不必要的超时重传</li>
+<li>队列满 -&gt; 丢包 -&gt; 浪费上游流量</li>
+<li>丢包 -&gt; 重传代价</li>
 </ul>
 </li>
 </ul>
@@ -1444,7 +1454,7 @@
 <li>每台主机或路由器存有ARP表, 保存了其知晓的MAC-IP对应关系, 每个条目有过期时间</li>
 <li>流程<ul>
 <li>若有表项, 直接构造包并发送</li>
-<li>若无, 向适配器发送ARP分组(发送和接收的IP地址, 目的MAC是广播地址)</li>
+<li>若无, 向适配器发送ARP分组(内容: 发送和接收的IP地址, 目的MAC: 广播地址)</li>
 <li>每个主机都收到, 若IP相同, 则响应ARP分组, 用标准链路层帧回复</li>
 </ul>
 </li>
@@ -1695,7 +1705,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-01-01T11:38:38.007Z" itemprop="dateUpdated">2020-01-01 19:38:38</time>
+    Last updated: <time datetime="2020-01-01T12:19:47.467Z" itemprop="dateUpdated">2020-01-01 20:19:47</time>
 </span><br>
 
 
