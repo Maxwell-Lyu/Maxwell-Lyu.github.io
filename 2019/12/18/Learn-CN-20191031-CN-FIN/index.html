@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-01T06:52:06.012Z">
+<meta property="og:updated_time" content="2020-01-01T07:01:29.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CN-FIN">
 <meta name="twitter:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
@@ -744,7 +744,7 @@
 </ul>
 <h3 id="TCP连接管理"><a href="#TCP连接管理" class="headerlink" title="TCP连接管理"></a>TCP连接管理</h3><ul>
 <li><p>建立: 三次握手</p>
-<p>| 通信       | SYN | ACK          | SEQ          | 操作                             |<br>| ———- | — | ———— | ———— | ——————————– |<br>| 客户-&gt;服务 | +   |              | client_isn   | 客户端随机选择起始序号           |<br>| 服务-&gt;客户 |     | client_isn+1 | server_isn   | 服务器分配资源, 随机选择起始序号 |<br>| 客户-&gt;服务 |     | server_isn+1 | client_isn+1 | 客户端分配资源                   |</p>
+<p>| 通信       | SYN | ACK          | SEQ          | 操作                             |<br>| ———- | — | ———— | ———— | ——————————– |<br>| 客户-&gt;服务 | +   |              | client_isn   | 客户端随机选择起始序号           |<br>| 服务-&gt;客户 | +   | client_isn+1 | server_isn   | 服务器分配资源, 随机选择起始序号 |<br>| 客户-&gt;服务 |     | server_isn+1 | client_isn+1 | 客户端分配资源                   |</p>
 </li>
 <li>终止(以客户终止为例)<ul>
 <li>客户发送FIN(设置首部FIN标志位1)</li>
@@ -1591,7 +1591,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-01-01T06:52:06.012Z" itemprop="dateUpdated">2020-01-01 14:52:06</time>
+    Last updated: <time datetime="2020-01-01T07:01:29.506Z" itemprop="dateUpdated">2020-01-01 15:01:29</time>
 </span><br>
 
 
