@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-01T06:38:41.816Z">
+<meta property="og:updated_time" content="2020-01-01T06:40:23.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CN-FIN">
 <meta name="twitter:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
@@ -973,11 +973,13 @@
 <li>获取主机地址: DHCP<ul>
 <li>所有的目的地址都是 255.255.255.255</li>
 <li>DHCP服务器发现: 新到达的主机发送DHCP发现报文<ul>
+<li>UDP端口67的报文</li>
 <li>目的: 255.255.255.255</li>
-<li>内容: UDP端口67的报文, 事务ID</li>
+<li>内容: 事务ID</li>
 </ul>
 </li>
 <li>DHCP服务器提供: 服务器的相应<ul>
+<li>UDP端口67的报文</li>
 <li>源: DHCP服务器地址</li>
 <li>内容<ul>
 <li>事务ID, 推荐IP地址, 掩码, 地址租期</li>
@@ -986,11 +988,13 @@
 </ul>
 </li>
 <li>DHCP请求: 主机选择一个服务器, 相应<ul>
+<li>UDP端口68的报文</li>
 <li>源: 0.0.0.0</li>
 <li>内容: 回显配置信息, 事务ID+1</li>
 </ul>
 </li>
 <li>DHCP ACK: 确认配置<ul>
+<li>UDP端口68的报文</li>
 <li>源: DHCP服务器地址</li>
 <li>内容: 证实参数, 事务ID+1</li>
 </ul>
@@ -1587,7 +1591,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-01-01T06:38:41.816Z" itemprop="dateUpdated">2020-01-01 14:38:41</time>
+    Last updated: <time datetime="2020-01-01T06:40:23.148Z" itemprop="dateUpdated">2020-01-01 14:40:23</time>
 </span><br>
 
 
