@@ -31,7 +31,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/01.png">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/02.png">
-<meta property="og:updated_time" content="2019-12-30T07:52:00.675Z">
+<meta property="og:updated_time" content="2019-12-30T13:02:35.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DB-FIN">
 <meta name="twitter:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
@@ -274,6 +274,7 @@
 <li>联系: 不同实体集中, 实体间的对应关系</li>
 <li>联系上的函数对应关系: 一一, 一多/多一, 多多</li>
 <li>参与方式<ul>
+<li>参与方式标一个数, 参与基数标范围</li>
 <li>考虑一个实体e, 在关系R的函数对应关系中, 有x条线与他相连, 则其参与基数为x</li>
 <li>考虑实体集E, min-card(E,R): 其中实体参与基数最小值, max-card(E,R)同理</li>
 </ul>
@@ -772,7 +773,8 @@
 <li>事务的语句组成成分: 开始, 结束(正常结束-&gt;提交事务, 非正常结束-&gt;回滚)</li>
 </ul>
 <h2 id="并发控制技术（概念）"><a href="#并发控制技术（概念）" class="headerlink" title="并发控制技术（概念）"></a>并发控制技术（概念）</h2><ul>
-<li>事务<ul>
+<li><p>事务</p>
+<ul>
 <li>事务的并发性: 数据库是一个多用户共享系统, 以事务为单位访问</li>
 <li>并发控制: 实现多个用户事务的并发执行的技术</li>
 <li>调度: DBMS中事务执行的操作序列, 按时间排序</li>
@@ -791,12 +793,8 @@
 <p>事务优先图<br>  优先: 给出的调度H中, 两个动作来自不同事务, 若其涉及同一个数据库对象且至少一个为写, 则这两个事务不可交换, 定义了优先关系<br>  优先关系画出有向图<br>盲写: 没读就写</p>
 </blockquote>
 </-></li>
-<li>不正确的事务并发所导致的数据不一致现象<ul>
-<li>丢失修改lost-update: 一个修改破坏另一个修改结果(原因: 并发修改同一个)</li>
-<li>脏读dirty-read: 读到错误的数据(原因: 读到未提交的结果)</li>
-<li>不可重复读unrepeatable-read: 前后两次读不一致(原因: 被插入了写)</li>
-<li>幻像读: 一个事务中, 执行相同的查询多次, 结果不同</li>
-</ul>
+<li><p>不正确的事务并发所导致的数据不一致现象</p>
+<p>|不一致现象|描述|原因|<br>|-|-|-|-|<br>|丢失修改|一个修改破坏另一个修改结果|多个事务并发修改同一个数据|<br>|脏读|读到错误的数据|其他事务未提交的修改|<br>|不可重复读|前后两次读不一致|其他事务已提交的写操作|<br>|幻像读|一个事务中, 执行相同的查询多次, 结果不同|其他事务已提交的插入操作|</p>
 </li>
 </ul>
 </li>
@@ -1432,7 +1430,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-12-30T07:52:00.675Z" itemprop="dateUpdated">2019-12-30 15:52:00</time>
+    Last updated: <time datetime="2019-12-30T13:02:35.326Z" itemprop="dateUpdated">2019-12-30 21:02:35</time>
 </span><br>
 
 
@@ -1626,7 +1624,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>Maxwell Lyu &copy; 2019</span>
+        <p><span>Maxwell Lyu &copy; 2019 - 2020</span>
             <span>
                 
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
