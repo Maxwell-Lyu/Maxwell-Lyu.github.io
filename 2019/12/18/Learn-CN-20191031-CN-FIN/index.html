@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-01T07:01:29.506Z">
+<meta property="og:updated_time" content="2020-01-01T07:17:40.476Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CN-FIN">
 <meta name="twitter:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
@@ -743,16 +743,100 @@
 </li>
 </ul>
 <h3 id="TCP连接管理"><a href="#TCP连接管理" class="headerlink" title="TCP连接管理"></a>TCP连接管理</h3><ul>
-<li><p>建立: 三次握手</p>
-<p>| 通信       | SYN | ACK          | SEQ          | 操作                             |<br>| ———- | — | ———— | ———— | ——————————– |<br>| 客户-&gt;服务 | +   |              | client_isn   | 客户端随机选择起始序号           |<br>| 服务-&gt;客户 | +   | client_isn+1 | server_isn   | 服务器分配资源, 随机选择起始序号 |<br>| 客户-&gt;服务 |     | server_isn+1 | client_isn+1 | 客户端分配资源                   |</p>
-</li>
-<li>终止(以客户终止为例)<ul>
-<li>客户发送FIN(设置首部FIN标志位1)</li>
-<li>服务器ACK这个FIN</li>
-<li>服务器发送FIN, 并立刻关闭, 释放资源</li>
-<li>客户端ACK这个FIN, 定时等待之后关闭, 释放资源</li>
+<li>建立: 三次握手</li>
 </ul>
-</li>
+<table>
+<thead>
+<tr>
+<th>通信</th>
+<th>SYN</th>
+<th>ACK</th>
+<th>ACK</th>
+<th>SEQ</th>
+<th>数据</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户-&gt;服务</td>
+<td>+</td>
+<td></td>
+<td></td>
+<td>client_isn</td>
+<td></td>
+<td>客户端随机选择起始序号</td>
+</tr>
+<tr>
+<td>服务-&gt;客户</td>
+<td>+</td>
+<td>+</td>
+<td>client_isn+1</td>
+<td>server_isn</td>
+<td></td>
+<td>服务器分配资源, 随机选择起始序号</td>
+</tr>
+<tr>
+<td>客户-&gt;服务</td>
+<td></td>
+<td>+</td>
+<td>server_isn+1</td>
+<td>client_isn+1</td>
+<td>可携带</td>
+<td>客户端分配资源</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>终止(以客户终止为例)  </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>通信</th>
+<th>FIN</th>
+<th>SEQ</th>
+<th>ACK</th>
+<th>ACK</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户-&gt;服务</td>
+<td>+</td>
+<td>client_isn</td>
+<td></td>
+<td>(server_isn)</td>
+<td>客户发送FIN</td>
+</tr>
+<tr>
+<td>服务-&gt;客户</td>
+<td></td>
+<td>server_isn</td>
+<td>+</td>
+<td>clinet_isn + 1</td>
+<td>服务器ACK这个FIN, 之后还可以发数据(len)</td>
+</tr>
+<tr>
+<td>服务-&gt;客户</td>
+<td>+</td>
+<td>server_isn + len</td>
+<td></td>
+<td>(clinet_isn + 1)</td>
+<td>服务器发送FIN, 并立刻关闭, 释放资源</td>
+</tr>
+<tr>
+<td>客户-&gt;服务</td>
+<td></td>
+<td>clinet_isn + 1</td>
+<td>+</td>
+<td>server_isn + len + 1</td>
+<td>客户端ACK这个FIN, 定时等待之后关闭, 释放资源</td>
+</tr>
+</tbody>
+</table>
+<ul>
 <li>防范SYN洪泛攻击<ul>
 <li>第一步的isn使用散列函数, 用源地址, 目的地址和端口号, 和一个只有服务器知道的散列函数</li>
 <li>第二步不分配资源</li>
@@ -1591,7 +1675,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-01-01T07:01:29.506Z" itemprop="dateUpdated">2020-01-01 15:01:29</time>
+    Last updated: <time datetime="2020-01-01T07:17:40.476Z" itemprop="dateUpdated">2020-01-01 15:17:40</time>
 </span><br>
 
 
