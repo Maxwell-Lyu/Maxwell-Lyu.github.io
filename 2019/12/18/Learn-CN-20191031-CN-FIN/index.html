@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-01T07:17:40.476Z">
+<meta property="og:updated_time" content="2020-01-01T08:32:50.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CN-FIN">
 <meta name="twitter:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
@@ -815,7 +815,7 @@
 <td></td>
 <td>server_isn</td>
 <td>+</td>
-<td>clinet_isn + 1</td>
+<td>client_isn + 1</td>
 <td>服务器ACK这个FIN, 之后还可以发数据(len)</td>
 </tr>
 <tr>
@@ -823,13 +823,13 @@
 <td>+</td>
 <td>server_isn + len</td>
 <td></td>
-<td>(clinet_isn + 1)</td>
+<td>(client_isn + 1)</td>
 <td>服务器发送FIN, 并立刻关闭, 释放资源</td>
 </tr>
 <tr>
 <td>客户-&gt;服务</td>
 <td></td>
-<td>clinet_isn + 1</td>
+<td>client_isn + 1</td>
 <td>+</td>
 <td>server_isn + len + 1</td>
 <td>客户端ACK这个FIN, 定时等待之后关闭, 释放资源</td>
@@ -983,7 +983,7 @@
 </ul>
 </li>
 <li>随机早期检测RED</li>
-<li>缓存大小: $B=\textrm{RTT}\cdot C/\sqrt{N}$, $C$为链路容量, $N$链路数量, $\textrm{RTT}$平均往返时延</li>
+<li>缓存大小: $B=\textrm{RTT}\cdot C/\sqrt{N}$, $C$为链路容量, $N$链路上的TCP流数量, $\textrm{RTT}$平均往返时延</li>
 </ul>
 </li>
 </ul>
@@ -1018,7 +1018,7 @@
 <li>选项: 长度不定, 默认首部长度为20字节, 可变</li>
 <li>数据报长度: 首部加数据的长度, 字节为单位</li>
 <li>寿命: 经过一个路由器, 减1, 为0丢弃</li>
-<li>协议: 到达目的地才有用, 6-TCP, 17-TCP, 类似端口号</li>
+<li>协议: 到达目的地才有用, 6-TCP, 17-UDP, 类似端口号</li>
 </ul>
 </li>
 </ul>
@@ -1675,7 +1675,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-01-01T07:17:40.476Z" itemprop="dateUpdated">2020-01-01 15:17:40</time>
+    Last updated: <time datetime="2020-01-01T08:32:50.186Z" itemprop="dateUpdated">2020-01-01 16:32:50</time>
 </span><br>
 
 
