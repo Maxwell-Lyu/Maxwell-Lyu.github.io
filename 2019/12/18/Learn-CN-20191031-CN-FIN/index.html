@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-01T12:53:23.760Z">
+<meta property="og:updated_time" content="2020-01-02T01:35:20.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CN-FIN">
 <meta name="twitter:description" content="计算机网络期末复习资料, 是结合给出的考点重新整理的资料">
@@ -438,7 +438,7 @@
 <h2 id="协议层级及其服务模型"><a href="#协议层级及其服务模型" class="headerlink" title="协议层级及其服务模型"></a>协议层级及其服务模型</h2><h3 id="分层的协议结构"><a href="#分层的协议结构" class="headerlink" title="分层的协议结构"></a>分层的协议结构</h3><ul>
 <li>协议分层<ul>
 <li>每层向上提供服务， 各层所有协议称为协议栈</li>
-<li>PDU: protocol data units, 协议带来的控制信息, 也就是首部(尾部)</li>
+<li>PDU: protocol data units, 也就是分组(控制信息 + 数据)</li>
 </ul>
 </li>
 <li>因特网(TCP/IP)协议栈<ul>
@@ -852,19 +852,35 @@
 <li>一堆废话, 我只关心TCP</li>
 </ul>
 <h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><ul>
-<li>拥塞窗口cwnd<ul>
+<li>拥塞窗口cwnd6;<ul>
 <li>对发送进行限制: LastByteSent - LastByteAcked &lt;= min(rwnd, cwnd)</li>
 </ul>
 </li>
 <li>窗口与速率的关系: B = S(发出的包数量)/RTT(往返时间)</li>
 <li>TCP拥塞控制算法<ul>
+<li>总结<ul>
+<li>ssthresh变化: 丢包事件: ssthresh = cwnd / 2</li>
+<li>cwnd变化: 状态初始值<ul>
+<li>进入慢启动: cwnd = 1</li>
+<li>进入拥塞避免: cwnd = ssthresh</li>
+<li>进入快速恢复: cwnd = ssthresh + 3</li>
+</ul>
+</li>
+<li>cwnd变化: 增长方式<ul>
+<li>慢启动: 每个ACK, +1, 相当于每轮乘二</li>
+<li>拥塞避免: 每轮 +1</li>
+<li>快速恢复: 每个冗余ACK +1</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>慢启动<ul>
 <li>初始: cwnd = 1 (MSS)</li>
 <li>加倍: 每一轮, cwnd加倍</li>
 <li>结束<ul>
 <li>超时, 取cwnd = 1, ssthresh = cwnd/2</li>
 <li>到达ssthresh, 进入拥塞避免模式</li>
-<li>3个冗余ACK, cwnd = cwnd/2+3, 进入快速恢复</li>
+<li>3个冗余ACK, ssthresh = cwnd/2, cwnd = cwnd/2+3, 进入快速恢复</li>
 </ul>
 </li>
 </ul>
@@ -873,14 +889,18 @@
 <li>线性增加: 每一轮, cwnd+1</li>
 <li>结束<ul>
 <li>超时, 取cwnd = 1, ssthresh = cwnd/2, 相当于慢启动</li>
-<li>3个冗余ACK, cwnd = cwnd/2+3, 进入快速恢复</li>
+<li>3个冗余ACK, ssthresh = cwnd/2, cwnd = cwnd/2+3, 进入快速恢复</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>快速恢复<ul>
 <li>接下来收到的冗余ACK, cwnd都加1(之前的3个冗余ACK已经加过3, 至少加3)</li>
-<li>结束: 收到期待的ACK, 将cwnd设置为ssthresh, 进入拥塞避免</li>
+<li>结束<ul>
+<li>收到期待的ACK, 将cwnd = ssthresh, 进入拥塞避免</li>
+<li>超时, ssthresh = cwnd/2, cwnd = 1</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>TCP拥塞控制: 回顾<ul>
@@ -1129,7 +1149,7 @@
 </ul>
 </li>
 <li>从IPv4到IPv6<ul>
-<li>隧道: IPv6数据报放入IPv4的有效载荷字段中</li>
+<li>隧道: IPv6数据报放入IPv4的有效载荷字段中, 上层协议41</li>
 </ul>
 </li>
 </ul>
@@ -1706,7 +1726,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-01-01T12:53:23.760Z" itemprop="dateUpdated">2020-01-01 20:53:23</time>
+    Last updated: <time datetime="2020-01-02T01:35:20.446Z" itemprop="dateUpdated">2020-01-02 09:35:20</time>
 </span><br>
 
 
