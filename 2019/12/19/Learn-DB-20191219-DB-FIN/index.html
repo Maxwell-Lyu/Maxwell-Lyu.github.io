@@ -31,7 +31,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/01.png">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/02.png">
-<meta property="og:updated_time" content="2020-01-03T01:16:12.069Z">
+<meta property="og:updated_time" content="2020-01-03T01:21:30.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DB-FIN">
 <meta name="twitter:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
@@ -773,8 +773,7 @@
 <li>事务的语句组成成分: 开始, 结束(正常结束-&gt;提交事务, 非正常结束-&gt;回滚)</li>
 </ul>
 <h2 id="并发控制技术（概念）"><a href="#并发控制技术（概念）" class="headerlink" title="并发控制技术（概念）"></a>并发控制技术（概念）</h2><ul>
-<li><p>事务</p>
-<ul>
+<li>事务<ul>
 <li>事务的并发性: 数据库是一个多用户共享系统, 以事务为单位访问</li>
 <li>并发控制: 实现多个用户事务的并发执行的技术</li>
 <li>调度: DBMS中事务执行的操作序列, 按时间排序</li>
@@ -793,11 +792,42 @@
 <p>事务优先图<br>  优先: 给出的调度H中, 两个动作来自不同事务, 若其涉及同一个数据库对象且至少一个为写, 则这两个事务不可交换, 定义了优先关系<br>  优先关系画出有向图<br>盲写: 没读就写</p>
 </blockquote>
 </-></li>
-<li><p>不正确的事务并发所导致的数据不一致现象</p>
-<p>|不一致现象|描述|原因|<br>|-|-|-|-|<br>|丢失修改|一个修改破坏另一个修改结果|多个事务并发修改同一个数据|<br>|脏读|读到错误的数据|其他事务未提交的修改|<br>|不可重复读|前后两次读不一致|其他事务已提交的写操作|<br>|幻像读|一个事务中, 执行相同的查询多次, 结果不同|其他事务已提交的插入操作|</p>
-</li>
+<li>不正确的事务并发所导致的数据不一致现象</li>
 </ul>
 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>不一致现象</th>
+<th>描述</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>丢失修改</td>
+<td>一个修改破坏另一个修改结果</td>
+<td>多个事务并发修改同一个数据</td>
+</tr>
+<tr>
+<td>脏读</td>
+<td>读到错误的数据</td>
+<td>其他事务未提交的修改</td>
+</tr>
+<tr>
+<td>不可重复读</td>
+<td>前后两次读不一致</td>
+<td>其他事务已提交的写操作</td>
+</tr>
+<tr>
+<td>幻像读</td>
+<td>一个事务中, 执行相同的查询多次, 结果不同</td>
+<td>其他事务已提交的插入操作</td>
+</tr>
+</tbody>
+</table>
+<ul>
 <li>封锁<ul>
 <li>排它锁（X锁）: 一个对象同时只能上一次, 维持到事务结束<blockquote>
 <p>自己可以读写, 别人啥也不行</p>
@@ -833,8 +863,7 @@
 </li>
 </ul>
 </li>
-<li><p>多粒度封锁</p>
-<ul>
+<li>多粒度封锁<ul>
 <li>封锁粒度/并发度/并发控制实现开销 之间的关系<ul>
 <li>锁粒度大, 并发度低, 控制开销小</li>
 <li>锁粒度小, 并发度高, 控制开销大</li>
@@ -842,22 +871,81 @@
 </li>
 <li>多粒度封锁: 同时支持多种封锁粒度供事务选择</li>
 <li>多粒度树: 按照封锁粒度的大小构造出一棵 ‘多粒度树’，以树中的每个结点作为封锁对象，可以构成一个‘多粒度封锁协议’</li>
-<li><p>基于意向锁的多粒度封锁协议</p>
-<ul>
+<li>基于意向锁的多粒度封锁协议<ul>
 <li>意向锁: 节点加意向锁, 其下层节点正被加锁(必须上层先加意向锁, 才能给下层加锁)<ul>
 <li>IS: 下层打算加S</li>
 <li>IX: 下层打算加X</li>
 <li>SIX: 当前加S, 下层加X</li>
 </ul>
 </li>
-<li><p>意向锁锁相容矩阵</p>
-<p>|已经有的锁|S|X|IS|IX|SIX||<br>|-|-|-|-|-|-|-|<br>|已经持有S|✔||✔|||S加了, 当前及其下层没有X<br>|已经持有X||||||X排他, 加了别的都没有|<br>|已经持有IS|✔||✔|✔|✔|IS加了, 当前没X|<br>|已经持有IX|||✔|✔||IX加了, 当前没S没X|<br>|已经持有SIX|||✔|||SIX加了, 相当于同时S和IX|</p>
-</li>
-<li>意向锁锁申请算法，意向锁锁释放算法: 对任何一个节点加锁, 必须先对其父节点加意向锁(也就是从根开始加)</li>
+<li>意向锁锁相容矩阵</li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>已经有的锁</th>
+<th>S</th>
+<th>X</th>
+<th>IS</th>
+<th>IX</th>
+<th>SIX</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>已经持有S</td>
+<td>✔</td>
+<td></td>
+<td>✔</td>
+<td></td>
+<td></td>
+<td>S加了, 当前及其下层没有X</td>
+</tr>
+<tr>
+<td>已经持有X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X排他, 加了别的都没有</td>
+</tr>
+<tr>
+<td>已经持有IS</td>
+<td>✔</td>
+<td></td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+<td>IS加了, 当前没X</td>
+</tr>
+<tr>
+<td>已经持有IX</td>
+<td></td>
+<td></td>
+<td>✔</td>
+<td>✔</td>
+<td></td>
+<td>IX加了, 当前没S没X</td>
+</tr>
+<tr>
+<td>已经持有SIX</td>
+<td></td>
+<td></td>
+<td>✔</td>
+<td></td>
+<td></td>
+<td>SIX加了, 相当于同时S和IX</td>
+</tr>
+</tbody>
+</table>
+<pre><code>+ 意向锁锁申请算法，意向锁锁释放算法: 对任何一个节点加锁, 必须先对其父节点加意向锁(也就是从根开始加)
+</code></pre><ul>
 <li>死锁的检测与预防<ul>
 <li>死锁: 每个事务持有部分锁, 循环等待</li>
 <li>活锁: 有部分事务长期等待锁, 其他事务可以继续运行</li>
@@ -1494,7 +1582,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-01-03T01:16:12.069Z" itemprop="dateUpdated">2020-01-03 09:16:12</time>
+    Last updated: <time datetime="2020-01-03T01:21:30.939Z" itemprop="dateUpdated">2020-01-03 09:21:30</time>
 </span><br>
 
 
