@@ -31,7 +31,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/01.png">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/02.png">
-<meta property="og:updated_time" content="2020-01-03T01:23:40.145Z">
+<meta property="og:updated_time" content="2020-01-03T02:15:50.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DB-FIN">
 <meta name="twitter:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
@@ -1041,7 +1041,7 @@
 <li>作用: 已提交事务的重做工作</li>
 <li>基于REDO日志的故障恢复流程<ul>
 <li>确定所有已提交的事务</li>
-<li>从后向前扫, 对每条更新<ul>
+<li>从前向后扫, 对每条更新<ul>
 <li>如果未提交, 继续扫</li>
 <li>如果提交了, 写入新值</li>
 </ul>
@@ -1436,11 +1436,11 @@
 </ul>
 </li>
 <li>元组的选择<ul>
-<li>根据步骤 2) 的分析结果(查询条件)进行元组的选择</li>
+<li>根据步骤 2) 的分析结果(查询条件)进行元组的选择: 用不着的尽快投影掉, 夜长梦多警告</li>
 </ul>
 </li>
 <li>属性的指定<ul>
-<li>根据步骤 1) 的分析结果执行投影操作</li>
+<li>根据步骤 1) 的分析结果执行投影操作: 别tm漏属性啊啊啊啊啊啊</li>
 </ul>
 </li>
 </ul>
@@ -1532,6 +1532,13 @@
 </li>
 <li>直接构造: 不会玩<ul>
 <li>根据题目中的约束, 直接构造公式, 约束元组</li>
+<li>刚刚才学到的技巧：蕴含<ul>
+<li>之前说是除法嘛, 其实不仅仅是除法, 表示 任意-都/仅仅 都可以</li>
+<li>在全称量词后面, 使用蕴含, 记得把蕴含条件的多余变元先 存在掉, 只留下前面限定过的(之前有谓词/量词), 被蕴含的那个也是</li>
+<li>全称蕴含外面, 有必要的话, 再补一个谓词</li>
+<li>别TM在全称里面用 且, 根本不可能满足的</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1583,7 +1590,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-01-03T01:23:40.145Z" itemprop="dateUpdated">2020-01-03 09:23:40</time>
+    Last updated: <time datetime="2020-01-03T02:15:50.235Z" itemprop="dateUpdated">2020-01-03 10:15:50</time>
 </span><br>
 
 
