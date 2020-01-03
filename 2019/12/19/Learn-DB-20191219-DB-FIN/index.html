@@ -31,7 +31,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/01.png">
 <meta property="og:image" content="https://maxwell-lyu.github.io/2019/12/19/Learn-DB-20191219-DB-FIN/02.png">
-<meta property="og:updated_time" content="2020-01-03T01:21:30.939Z">
+<meta property="og:updated_time" content="2020-01-03T01:23:40.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DB-FIN">
 <meta name="twitter:description" content="第一章:数据库系统概述基本概念 数据库(DB): 是数据集合, 具有统一的结构形式并存放于统一的存储介质内, 它由多种应用数据集成, 并可被应用所共享 数据库管理系统(DBMS): 是管理数据库的系统软件 数据库系统(DBS): 是一个以对海量的、具有复杂数据结构的、可以持久保存的、可供多用户共享的数据进行统一管理为目标的计算机系统 数据库管理员(DBA): 对数据库进行规划、设计、维护、监视的专">
@@ -814,6 +814,7 @@
 <td>脏读</td>
 <td>读到错误的数据</td>
 <td>其他事务未提交的修改</td>
+<td>s</td>
 </tr>
 <tr>
 <td>不可重复读</td>
@@ -879,6 +880,7 @@
 </ul>
 </li>
 <li>意向锁锁相容矩阵</li>
+<li>意向锁锁申请算法，意向锁锁释放算法: 对任何一个节点加锁, 必须先对其父节点加意向锁(也就是从根开始加)</li>
 </ul>
 </li>
 </ul>
@@ -944,8 +946,7 @@
 </tr>
 </tbody>
 </table>
-<pre><code>+ 意向锁锁申请算法，意向锁锁释放算法: 对任何一个节点加锁, 必须先对其父节点加意向锁(也就是从根开始加)
-</code></pre><ul>
+<ul>
 <li>死锁的检测与预防<ul>
 <li>死锁: 每个事务持有部分锁, 循环等待</li>
 <li>活锁: 有部分事务长期等待锁, 其他事务可以继续运行</li>
@@ -1582,7 +1583,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-01-03T01:21:30.939Z" itemprop="dateUpdated">2020-01-03 09:21:30</time>
+    Last updated: <time datetime="2020-01-03T01:23:40.145Z" itemprop="dateUpdated">2020-01-03 09:23:40</time>
 </span><br>
 
 
