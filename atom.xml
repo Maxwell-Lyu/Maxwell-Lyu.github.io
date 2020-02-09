@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Maxwell-lyu.github.io/"/>
-  <updated>2020-01-03T02:15:50.235Z</updated>
+  <updated>2020-01-08T02:35:05.476Z</updated>
   <id>https://Maxwell-lyu.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Ubuntu双启动</title>
+    <link href="https://Maxwell-lyu.github.io/2020/01/08/Tech-20200108-Ubuntu%E5%8F%8C%E5%90%AF%E5%8A%A8/"/>
+    <id>https://Maxwell-lyu.github.io/2020/01/08/Tech-20200108-Ubuntu双启动/</id>
+    <published>2020-01-08T02:23:21.000Z</published>
+    <updated>2020-01-08T02:35:05.476Z</updated>
+    
+    <content type="html"><![CDATA[<p>主要2个部分: Ubuntu双启动U盘制作, UEFI和LEGACY启动详解<br><a id="more"></a></p><h1 id="Ubuntu双启动"><a href="#Ubuntu双启动" class="headerlink" title="Ubuntu双启动"></a>Ubuntu双启动</h1><h2 id="通过这个教程-你能得到"><a href="#通过这个教程-你能得到" class="headerlink" title="通过这个教程, 你能得到"></a>通过这个教程, 你能得到</h2><ul><li>一个USB设备<ul><li>包含一个可以引导运行的Ubuntu系统, 而不是安装介质</li><li>该系统能够在传统BIOS和UEFI两种引导方式下启动<h2 id="教程推荐的设备"><a href="#教程推荐的设备" class="headerlink" title="教程推荐的设备"></a>教程推荐的设备</h2></li></ul></li><li>使用固态硬盘+转换盒组成的固态U盘</li><li>高速U盘, 尤其是4K读取和4K写入能力高的U盘, 详询UserBenchmark<h2 id="需要进行的其他准备"><a href="#需要进行的其他准备" class="headerlink" title="需要进行的其他准备"></a>需要进行的其他准备</h2></li><li>一个Ubuntu镜像, 16.04LTS或更新, 本教程使用19.10</li><li>VMWare Workstation Pro, 使用虚拟机进行安装, 修改和测试, 完全无痛<ul><li>如果您使用的是VBox, 很抱歉不能提供更多指导</li><li>如果您使用的是Hyper-V, 很幸运, 该教程应当是奏效的, BIOS引导模式需要选择第一代, UEFI则是第二代<h2 id="现在开始"><a href="#现在开始" class="headerlink" title="现在开始"></a>现在开始</h2><h3 id="对USB驱动器进行准备"><a href="#对USB驱动器进行准备" class="headerlink" title="对USB驱动器进行准备"></a>对USB驱动器进行准备</h3></li></ul></li></ul><ol><li>备份驱动器内的全部资料, 请务必这样做, 除非其中没有任何数据</li><li></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;主要2个部分: Ubuntu双启动U盘制作, UEFI和LEGACY启动详解&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Technique" scheme="https://Maxwell-lyu.github.io/categories/Technique/"/>
+    
+    
+      <category term="Utility" scheme="https://Maxwell-lyu.github.io/tags/Utility/"/>
+    
+  </entry>
   
   <entry>
     <title>DB-FIN</title>
