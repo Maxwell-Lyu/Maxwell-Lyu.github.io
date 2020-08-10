@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>编译原理 8 | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Course,Principles and Techniques of Compilers">
+    <meta name="description" content="代码生成 要解决的问题 正确性 易于实现, 测试和维护   输入IR的选择: 四元式, 三元式, 字节代码, 堆栈机代码, 后缀表示, 抽象语法树, DAG 输出: RISC, CISC, 可重定向代码, 汇编语言目标语言 目标机模型 使用三地址机器的模型 指令 加载: LD dst,addr addr内存的内容加载到dst寄存器 保存: ST x,r 寄存器r到x 计算: OP dst,src1">
+<meta name="keywords" content="Course,Principles and Techniques of Compilers">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理 8">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="代码生成 要解决的问题 正确性 易于实现, 测试和维护   输入IR的选择: 四元式, 三元式, 字节代码, 堆栈机代码, 后缀表示, 抽象语法树, DAG 输出: RISC, CISC, 可重定向代码, 汇编语言目标语言 目标机模型 使用三地址机器的模型 指令 加载: LD dst,addr addr内存的内容加载到dst寄存器 保存: ST x,r 寄存器r到x 计算: OP dst,src1">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-05-13T10:24:59.542Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编译原理 8">
+<meta name="twitter:description" content="代码生成 要解决的问题 正确性 易于实现, 测试和维护   输入IR的选择: 四元式, 三元式, 字节代码, 堆栈机代码, 后缀表示, 抽象语法树, DAG 输出: RISC, CISC, 可重定向代码, 汇编语言目标语言 目标机模型 使用三地址机器的模型 指令 加载: LD dst,addr addr内存的内容加载到dst寄存器 保存: ST x,r 寄存器r到x 计算: OP dst,src1">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">编译原理 8</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">编译原理 8</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-04-30T06:45:51.000Z" itemprop="datePublished" class="page-time">
+  2020-04-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#代码生成"><span class="post-toc-number">1.</span> <span class="post-toc-text">代码生成</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标语言"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标语言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标语言中的地址"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">目标语言中的地址</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本块和流图"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">基本块和流图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本块优化"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">基本块优化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码生成器"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">代码生成器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#寄存器分配"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">寄存器分配</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Learn-PTC-20200430-PTC-08"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">编译原理 8</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-04-30 14:45:51" datetime="2020-04-30T06:45:51.000Z"  itemprop="datePublished">2020-04-30</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h1><ul>
+<li>要解决的问题<ul>
+<li>正确性</li>
+<li>易于实现, 测试和维护</li>
+</ul>
+</li>
+<li>输入IR的选择: 四元式, 三元式, 字节代码, 堆栈机代码, 后缀表示, 抽象语法树, DAG</li>
+<li>输出: RISC, CISC, 可重定向代码, 汇编语言<h2 id="目标语言"><a href="#目标语言" class="headerlink" title="目标语言"></a>目标语言</h2></li>
+<li>目标机模型<ul>
+<li>使用三地址机器的模型</li>
+<li>指令<ul>
+<li>加载: LD dst,addr addr内存的内容加载到dst寄存器</li>
+<li>保存: ST x,r 寄存器r到x</li>
+<li>计算: OP dst,src1,src2 两个值运算后到dst</li>
+<li>无条件跳转: BR L 控制流转到标号L的指令</li>
+<li>条件跳转: Bcond r,L 对r种的值进行测试, 为真转向L</li>
+</ul>
+</li>
+<li>寻址模式<ul>
+<li>变量x: 指向分配x的内存位置</li>
+<li>a(r): 地址是a的左值加上寄存器r中的值</li>
+<li>constant(r): 寄存器中内容加上前面的常数即地址</li>
+<li>*r: 寄存器的内容所表示的位置上, 存放的内容位置</li>
+<li>*constant(r): 寄存器中内容加上前面的常数所代表的位置, 上的内容所表示的位置</li>
+<li>#constant: 常量</li>
+</ul>
+</li>
+<li>程序及指令的代价<ul>
+<li>不同的目的有不同的度量</li>
+<li>不可判定一个目标程序是否最优<h2 id="目标语言中的地址"><a href="#目标语言中的地址" class="headerlink" title="目标语言中的地址"></a>目标语言中的地址</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>目标代码中的地址<ul>
+<li>如何为过程调用和返回生成代码<ul>
+<li>静态分配: 活动记录</li>
+<li>栈式分配: 活动记录</li>
+</ul>
+</li>
+<li>如何将变量名和函数名转换为地址? 不同区域的名字采用不同寻址方式</li>
+</ul>
+</li>
+<li>活动记录的静态分配<ul>
+<li>每个过程静态地分配一个数据区域, 用staticArea表示</li>
+<li>call callee<ul>
+<li>ST callee.staticArea, #here+20</li>
+<li>BR callee.codeArea</li>
+</ul>
+</li>
+<li>callee中的return<ul>
+<li>BR *callee.staticArea: 跳转到静态区起始, 指向的地方(返回地址) </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>活动记录的栈式分配<ul>
+<li>寄存器SP指向栈顶</li>
+<li>第一个过程main初始化栈区</li>
+<li>过程调用指令序列<ul>
+<li>ADD SP, SP, #caller.recordSize</li>
+<li>ST 0(SP), #here + 16</li>
+<li>BR callee.codeArea</li>
+</ul>
+</li>
+<li>返回指令序列<ul>
+<li>BR *0(SP)</li>
+<li>SUB SP, SP, $caller.recordSize</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>名字的运行时刻地址<ul>
+<li>在三地址语句中使用名字: 实际上是指向符号表条目来引用变量</li>
+<li>语句x = 0<ul>
+<li>x在静态区, 且静态区开始位置为static, 则直接访问即可<ul>
+<li>LD 112, #0     (112是在编译时刻确定)</li>
+</ul>
+</li>
+<li>x在栈区, 且相对地址为12<ul>
+<li>LD 12(SP), #0<h2 id="基本块和流图"><a href="#基本块和流图" class="headerlink" title="基本块和流图"></a>基本块和流图</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基本块和流图<ul>
+<li>中间代码的流图表示法<ul>
+<li>中间代码划分为基本块<ul>
+<li>控制流只能从基本块的第一条指令进入</li>
+<li>除基本块的最后一条指令外, 控制流不会跳转/停机</li>
+</ul>
+</li>
+<li>流图的结点是基本块, 边指明了哪些基本块可以在当前基本块后运行</li>
+</ul>
+</li>
+<li>流图可以作为优化的基础<ul>
+<li>指出了基本块之间的控制流</li>
+<li>根据流图了解到一个值是否会被使用等信息</li>
+</ul>
+</li>
+<li>划分基本块的算法<ul>
+<li>方法<ul>
+<li>确定首指令leader<ul>
+<li>第一个三地址指令</li>
+<li>任意一个转移指令的目标指令</li>
+<li>紧跟在一个转移指令之后的指令</li>
+</ul>
+</li>
+<li>确定基本块: 每个首指令对应一个基本块, 从一个首指令到下一个首指令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>后续使用信息<ul>
+<li>变量值的使用<ul>
+<li>三地址语句i向x赋值, 如果另一个语句j的运算分量为x, 且从i开始有一条路径到j, 且路径上没有对x赋值, 那么j就使用了i处计算得到的x值</li>
+<li>我们说变量x在语句i后的程序点上活跃<ul>
+<li>程序执行完i, x中存放的值将被后面的语句使用</li>
+<li>不活跃是指值不会被使用, 而不是变量不被只用</li>
+</ul>
+</li>
+<li>用于代码生成: 如果不活跃, 且x占用了一个寄存器, 则可以将这个寄存器用于其他目的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>确定基本块中的活跃性<ul>
+<li>方法  <ul>
+<li>从B的最后一个语句开始反向扫描</li>
+<li>对于每个语句i: x = y + z<ul>
+<li>令语句i和x, y, z的当前活跃性信息/使用信息关联</li>
+<li>设置x为不活跃和无后续使用</li>
+<li>设置y和z为活跃, 并指明他们下一次使用设置为语句i</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>流图的构造<ul>
+<li>流图的结点是基本块<ul>
+<li>两个结点B和C之间有一条有向边iff基本块C的第一个指令可能在B的最后一个指令之后执行</li>
+</ul>
+</li>
+<li>存在边的原因<ul>
+<li>B的结尾指令是跳转到C的开头的条件/无条件语句</li>
+<li>C紧跟在B之后, 且B的结尾不是无条件跳转语句</li>
+<li>B是C的前驱, C是B的后继</li>
+</ul>
+</li>
+<li>入口/出口结点<ul>
+<li>不和任何中间指令对应; 入口到第一条指令有一条边, 任何可能最后执行的基本块到出口有一条边</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>循环<ul>
+<li>程序中的大部分时间都花在循环上</li>
+<li>循环的定义<ul>
+<li>循环L是一个结点集合</li>
+<li>存在一个循环入口, 是唯一的, 前驱可以在这个循环之外, 到达循环的其余结点的路径必然经过这个入口</li>
+<li>其余结点都存在到达入口的非空路径, 即路径在L中<h2 id="基本块优化"><a href="#基本块优化" class="headerlink" title="基本块优化"></a>基本块优化</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基本块的优化<ul>
+<li>针对基本块的优化(局部优化)</li>
+<li>DAG图可以反应变量及其值对其他变量的依赖关系</li>
+<li>构造方法<ul>
+<li>每个变量都有一DAG结点表示其初始值</li>
+<li>每个语句s有一个相关的结点N, 代表此计算得到的值<ul>
+<li>N的子节点对应于(得到其运算分量当前值的)其他语句</li>
+<li>N的标号是s中的运算符, 同时还有一组变量被关联到N, 表示s是最晚对这些变量进行定值的语句\</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DAG构造<ul>
+<li>为基本块中出现的每个变量建立结点(表示初始值)</li>
+<li>顺序扫描各个三地址指令<ul>
+<li>指令x = y op z<ul>
+<li>为该指令建立结点N, 标号op, 令x和N关联</li>
+<li>N的子节点为y,z当前关联的结点</li>
+</ul>
+</li>
+<li>指令x=y<ul>
+<li>假设y关联到N, 那么x现在也关联到N</li>
+</ul>
+</li>
+<li>扫描结束后, 出口处活跃的变量x, 其关联的结点设置为输出结点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DAG的作用<ul>
+<li>描述了各变量的值之间的关系</li>
+</ul>
+</li>
+<li>以DAG为基础, 对代码进行转换<ul>
+<li>寻找局部公共子表达式<ul>
+<li>局部公共子表达式的发现<ul>
+<li>建立某个结点M之前, 检查是否存在一个结点N, 它和M具有相同的运算符和子节点(顺序也相同)</li>
+<li>如果存在, 则不需要生成新结点, N代替M</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>消除死代码<ul>
+<li>DAG图上, 消除没有附加活跃变量的根节点, 即消除死代码</li>
+</ul>
+</li>
+<li>代数恒等式的使用<ul>
+<li>消除计算步骤(加减乘除, 01的特殊)</li>
+<li>降低强度: 例如乘2变为加</li>
+<li>常量合并: 常量计算变赋值</li>
+</ul>
+</li>
+<li>数组引用的表示<ul>
+<li>从数组取值的运算, 对应于=[]的结点<ul>
+<li>这个结点的子节点是数组对应初始值a和下标i</li>
+<li>变量x是这个结点的标号之一</li>
+</ul>
+</li>
+<li>对数组赋值的运算对应于[]=的结点<ul>
+<li>这个结点的三个子节点分别表示a, 下标i和值y</li>
+<li>杀死所有依赖于a的变量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>指针赋值和过程调用<ul>
+<li>通过指针进行取值/赋值: x=*p, q*=y<ul>
+<li>x使用了任意变量, 因此无法消除死代码</li>
+<li>*q=y对任意变量赋值, 因此杀死了全部其他节点</li>
+</ul>
+</li>
+<li>可通过(全局/局部)指针分析, 部分解决该问题</li>
+<li>过程调用类似<ul>
+<li>使用了可访问范围内的所有变量</li>
+<li>修改了课访问范围内的所有变量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>从DAG到基本块<ul>
+<li>重构的方法<ul>
+<li>每个结点构造一个三地址语句, 计算对应的值</li>
+<li>结果尽量赋值给一个活跃的变量</li>
+<li>如果结点有多个关联的变量, 则需要用赋值语句进行赋值</li>
+<li>多个变量可选作为参数时, 尽量使用已经活跃的变量, 尽量少地将不活跃的变量变成活跃</li>
+</ul>
+</li>
+<li>重组的规则<ul>
+<li>注意求值顺序<ul>
+<li>指令必须遵守DAG中结点的顺序</li>
+<li>对数组赋值要跟在原来之前的赋值/求值之后</li>
+<li>对数组求值要跟在原来的赋值指令之后</li>
+<li>对变量的使用必须跟在所有原来在他之前的过程调用和指针间接复制之后</li>
+<li>任何过程调用或指针间接赋值必须跟在原来它之前的变量求值之后</li>
+</ul>
+</li>
+<li>即保证<ul>
+<li>如果两个指令相互影响, 他们的顺序就不该改变</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="代码生成器"><a href="#代码生成器" class="headerlink" title="代码生成器"></a>代码生成器</h2><ul>
+<li>根据三地址指令序列生成机器指令<ul>
+<li>假设每个三地址指令只有一个对应的机器指令<ul>
+<li>有一组寄存器, 用于计算基本块内部的值</li>
+</ul>
+</li>
+<li>主要目标是减少加载LD和保存ST指令, 即最大限度地利用寄存器</li>
+<li>寄存器的使用方法<ul>
+<li>执行运算时, 运算分量必须放在寄存器中</li>
+<li>存放临时变量</li>
+<li>存放全局的值</li>
+<li>进行运行时刻管理(比如栈顶指针)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>算法的基本思想和数据结构<ul>
+<li>依次考虑各个三地址指令, 尽可能把值保留在寄存器中, 以减少寄存器/内存之间的数据交换</li>
+<li>为一个三地址指令生成机器指令时<ul>
+<li>只有当运算分量不在寄存器中时, 才从内存载入</li>
+<li>尽量保证只有当寄存器中的值不被使用时, 才覆盖掉</li>
+</ul>
+</li>
+<li>数据结构<ul>
+<li>寄存器描述符: 跟踪各个寄存器存放了哪些变量的当前值</li>
+<li>地址描述符: 各个变量当前值存放在哪些位置上(内存/寄存器位置)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码生成算法<ul>
+<li>重要子函数getReg(I)<ul>
+<li>根据寄存器描述符和地址描述符等数据流信息, 为三地址指令I选择最佳的寄存器</li>
+<li>得到的机器指令的指令依赖于getReg函数选取寄存器的算法</li>
+</ul>
+</li>
+<li>代码生成算法逐个处理三地址指令</li>
+<li>运算语句: x = y + z<ul>
+<li>getReg(x = y + z)为xyz选择寄存器Rx Ry Rz<ul>
+<li>检查Ry的描述符, 如果y不在Ry中, 则生成指令LD Ry,y’, y’为当前位置</li>
+<li>Rz类似</li>
+</ul>
+</li>
+<li>生成指令ADD Rx,Ry,Rz</li>
+</ul>
+</li>
+<li>复制语句: x = y<ul>
+<li>getReg(x = y)为xy选择相同的寄存器</li>
+<li>如果y不在Ry中, 则生成指令LD Ry, y</li>
+</ul>
+</li>
+<li>基本块的收尾<ul>
+<li>如果x活跃, 且不在内存中, 则生成指令ST x,Rx</li>
+</ul>
+</li>
+<li>代码生成的同时, 更新寄存器和地址描述符</li>
+<li>处理指令时生成的LD R, x<ul>
+<li>R的寄存器描述符: 只包含x</li>
+<li>x的地址描述符: R作为新位置加入到x的位置集合中, 从任何不同于x的变量描述符中删除R</li>
+</ul>
+</li>
+<li>生成的ST x,R<ul>
+<li>x的地址描述符L包含自己的内存位置: 新增</li>
+</ul>
+</li>
+<li>ADD Rx,Ry,Rz<ul>
+<li>Rx的寄存器描述符: 只包含x</li>
+<li>x的地址描述符: 只包干Rx</li>
+<li>从任何不同于x的变量的地址描述符中删除Rx</li>
+</ul>
+</li>
+<li>处理x=y时<ul>
+<li>如果生成LD Ry,y, 按照第一个规则处理</li>
+<li>把x加入到Ry的寄存器描述符中</li>
+<li>x的地址描述符: 只包含Ry</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>getReg函数<ul>
+<li>目标: 减少LD/ST指令</li>
+<li>任务: 为运算分量和结果分配寄存器</li>
+<li>为x= y op z的运算分量yz分配寄存器<ul>
+<li>如果y已经在某一个寄存器中, 不需要进行处理, 选择这个寄存器Ry</li>
+<li>如果不在, 且有空闲寄存器, 选择一个空闲寄存器</li>
+<li>如果不在且无空闲, 寻找一个寄存器R, 其寄存器描述符表示v在R中<ul>
+<li>如果v的地址描述符表明, 还可以在别的地方找到v, DONE</li>
+<li>如果v就是x, 且x不是运算分量z, DONE</li>
+<li>如果v在此之后不会被使用(不活跃), DONE</li>
+<li>生成保存指令ST v,R, 并修改v的地址描述符, 如果R中存放了多个变量的值, 那么需要生成多条ST指令</li>
+</ul>
+</li>
+<li>为x = y op z结果选择寄存器Rx的方法和上面要把y从内存LD一样, 但是<ul>
+<li>只存放x值的寄存器总是可以接受的</li>
+<li>如果y在指令之后不再使用, 且Ry仅仅保存了y值, 那么Ry同时也可作为Rx</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>处理x=y时, 先选择Ry, 然后让Rx = Ry</li>
+</ul>
+</li>
+<li>窥孔优化<ul>
+<li>使用一个滑动窗口, 来检查目标指令, 在窥孔内实现优化<ul>
+<li>冗余指令消除</li>
+<li>控制流优化</li>
+<li>代数化简, 强度消减</li>
+<li>机器特有指令的使用</li>
+</ul>
+</li>
+<li>冗余指令的消除<ul>
+<li>多余的LD, ST指令: LD R0,a; ST a,R0; 且后者无标号</li>
+<li>级联跳转代码<ul>
+<li>IF GOTO反转条件优化</li>
+<li>如果条件已知是0或1, 那么替换为一个跳转即可</li>
+<li>(if x op y) goto L1; … L1:goto L2: 优化为goto L2; … L1:goto L2</li>
+</ul>
+</li>
+<li>代数化简/强度消减.机器特有指令<ul>
+<li>代数恒等式: +0 *1</li>
+<li>机器特有指令: INC, DEC<h2 id="寄存器分配"><a href="#寄存器分配" class="headerlink" title="寄存器分配"></a>寄存器分配</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>寄存器分配和指派<ul>
+<li>寄存器分配: 确定程序的每个点上, 哪个值应该存放在寄存器中</li>
+<li>寄存器指派: 各个值应该给存放在哪个寄存器</li>
+<li>简单方法: 特定类型的值分配给特定的寄存器(专存专用)<ul>
+<li>缺点: 寄存器的使用效率低</li>
+</ul>
+</li>
+<li>全局寄存器分配<ul>
+<li>循环中频繁使用的值存放在固定寄存器<ul>
+<li>分配固定多个寄存器来存放内部循环中最活跃的值</li>
+</ul>
+</li>
+<li>可以通过计数的方法, 估算把一个值放到寄存器里面会带来多大好处</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>树重写实现指令选择<ul>
+<li>某些机器上, 某一个三地址指令可以使用多种机器指令实现, 有时多个三地址指令可以使用一个机器指令实现</li>
+<li>指令选择<ul>
+<li>实现中间表示形式中出现的运算符, 选择适当的机器指令</li>
+<li>用树来表示中间代码, 按照特定的规则不断覆盖这颗树, 生成机器指令</li>
+</ul>
+</li>
+<li>目标指令选择<ul>
+<li>重写规则 replacement &lt;- template [ action ]: 替换结点: 是一个结点, 模板是一颗子树, 动作类似语法制导翻译的代码片段</li>
+<li>一组树重写规则被称作一个翻译方案</li>
+<li>只剩一个结点则重写结束</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>树翻译方案的工作模式<ul>
+<li>给定一颗输入树, 树重写规则中的模板被用来匹配输入树的子树</li>
+<li>如果匹配到, 则将这个子树替换为替换节点, 执行相应动作(生成机器指令)</li>
+<li>不断匹配, 直到变成单一节点, 或者找不到可以匹配的模板为止</li>
+<li>此方案中得到的指令代码序列就是树翻译方案对于给定输入树的输出</li>
+</ul>
+</li>
+<li>如何完成树匹配<ul>
+<li>把树重写规则替换成相应的上下文无关文法的产生式</li>
+<li>右部是其指令模板的前缀表示</li>
+</ul>
+</li>
+<li>如果在某个时刻有多个模板匹配, 则大树优先</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-05-13T10:24:59.542Z" itemprop="dateUpdated">2020-05-13 18:24:59</time>
+</span><br>
+
+
+        
+        Link：<a href="/2020/04/30/Learn-PTC-20200430-PTC-08/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Course/">Course</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Principles-and-Techniques-of-Compilers/">Principles and Techniques of Compilers</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/&title=《编译原理 8》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/&title=《编译原理 8》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《编译原理 8》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/05/13/Learn-PTC-20200513-PTC-09/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">编译原理 9</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/04/21/Learn-PTC-20200421-PTC-07/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">编译原理 7</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019 - 2020</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/&title=《编译原理 8》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/&title=《编译原理 8》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《编译原理 8》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2020/04/30/Learn-PTC-20200430-PTC-08/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

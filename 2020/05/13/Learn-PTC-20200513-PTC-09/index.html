@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>编译原理 9 | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Course,Principles and Techniques of Compilers">
+    <meta name="description" content="机器无关的优化引言 代码优化或代码改进 消除不必要 替换为更快的同功能指令   全局优化 具体的优化实现基于数据流分析计数 用以收集程序相关信息的算法    优化的来源 编译器只能通过一些相对底层的语义等价转换来优化代码 冗余的原因 源程序中的冗余 高级语言的副产品   语义不变的优化 公共子表达式的消除0 复制传播 死代码消除 常量折叠   全局公共子表达式 表达式E 如果某次出现之前必然被计算">
+<meta name="keywords" content="Course,Principles and Techniques of Compilers">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理 9">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="机器无关的优化引言 代码优化或代码改进 消除不必要 替换为更快的同功能指令   全局优化 具体的优化实现基于数据流分析计数 用以收集程序相关信息的算法    优化的来源 编译器只能通过一些相对底层的语义等价转换来优化代码 冗余的原因 源程序中的冗余 高级语言的副产品   语义不变的优化 公共子表达式的消除0 复制传播 死代码消除 常量折叠   全局公共子表达式 表达式E 如果某次出现之前必然被计算">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-05-29T10:11:49.583Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编译原理 9">
+<meta name="twitter:description" content="机器无关的优化引言 代码优化或代码改进 消除不必要 替换为更快的同功能指令   全局优化 具体的优化实现基于数据流分析计数 用以收集程序相关信息的算法    优化的来源 编译器只能通过一些相对底层的语义等价转换来优化代码 冗余的原因 源程序中的冗余 高级语言的副产品   语义不变的优化 公共子表达式的消除0 复制传播 死代码消除 常量折叠   全局公共子表达式 表达式E 如果某次出现之前必然被计算">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">编译原理 9</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">编译原理 9</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-05-13T10:25:22.000Z" itemprop="datePublished" class="page-time">
+  2020-05-13
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#机器无关的优化"><span class="post-toc-number">1.</span> <span class="post-toc-text">机器无关的优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引言"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">引言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优化的来源"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">优化的来源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据流分析"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">数据流分析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#部分冗余消除"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">部分冗余消除</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#循环的识别分析和优化"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">循环的识别分析和优化</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Learn-PTC-20200513-PTC-09"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">编译原理 9</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-05-13 18:25:22" datetime="2020-05-13T10:25:22.000Z"  itemprop="datePublished">2020-05-13</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="机器无关的优化"><a href="#机器无关的优化" class="headerlink" title="机器无关的优化"></a>机器无关的优化</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><ul>
+<li>代码优化或代码改进<ul>
+<li>消除不必要</li>
+<li>替换为更快的同功能指令</li>
+</ul>
+</li>
+<li>全局优化<ul>
+<li>具体的优化实现基于数据流分析计数</li>
+<li>用以收集程序相关信息的算法</li>
+</ul>
+</li>
+</ul>
+<h2 id="优化的来源"><a href="#优化的来源" class="headerlink" title="优化的来源"></a>优化的来源</h2><ul>
+<li>编译器只能通过一些相对底层的语义等价转换来优化代码<ul>
+<li>冗余的原因<ul>
+<li>源程序中的冗余</li>
+<li>高级语言的副产品</li>
+</ul>
+</li>
+<li>语义不变的优化<ul>
+<li>公共子表达式的消除0</li>
+<li>复制传播</li>
+<li>死代码消除</li>
+<li>常量折叠</li>
+</ul>
+</li>
+<li>全局公共子表达式<ul>
+<li>表达式E<ul>
+<li>如果某次出现之前必然被计算过</li>
+<li>且E的运算分量在该计算之后没有被改变</li>
+<li>那么E的本次出现就是一个公共子表达式</li>
+</ul>
+</li>
+<li>如果上次E赋值给了x, 且x的值没有被修改过, 则可以使用x而不是计算E</li>
+</ul>
+</li>
+<li>复制传播<ul>
+<li>形如u=v的复制语句, 使得之后的程序点上, u的值等于v的值<ul>
+<li>如果某点一定相等, 则u课替换为v</li>
+<li>有时可以彻底消除对u的引用</li>
+</ul>
+</li>
+<li>尽可能用v替代u, 可能就用不着这个</li>
+</ul>
+</li>
+<li>死代码消除<ul>
+<li>如果某个变量的值算出来后, 有被使用, 则是活跃的, 反之是死的</li>
+<li>死代码多半是因为先前的优化产生的</li>
+</ul>
+</li>
+<li>代码移动<ul>
+<li>循环中的代码会被执行很多次<ul>
+<li>循环不变表达式: 循环的同一次运行的不哦她那个迭代中, 表达式的值不改变</li>
+<li>移到入口计算, 能提高效率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>归纳变量和强度消减<ul>
+<li>归纳变量<ul>
+<li>每次对x赋值都使x增加c, 则把赋值改成增量操作, 可以减少开销</li>
+<li>两个变量步调一致, 可删除一个<h2 id="数据流分析"><a href="#数据流分析" class="headerlink" title="数据流分析"></a>数据流分析</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据流分析<ul>
+<li>用于获取数据沿着程序执行路径, 流动信息的相关技术</li>
+<li>是优化的基础</li>
+</ul>
+</li>
+<li>数据流抽象<ul>
+<li>程序点: 三地址语句之前或之后的位置<ul>
+<li>基本块内部: 一个语句之后的程序点, 等于下一个语句之前的程序点</li>
+<li>如果流图中有B1到B2的边, 那么B2的第一个语句执行之前的点, 可能紧跟在B1的最后语句之后的点后面执行</li>
+</ul>
+</li>
+<li>从p1到pn的执行路径<ul>
+<li>要么pi是一个语句之前的点, pi+1是该语句之后的点</li>
+<li>要么pi是某个基本块的结尾, 且pi+1是基本块某个后继的开头</li>
+</ul>
+</li>
+<li>出现在某个点的程序状态<ul>
+<li>某个运行时刻, 当指令指针指向这个程序点时, 各个变量和动态内存中存放的值</li>
+<li>指令指针可能多次指向同一个程序点, 因此一个程序点可能对应多个程序状态</li>
+</ul>
+</li>
+<li>数据流分析把可能出现在同一个程序点上的状态集合, 总结为一些特性<ul>
+<li>不管程序怎么运行, 到达该点, 程序状态总是满足分析得到的特性</li>
+<li>不同的分析技术关心不同的信息</li>
+</ul>
+</li>
+<li>性质和算法<ul>
+<li>根据不同的需要来设置不同的性质集合, 然后设计分析算法<ul>
+<li>程序点上的性质被表示成为数据流值, 求解这些数据流值实际上就是推导这些性质的过程</li>
+</ul>
+</li>
+<li>到达定值<ul>
+<li>如果要求出变量在某个点上的值可能在哪里定制, 可以使用到达定值<ul>
+<li>性质形式: x由d1定值</li>
+</ul>
+</li>
+<li>如果希望实现常量折叠优化, 关心的是某个点上x的值是否总是由某个常量赋值语句给予<ul>
+<li>性质形式: x=c, x = NAC</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据流分析模式<ul>
+<li>数据流分析中, 程序点和数据流值关联在一起<ul>
+<li>数据流值表示了程序点的性质</li>
+<li>和某个程序点相关的数据流值: 程序运行中经过这个点时必然具有的性质(安全)</li>
+</ul>
+</li>
+<li>域<ul>
+<li>某个数据流所有可能值的集合</li>
+<li>不容的应用选不同的域, 例如到达定值, 数据流值是定值(三地址语句)的集合</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据流分析<ul>
+<li>对一组数据约束求解, 得到各个点上的数据流值<ul>
+<li>两类约束: 语义约束和控制流</li>
+</ul>
+</li>
+<li>基于语义的约束<ul>
+<li>一个语句之前和之后的数据流值, 受到其语义的约束</li>
+<li>语句语义通常用传递函数表示, 它把一个数据流值映射为另一个数据流值</li>
+</ul>
+</li>
+<li>基于控制流的约束<ul>
+<li>在基本块内部, 一个语句的输出=下一个语句的输入</li>
+<li>流图的控制流边也对应新的约束</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基本块内的数据流模式<ul>
+<li>非常简单<ul>
+<li>从头到尾不会中断</li>
+<li>没有分支</li>
+</ul>
+</li>
+<li>基本块的效果, 就是各个语句效果的复合</li>
+<li>可以预先处理基本块内部数据流关系, 给出基本块对应的传递函数</li>
+</ul>
+</li>
+<li>基本块之间的控制流约束<ul>
+<li>前向数据流问题<ul>
+<li>B的传递函数根据IN计算OUT</li>
+<li>IN和B的各个前驱基本块之间的OUT值具有约束关系</li>
+</ul>
+</li>
+<li>逆向数据流问题<ul>
+<li>B的传递函数根据OUT计算得到IN</li>
+<li>OUT和B的各个后继基本块之间具有约束关系</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据流方程解的精确性和安全性<ul>
+<li>数据流方程通常没有唯一解</li>
+<li>目标是寻找一个最精确且满足约束的解<ul>
+<li>精确: 进行最多的改进</li>
+<li>满足约束: 根据分析结果来改进代码是安全的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>到达定值<ul>
+<li>到达定值<ul>
+<li>假定x有定值d, 如果存在一个路径, 从紧随d的点到达某点p, 并且此路径上没有x的其他定值点, 则称x的定值d到达p</li>
+<li>如果路径上有对x的其他定值, 我们说变量x的这个定值d被杀死了</li>
+</ul>
+</li>
+<li>如果某个变量x的一个定值d到达了点p, 在p点使用x的时候, x的值是由d最后定值的</li>
+<li>到达定值的解允许不精确, 但必须是安全的<ul>
+<li>分析得到的到达定值可能实际上不会到达</li>
+<li>但是实际到达的一定被分析出来, 否则不安全</li>
+</ul>
+</li>
+<li>比如确定x在p是否为常量<ul>
+<li>忽略变化, 可能被误认为常量, 不安全</li>
+<li>过多估计则相反</li>
+</ul>
+</li>
+<li>语句/基本块的传递方程<ul>
+<li>定值d: u = v + w<ul>
+<li>生成了对变量u的新定值, 杀死其他对u的定值</li>
+<li>生成-杀死形式: $f_d(x) = gen_d\cup (x-kill_d)$</li>
+<li>$gen_d = {d}, kill_d = \{程序中其他对u的定值\}$</li>
+</ul>
+</li>
+<li>生成-杀死形式的函数复合仍具有该形式<ul>
+<li>(直接函数复合就好)</li>
+<li>生成的定值: 第二部分生成, 第一部分生成且没被第二部分杀死</li>
+<li>杀死的定值: 第一部分, 第二部分杀死的定值</li>
+</ul>
+</li>
+<li>设B有n个语句, 第i个语句的传递函数为fi<ul>
+<li>$f_B(x)=gen_b\cup(x-kill_B)$</li>
+<li>$gen_B$是所有i, 被第i个句子生成, 且未被其后的句子杀死的定值集合</li>
+<li>$kill_B$</li>
+</ul>
+</li>
+<li>到达定值的控制流方程<ul>
+<li>只要一个定值能够沿某条路径到达一个程序点, 那么他就是到达定值</li>
+<li>$IN[B]=\cup_{P是B的前驱基本块}OUT[P]$<ul>
+<li>如果从P到B有一条控制流边, 则$OUT[P]$在$IN[B]$中</li>
+<li>一个定值必然先出现在前驱, 才能出现在B</li>
+</ul>
+</li>
+<li>$\cup$交汇运算符: 不一定是并集</li>
+</ul>
+</li>
+<li>控制流方程的迭代解法<ul>
+<li>ENTRY基本块的传递函数是常函数: $OUT[ENTRY] = \emptyset$</li>
+<li>其他基本块<ul>
+<li>$OUT[B] = gen_B\cup(IN[B] - kill_B)$</li>
+<li>$IN[B]=\cup_{P是B的前驱基本块}OUT[P]$</li>
+</ul>
+</li>
+<li>迭代解法<ul>
+<li>先求出各个基本块的$gen$和$kill$</li>
+<li>令所有的$OUT[B]$为空集, 然后不停迭代, 得到最小不动点的解</li>
+</ul>
+</li>
+<li>解法的正确性: 不断传递定值, 直到被杀死</li>
+<li>为什么不出现死循环<ul>
+<li>各个OUT不会变小</li>
+<li>各个OUT有穷的上界</li>
+<li>只有增加了某个OUT的值, 算法才会继续迭代</li>
+</ul>
+</li>
+<li>最大迭代次数: 流图的结点数n, 任意定值经过n步必然到达所有可能的结点</li>
+<li>结束时, 各个IN/OUT必然满足数据流方程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>活跃变量分析<ul>
+<li>活跃变量分析<ul>
+<li>x在p上的值是否会在某条从p出发的路径中使用</li>
+<li>变量x在p上活跃, 当且仅当存在一条从p开始的路径, 其末端使用了x, 且路径上没有对x进行覆盖</li>
+</ul>
+</li>
+<li>用途: 寄存器分配/死代码删除</li>
+<li>数据流值: (活跃)变量的集合</li>
+<li>基本块内的数据流方程<ul>
+<li>基本块内的传递函数依然是生成-杀死形式, 但是从OUT算IN(逆向)<ul>
+<li>$use_B$: 在B中先于定值被使用</li>
+<li>$def_B$: 在B中先于使用被定值</li>
+</ul>
+</li>
+<li>语句的传递函数<ul>
+<li>s: x = y + z</li>
+<li>$use_s = \{y,z\}$</li>
+<li>$def_s = \{x\} - \{y,z\}$</li>
+</ul>
+</li>
+<li>多个语句<ul>
+<li>每一个语句的use需减去其前所有def, 然后cup得到整个块的use</li>
+<li>每一个语句的def需减去其前所有use, 然后cup得到整个块的def</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>活跃变量数据流方程<ul>
+<li>任何变量在程序出口不再活跃: $IN[EXIT] = 空集$</li>
+<li>对于所有不等于EXIT的基本块<ul>
+<li>$IN[B] = use_B\cup(OUT[B]-def_B)$</li>
+<li>$OUT[B] = \bigcup_{S是B的后继基本块}IN[S]$</li>
+</ul>
+</li>
+<li>与到达定值比较<ul>
+<li>都使用并运算; 数据流向不同(逆向)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>活跃变量分析的迭代方法<ul>
+<li>首先所有IN都是空集</li>
+<li>对除了EXIT的所有基本块<ul>
+<li>计算新OUT</li>
+<li>计算新IN</li>
+</ul>
+</li>
+<li>直到各个IN无变化</li>
+<li>IN越来越大, 且有上界, 因此必然停机</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>可用表达式分析</p>
+<ul>
+<li>x+y在p点可用<ul>
+<li>从流图入口结点到达p的每条路径都对x+y求值, 且在最后一次求值之后再也没有对x或y赋值</li>
+</ul>
+</li>
+<li>主要用途<ul>
+<li>寻找全局公共子表达式</li>
+</ul>
+</li>
+<li>生成-杀死<ul>
+<li>生成: 基本块求值x+y, 且之后没有对x或y赋值, 那么它生成了x+y</li>
+<li>杀死: 基本块对x或y赋值, 且没有重新计算x+y, 那么它杀死了x+y</li>
+</ul>
+</li>
+<li>计算基本块生成的表达式<ul>
+<li>初始化S={}</li>
+<li>从头到尾处理每个指令x=y+z<ul>
+<li>y+z添加到S中, 从S中删除任何涉及变量x的表达式</li>
+</ul>
+</li>
+<li>遍历结束得到基本块生成的表达式集合</li>
+</ul>
+</li>
+<li>计算基本块杀死的表达式: 表达式的某个分量被定值, 且没有被再次生成</li>
+<li>可用表达式的数据流方程<ul>
+<li>ENTRY结点的出口处没有可用表达式: $OUT[ENTRY]=空集$</li>
+</ul>
+</li>
+<li>其他基本块的方程<ul>
+<li>OUT: 跟到达定值一样</li>
+<li>IN: 求交集而不是并集</li>
+</ul>
+</li>
+<li><p>算法</p>
+<ul>
+<li>$OUT[ENTRY]$为空集, 而其余的OUT初始化为全集</li>
+</ul>
+<p>||到达定值|活跃变量|可用表达式|<br>|-|-|-|-|<br>|方向|正向|反向|正向|<br>|传递函数|$gen_B\cup(x-kill_B)$|$use_B\cup(x-def_B)$|$e_gen_B\cup(x-e_kill_B)$|<br>|边界条件|$OUT[ENTRY]=\emptyset$|$IN[EXIT]=\emptyset$|$OUT[ENTRY]=\emptyset$|<br>|交汇运算$\wedge$|$\cup$|$\cup$|$\cap$|<br>|方程组|$OUT[B]=f_B(IN[B])\quad IN[B]=\bigwedge_{P,pred(B)}OUT[P]$|$IN[B]=f_B(OUT[B])\quad OUT[B]=\bigvee_{S,succ(B)}IN[S]$|$OUT[B] = f_B(IN[B])\quad IN[B]=\bigvee_{P,pred(B)}OUT[P]$|<br>|初始值|$OUT[B]=\emptyset$|$IN[B]=\emptyset$|$OUT[B]=U$|</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="部分冗余消除"><a href="#部分冗余消除" class="headerlink" title="部分冗余消除"></a>部分冗余消除</h2><ul>
+<li>部分冗余消除<ul>
+<li>目标: 尽量减少表达式求值的次数</li>
+<li>对于表达式x+y<ul>
+<li>全局公共子表达式: 如果x+y求值前的程序点上x+y可用, 那么不需要再对x+y求值</li>
+<li>循环不变表达式: 循环中表达式x+y的值不变, 可以只计算一次</li>
+<li>部分冗余: 在程序按照某些路径到达这个点的时候x+y已经计算过, 但另一些尚未计算过</li>
+</ul>
+</li>
+<li>需要更复杂的数据流分析技术</li>
+<li>需要添加基本块来消除的冗余<ul>
+<li>进行两种操作<ul>
+<li>在关键边上增加基本块</li>
+<li>进行代码复制</li>
+</ul>
+</li>
+<li>关键边<ul>
+<li>从具有多个后继的结点, 到达具有多个前驱的结点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>懒惰代码移动<ul>
+<li>目标<ul>
+<li>所有不复制代码就可消除的冗余计算都被消除</li>
+<li>优化后的代码不会执行源程序中不执行的任何计算</li>
+<li>表达式的计算应该尽量靠后, 利于寄存器分配</li>
+</ul>
+</li>
+<li>冗余消除<ul>
+<li>完全冗余</li>
+<li>部分冗余: 在流图中放置表达式x+y的拷贝, 使得某处的x+y成为完全冗余从而删除</li>
+</ul>
+</li>
+<li>基本步骤<ul>
+<li>找出各个程序点上预期执行的所有表达式<ul>
+<li>被预期执行: 如果从p出发的所有路径都会计算b+c的值, 并且b和c在那时的值就是p的值, 那么b+c在p预期执行</li>
+<li>数据流分析框架<ul>
+<li>逆向分析</li>
+<li>基本块内部: 当表达式在B出口处被预期执行, 且它没有被B杀死, 那么它在B入口处也被预期执行</li>
+<li>基本块之间: 当在B的所有后继基本块的入口处都被预期执行, 那么表达式在B出口处被预期执行</li>
+<li>在整个程序的出口处, 没有表达式被预期执行</li>
+</ul>
+</li>
+<li>求出预期执行点之后, 表达式被放置到首次被预期执行的程序点上: 一些表达式因此变成完全冗余</li>
+</ul>
+</li>
+<li>在表达式被预期执行但是不可用的程序点上, 放置表达式的计算<ul>
+<li>可用表达式: 和前面的可用表达式类似, 但假设代码已经被复制到的预期执行点上</li>
+<li>表达式在基本块的出口处可用的条件<ul>
+<li>在基本块的入口处可用, 或在基本块的入口处的预期执行表达式中</li>
+<li>且没有被这个基本块杀死</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>把表达式尽量后延到某个程序点, 在到达这个程序点的所有路径上, 这个表达式在这个程序点之前被预期执行, 但还没有使用这个值<ul>
+<li>可后延表达式<ul>
+<li>在保持程序语义的情况下， 尽可能延后计算表达式</li>
+<li>x + y可后延到p的条件: 所有从程序入口到达p的路径 中都会碰到一个位置较前的x + y，且在最后一个这样的位 置到p之间没有使用x + y</li>
+<li>粗略地说，一个表达式将被放置在边界上，即一 个表达式从可后延变成不可后延的地方</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>消除只使用一次的临时变量<ul>
+<li>确定一个被引入的临时变量是否在它所在基本块 之外的其它地方使用+<ul>
+<li>对表达式的活跃性分析</li>
+<li>如果从程序点p出发的一条路径在表达式被重新求值之 前使用了该表达式，那么该表达式在点p上被使用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="循环的识别分析和优化"><a href="#循环的识别分析和优化" class="headerlink" title="循环的识别分析和优化"></a>循环的识别分析和优化</h2><ul>
+<li>循环的重要性+ 程序的大部分执行时间都花在循环上<ul>
+<li>也是数据流分析需要经过若干次迭代的原因</li>
+</ul>
+</li>
+<li>相关概念<ul>
+<li>支配结点<ul>
+<li>支配 (Dominate): 如果每条从入口结点到达n的路径都经过d，那么d支配n，记为d dom n</li>
+<li>支配结点树可以表示支配关系<ul>
+<li>根结点：入口结点</li>
+<li>每个结点d支配且只支配树中的后代结点</li>
+</ul>
+</li>
+<li>直接支配结点<ul>
+<li>从入口结点到达n的任何路径 (不含n) 中，它是路径中 最后一个支配n的结点</li>
+<li>n的直接支配结点m具有如下性质：如果d ≠ n且d dom n，那么d dom m</li>
+</ul>
+</li>
+<li>寻找支配结点算法<br>+ </li>
+</ul>
+</li>
+<li>深度优先排序</li>
+<li>回边</li>
+<li>图的深度</li>
+<li>可归约性</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-05-29T10:11:49.583Z" itemprop="dateUpdated">2020-05-29 18:11:49</time>
+</span><br>
+
+
+        
+        Link：<a href="/2020/05/13/Learn-PTC-20200513-PTC-09/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Course/">Course</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Principles-and-Techniques-of-Compilers/">Principles and Techniques of Compilers</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/&title=《编译原理 9》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/&title=《编译原理 9》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《编译原理 9》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/04/30/Learn-PTC-20200430-PTC-08/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">编译原理 8</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019 - 2020</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/&title=《编译原理 9》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/&title=《编译原理 9》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《编译原理 9》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2020/05/13/Learn-PTC-20200513-PTC-09/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
