@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>Logic Ch1 | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Course,Mathematical Logic">
+    <meta name="description" content="Logic Course in 2019 Spring">
+<meta name="keywords" content="Course,Mathematical Logic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Logic Ch1">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="Logic Course in 2019 Spring">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-03-11T11:28:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Logic Ch1">
+<meta name="twitter:description" content="Logic Course in 2019 Spring">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Logic Ch1</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Logic Ch1</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-01T07:17:50.000Z" itemprop="datePublished" class="page-time">
+  2019-03-01
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第一讲：命题逻辑"><span class="post-toc-number">1.</span> <span class="post-toc-text">第一讲：命题逻辑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#命题逻辑的语法"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">命题逻辑的语法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#命题的语义"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">命题的语义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自然推理系统及其性质"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">自然推理系统及其性质</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Learn-ML-20190301-ML-01"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Logic Ch1</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-01 15:17:50" datetime="2019-03-01T07:17:50.000Z"  itemprop="datePublished">2019-03-01</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Logic Course in 2019 Spring<br><a id="more"></a> </p>
+<h1 id="第一讲：命题逻辑"><a href="#第一讲：命题逻辑" class="headerlink" title="第一讲：命题逻辑"></a>第一讲：命题逻辑</h1><h2 id="命题逻辑的语法"><a href="#命题逻辑的语法" class="headerlink" title="命题逻辑的语法"></a>命题逻辑的语法</h2><p><strong>定义1.1</strong>(字母表)  </p>
+<ol>
+<li>命题符：$P_0,P_1,P_2,\cdots,P_n,\cdots,n\in \mathbb{N}$, 记$PS=\{P_n|n\in\mathbb{N}\}$  </li>
+<li>联结词：$\neg$, $\wedge$, $\vee$, $\rightarrow$  </li>
+<li>辅助符：$($, $)$</li>
+</ol>
+<p><strong>定义1.2</strong>(命题)</p>
+<ol>
+<li>命题符为命题  </li>
+<li>若$A$, $B$为命题, 则$(\neg A)$, $(A\wedge B)$, $(A\vee B)$, $(A\rightarrow B)$为命题  </li>
+<li>命题仅限于此  </li>
+<li><strong>BNF范式</strong>表达：$\varphi\Coloneqq P|(\neg\varphi)|(\varphi_1\wedge\varphi_2)|(\varphi_1\vee\varphi_2)|(\varphi_1\rightarrow\varphi_2),P\in PS$ </li>
+<li><strong>闭包法</strong>也可定义命题<br> 令$C_\neg$, $C_\wedge$, $C_\vee$, $C_\rightarrow$为所有字母表符号串之集上的函数：<br> $$C_\neg(A)=(\neg A)$$<br> $$C_*(A,B)=(A*B)$$<br> 这里$*\in \{\wedge, \vee, \rightarrow\}$  </li>
+</ol>
+<p><strong>定义1.3</strong>(命题集)<br>所有命题的集合$PROP$是满足以下条件的最小集合：</p>
+<ol>
+<li>$PS\subseteq PROP$</li>
+<li>若$A\in PROP$, 则$C_\neg(A)\in PROP$</li>
+<li>若$A,B\in PROP$, 则$C_\wedge(A,B)$, $C_\vee(A,B)$, $C_\rightarrow(A,B)\in PROP$</li>
+<li>即$PROC$为函数$C_\neg$, $C_\wedge$, $C_\vee$, $C_\rightarrow$下$PS$的归纳闭包</li>
+</ol>
+<p><strong>引理1.4</strong>(括号引理)<br>若$A$为命题, 则$A$中所有左括号的个数等于右括号的个数</p>
+<p><strong>引理1.5</strong><br>$A\in PROP$等价于存在有穷序列$A_0,A_1,\cdots,A_n$使$A$为$A_n$且对任何$i\leq n$,   </p>
+<ul>
+<li>或(a) $A_i\in PS$  </li>
+<li>或(b) 存在$k&lt;i$使$A_i$为$\neg A_k$  </li>
+<li>或(c) 存在$k,l&lt;i$使$A_i$为$(A_k*A_l)$, 这里$*$为$\wedge$,   $\vee$, $\rightarrow$之一<br>以上序列$A_0,A_1,\cdots,A_n$被称为$A$的<strong>构造序列</strong>  </li>
+</ul>
+<p><strong>结构归纳</strong></p>
+<ul>
+<li>每个命题皆有构造过程, 但构造过程不一定唯一</li>
+<li>若$A_0,A_1,\cdots,A_n$为$A$的最短构造过程, 则称$n$为$A$的<strong>构造长度</strong></li>
+<li>对$A$的结构作归纳证明一些性质, 事实上是对$A$的构造长度作归纳, 而这是自然数上的归纳</li>
+</ul>
+<h2 id="命题的语义"><a href="#命题的语义" class="headerlink" title="命题的语义"></a>命题的语义</h2><p><strong>什么是命题的语义</strong><br>对于任意的<strong>赋值</strong>, $v:PS\rightarrow\{T,F\}$, 定义一个<strong>解释</strong><br>$$\hat{v}:PROP\rightarrow\{T,F\}$$  </p>
+<p><strong>定义1.6</strong><br>令真值集$B=\{T,F\}$</p>
+<ul>
+<li>联结词$\neg$被解释为一元函数$H_\neg:B\rightarrow B$</li>
+<li>联结词$*$被解释为二元函数$H_*:B^2\rightarrow B$<br>这里$*\in \{\wedge, \vee, \rightarrow\}$ </li>
+<li>定义为真值表, 此处略</li>
+</ul>
+<p><strong>定义1.7</strong>(命题的语义)  </p>
+<ul>
+<li>$v$为一个赋值, 指它为函数$v:PS\rightarrow B$<br>从而对任何命题符$P-i$, $v(P_i)$为$T$或$F$</li>
+<li><p>对于任何赋值$v$, 定义$\hat{v}：PROP\rightarrow B$如下：  </p>
+<ul>
+<li>$\hat{v}(P_n)=v(P_n)$, $n\in\mathbb{N}$</li>
+<li>$\hat{v}(\neg A)=H_\neg(\hat{v}(A))$</li>
+<li>$\hat{v}(A * B)=H_*(\hat{v}(A), \hat{v}(B))$, 这里$*\in \{\wedge, \vee, \rightarrow\}$<blockquote>
+<p>  确实应该是$H_*(\hat{v}(A),\hat{v}(B))$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>引理1.8</strong><br>设$A$为命题, $v_1$, $v_2$为赋值, 若$v_1\upharpoonright FV(A)=v_2\upharpoonright FV(A)$, 即对于$P\in FV(A)$, $v_1(P)=v_2(P)$, 则$\hat{v_1}(A)=\hat{v_2}(A)$</p>
+</li>
+<li><p><strong>定义1.9</strong><br>设$A$为命题, $v$为赋值  </p>
+<ol>
+<li>$v$满足$A$, 记为$v\vDash A$, 指$\hat{v}(A)=T$</li>
+<li>$A$为永真式(tautology), 记为$\vDash A$, 指对任何$v$有$\hat{v}(A)=T$</li>
+<li>$A$可满足, 指有$v$使$v\vDash A$</li>
+<li>设$\Gamma$为命题集, $A$为$\Gamma$的语义结论, 记为$\Gamma\vDash A$, 指对所有$v$, 若对任何$B\in \Gamma$有$\hat{v}(B)=T$, 则$\hat{v}(A)=T$</li>
+</ol>
+</li>
+<li><p><strong>定义1.10</strong><br>设$A$为命题, $FV(A)=\{Q_1, \cdots, Q_n\}$. $n$元函数$H_A:B^n\to B$定义如下: 对于任何$(a_1,\cdots,a_n)\in B^n$, $H_A(a_1,\cdots, a_n)=\hat{v}(A)$, 这里赋值$v$满足$v(Q_i)=a_i(1\leq i\leq n)$. 下面称$f:B^n\to B$为$n$元真值函数, 称$H_A$为$A$定义的真值函数</p>
+</li>
+<li><p><strong>定义1.11</strong>  </p>
+<ol>
+<li>命题$A$为析合范式($\vee\wedge$-nf)指$A$呈形$\bigvee_{i=1}^m(\bigwedge_{k=1}^nP_{i,k})$, 这里$P_{i,k}$为命题符或命题符的否定(即呈形$\neg P_i$)</li>
+<li>命题$A$为合析范式($\wedge\vee$-nf)指$A$呈形$\bigwedge_{i=1}^l(\bigvee_{k=1}^nQ_{i,k})$, 这里$Q_{i,k}$为命题符或命题符的否定(即呈形$\neg Q_i$)<br>其中$\bigwedge_{k=1}^n$为$(\cdots(((B_1\wedge B_2)\wedge B_3)\cdots\wedge B_n)\cdots)$的简写; $\bigvee_{k=1}^n$为$(\cdots(((B_1\vee B_2)\vee B_3)\cdots\vee B_n)\cdots)$的简写</li>
+</ol>
+</li>
+<li><p><strong>定理1.12</strong>  </p>
+<ol>
+<li>存在命题$A$, 其为$\vee\wedge$-nf使$f=H_A$</li>
+<li>存在命题$A’$, 其为$\wedge\vee$-nf使$f=H_{A’}$</li>
+</ol>
+</li>
+<li><p><strong>定义1.13</strong>  </p>
+<ol>
+<li>设$A, B$为命题, $A$与$B$逻辑等价, 记为$A\simeq B$, 指对任何赋值$v$,<br>$$v\vDash A\textrm{ iff }v\vDash B$$</li>
+</ol>
+</li>
+<li><p><strong>命题1.14</strong>  </p>
+<ol>
+<li>$A\simeq A$</li>
+<li>若$A\simeq B$, 则$B\simeq A$</li>
+<li>若$A\simeq B$且$B\simeq C$, 则$A\simeq C$</li>
+<li>若$A\simeq B$, 则$(\neg A)\simeq (\neg B)$</li>
+<li>若$A_1\simeq B_1$且$A_2\simeq B_2$, 则$(A_1* A_2)\simeq(B_1*B_2)$, 这里$*\in\{\wedge,\vee,\rightarrow\}$</li>
+</ol>
+</li>
+<li><p><strong>命题1.15</strong><br>设$FV(A\wedge B)=\{Q_1, \cdots, Q_n\}$且$H_A:B^n\rightarrow B$, $H_B:B^n\rightarrow B$. 我们有$A\simeq B\textrm{ iff }H_A=H_B$</p>
+</li>
+<li><p><strong>命题1.16</strong><br>若$A$为命题，则存在$\wedge\vee$-nf$B$和$\vee\wedge$-nf$B’$使$A\simeq B$且$A\simeq B’$, 这时称$B$和$B’$分别为$A$的$\wedge\vee$-nf和$\vee\wedge$-nf</p>
+</li>
+</ul>
+<h2 id="自然推理系统及其性质"><a href="#自然推理系统及其性质" class="headerlink" title="自然推理系统及其性质"></a>自然推理系统及其性质</h2><ul>
+<li><p><strong>定义1.17</strong><br>一个矢列是一个二元组$(\Gamma, \Delta)$, 记为$\Gamma\vdash\Delta$, 这里$\Gamma, \Delta$为命题的有穷集合(可以为空), 称$\Gamma$为前件, $\Delta$为后件. 命题逻辑的自然推理系统$G’$由以下公里和规则组成, $\Gamma, \Delta, \Lambda, \Theta$表示任何命题有穷集合, $A, B$表示任何命题, $\Lambda, A, \Delta$为集合$\Lambda\cup\{A\}\cup\Delta$的缩写  </p>
+<ul>
+<li>公理: 左右两边有一样的</li>
+<li>规则: <ul>
+<li>否定调换左右</li>
+<li>左或右且分为两个</li>
+<li>左且右或逗号隔开</li>
+<li>箭头看作有否定的或</li>
+<li>$$\textrm{Cut}: \frac{\Gamma\vdash\Lambda,A\quad\Delta,A\vdash\Theta}{\Gamma,\Delta\vdash\Lambda,\Theta}$$<br>规则的上矢列被称为前提, 下矢列被称为结论. $G’$系统中的规则被称为推理规则, 规则中被作用的命题被称为主命题, 而不变的命题被称为辅命题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>定义1.18</strong><br>设$\Lambda$为$\{A_1,A_2,\cdots, A_m\}$, $\Delta$为$\{B_1,B_2,\cdots, B_n\}$  </p>
+<ol>
+<li>$\Lambda\vdash\Delta$有反例(falsifiable)指存在赋值$v$使$v\vDash(A_1\wedge \cdots\wedge A_m)\wedge(\neg B_1\wedge\cdots\wedge\neg B_n)$, 这时称$v$反驳$\Lambda\vdash\Delta$  </li>
+<li>$\Lambda\vdash\Delta$有效(valid)指对任何赋值$v$, $v\vDash(A_1\wedge\cdots\wedge A_m)\rightarrow(B_1\vee B_2\vee\cdots\vee B_n)$, 这时称$v$满足$\Lambda\vdash\Delta$  </li>
+<li>$\Lambda\vdash\Delta$有效也被记为$\Lambda\vDash\Delta$</li>
+<li>当$m=0$时, $\vdash B_1,\cdots B_n$有反例指$(\neg B_1\wedge\cdots\wedge\neg B_n)$可满足; $\vdash B_1,\cdots B_n$有效指$(B_1\vee \cdots\vee B_n)$永真</li>
+<li>当$n=0$时, $A_1,\cdots A_n\vdash$有反例指$(A_1\wedge \cdots\wedge A_m)$可满足; $A_1,\cdots A_n\vdash$有效指$(A_1\wedge \cdots\wedge A_m)$不可满足</li>
+<li>约定$\{\}\vdash\{\}$非有效</li>
+</ol>
+</li>
+<li><p><strong>命题1.19</strong><br>$\Gamma\vdash\Delta$有效$\textrm{ iff }$$\Gamma\vdash\Delta$无反例</p>
+</li>
+<li><p><strong>引理1.20</strong><br>对于$G’$系统中的每条异于$\textrm{Cut}$的规则:   </p>
+<ol>
+<li>赋值$v$反驳规则的结论$\textrm{ iff }$$v$至少反驳规则的一个前提</li>
+<li>$v$满足规则的结论$\textrm{ iff }$$v$满足规则的所有前提</li>
+<li>每个前提有效$\textrm{ iff }$结论有效</li>
+</ol>
+</li>
+<li><p><strong>定义1.21</strong><br>设$\Gamma\vdash\Lambda$为矢列, 树$T$为$\Gamma\vdash\Lambda$的证明树指:  (见书本图片)</p>
+</li>
+<li><p><strong>定义1.22</strong><br>设$\Gamma\vdash\Lambda$为矢列, $\Gamma\vdash\Lambda$可证(provable)指存在$\Gamma\vdash\Lambda$的证明树</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>定理1.23</strong>($G’$的soundness)<br>若$\Gamma\vdash\Delta$在$G’$中可证, 则$\Gamma\vdash\Delta$有效  </p>
+</li>
+<li><p><strong>定理1.24</strong>($G’$的completeness)<br>若$\Gamma\vdash\Delta$有效, 则$\Gamma\vdash\Delta$在$G’$中可证. 这就是$G’$的完全性</p>
+</li>
+<li><p><strong>系1.25</strong><br>$\Gamma\vdash\Delta$可证$\textrm{ iff }$$\Gamma\vdash\Delta$有效</p>
+</li>
+<li><p><strong>系1.26</strong><br>若$\Gamma\vdash\Delta$在$G’$中可证, 则$\Gamma\vdash\Delta$在$G’$中由一个无$\textrm{Cut}$证明</p>
+</li>
+<li><p><strong>定理1.27</strong>(compactness)<br>设$\Gamma$为命题的集合, 若$\Gamma$的任何有穷子集可满足, 则$\Gamma$可满足</p>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-03-11T11:28:46.000Z" itemprop="dateUpdated">2019-03-11 19:28:46</time>
+</span><br>
+
+
+        
+        Link：<a href="/2019/03/01/Learn-ML-20190301-ML-01/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Course/">Course</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematical-Logic/">Mathematical Logic</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/&title=《Logic Ch1》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/&title=《Logic Ch1》 — Maxwell's Blog&source=Logic Course in 2019 Spring" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Logic Ch1》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/07/Learn-PMS-20190307-PMS-02/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Probability Ch2</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/02/28/Learn-PMS-20190228-PMS-01/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Probability Ch1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019 - 2021</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/&title=《Logic Ch1》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/&title=《Logic Ch1》 — Maxwell's Blog&source=Logic Course in 2019 Spring" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Logic Ch1》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2019/03/01/Learn-ML-20190301-ML-01/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

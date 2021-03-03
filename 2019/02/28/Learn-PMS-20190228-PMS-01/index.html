@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>Probability Ch1 | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Course,Probability and Mathematical Statistics">
+    <meta name="description" content="Probability Course in 2019 Spring">
+<meta name="keywords" content="Course,Probability and Mathematical Statistics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Probability Ch1">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="Probability Course in 2019 Spring">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-04-27T01:12:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Probability Ch1">
+<meta name="twitter:description" content="Probability Course in 2019 Spring">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Probability Ch1</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Probability Ch1</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-28T00:29:38.000Z" itemprop="datePublished" class="page-time">
+  2019-02-28
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#随机事件与概率"><span class="post-toc-number">1.</span> <span class="post-toc-text">随机事件与概率</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#随机事件及其运算"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">随机事件及其运算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#随机试验与随机事件"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">随机试验与随机事件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事件间的关系及运算"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">事件间的关系及运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#事件的概率及性质"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">事件的概率及性质</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#频率与概率"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">频率与概率</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概率的定义及性质"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">概率的定义及性质</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#等可能概型（古典概型）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">等可能概型（古典概型）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#几何概率"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">几何概率</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#条件概率"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">条件概率</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件概率-1"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">条件概率</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#乘法公式"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">乘法公式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全概率公式与贝叶斯公式"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">全概率公式与贝叶斯公式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#独立性"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">独立性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#独立性定义"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">独立性定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多个事件的独立性"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">多个事件的独立性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可靠性分析"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">可靠性分析</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#独立重复试验模型"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">独立重复试验模型</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Learn-PMS-20190228-PMS-01"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Probability Ch1</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-28 08:29:38" datetime="2019-02-28T00:29:38.000Z"  itemprop="datePublished">2019-02-28</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Probability Course in 2019 Spring<br><a id="more"></a> </p>
+<h1 id="随机事件与概率"><a href="#随机事件与概率" class="headerlink" title="随机事件与概率"></a>随机事件与概率</h1><h2 id="随机事件及其运算"><a href="#随机事件及其运算" class="headerlink" title="随机事件及其运算"></a>随机事件及其运算</h2><h3 id="随机试验与随机事件"><a href="#随机试验与随机事件" class="headerlink" title="随机试验与随机事件"></a>随机试验与随机事件</h3><ul>
+<li><strong>随机现象</strong>：非确定性现象</li>
+<li><strong>随机试验</strong>：$E$：对随机现象的的一次观测</li>
+<li><strong>样本空间</strong>：$\varOmega$：所有可能结果的集合</li>
+<li><strong>基本事件</strong>或<strong>样本点</strong>：$e$：样本空间的元素, 即$E$的每个可能结果</li>
+<li><strong>随机事件</strong>：$A,B,C$等：样本空间$\varOmega$的子集合, 简称事件</li>
+</ul>
+<h3 id="事件间的关系及运算"><a href="#事件间的关系及运算" class="headerlink" title="事件间的关系及运算"></a>事件间的关系及运算</h3><ol>
+<li>事件间的关系<ol>
+<li><strong>包含关系</strong><br>如果事件$A$发生必然导致事件$B$发生, 则事件$B$包含事件$A$, 记$B\supset A$  </li>
+<li><strong>互不相容关系</strong><br>若事件$A$与$B$不可能同时发生, 则称$A,B$互不相容（或互斥）, 此时$A$与$B$没有共同的样本点  </li>
+<li><strong>相等关系</strong><br>若$B\supset A$, 且$A\supset B$, 则称$A$与$B$相等, 记为$A=B$, 两者样本点完全相同</li>
+</ol>
+</li>
+<li>事件的运算<ol>
+<li><strong>事件的并</strong><br>事件$A$与$B$至少发生一个所构成的事件成为$A$与$B$的并, 记为$A\cup B$, 其样本点由$A$与$B$的样本点合并而成<br>事件$A_1,A_2,\cdots,A_n$至少发生一个的事件称为$A_1,A_2,\cdots,A_n$的并, 记为$A_1\cup A_2\cup\cdots\cup A_n$或$\bigcup_{i=1}^nA_i$  </li>
+<li><strong>事件的交</strong><br>事件$A$与$B$同时发生的事件成为$A$与$B$的交, 记为$A\cap B$或$AB$, 其样本点由$A$与$B$共同的样本点而成<br>事件$A_1,A_2,\cdots,A_n$同时发生的事件称为$A_1,A_2,\cdots,A_n$的交, 记为$A_1\cap A_2\cap\cdots\cap A_n$或$\bigcap_{i=1}^nA_i$或$A_1A_2\cdots A_n$  </li>
+<li><strong>事件的差</strong><br>事件$A$发生而$B$不发生的事件称为$A$与$B$的差, 记为$A-B$, 其样本点由$A$中除去$B$的样本点组成  </li>
+<li><strong>对立事件</strong><br>$A$不发生的事件称为$A$的对立事件, 记为$\bar{A}$, 其样本点由$\varOmega$中除$A$以外的样本点组成   </li>
+<li><strong>注意如下等式</strong>  <ol>
+<li>$A=(A-B)\cup AB$  </li>
+<li>$A\cup B = A\cup (B-A)=(A-B)\cup AB \cup (B-A)$  </li>
+<li>$A-B=A-AB=A\bar{B}$</li>
+<li>$\bar{A}=\varOmega-A,A\cup\bar{A}=\varOmega$  </li>
+</ol>
+</li>
+<li><strong>满足如下运算律</strong>  <ol>
+<li>交换律 $A\cup B=b\cup A, A\cap B=B\cap A$</li>
+<li>结合律 $(A\cup B)\cup C=A\cup(B\cup C),(A\cap B)\cap C=A\cap(B\cap C)$  </li>
+<li>分配律 $A\cup(B\cap C)=(A\cup B)\cap(A\cup C),A\cap(B\cup C)=(A\cap B)\cup(A\cap C)$  </li>
+<li>德摩根定律 $\overline{A\cup B}=\bar{A}\cap\bar{B},\overline{A\cap B}=\bar{A}\cup\bar{B}$</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="事件的概率及性质"><a href="#事件的概率及性质" class="headerlink" title="事件的概率及性质"></a>事件的概率及性质</h2><h3 id="频率与概率"><a href="#频率与概率" class="headerlink" title="频率与概率"></a>频率与概率</h3><ul>
+<li><strong>频率</strong>：设随机事件$A$在$n$次重复实验中共出现$n_A$次, 将其比值$n_A/n$定义为$A$发生的频率, 记为$f_n(A)$, 即<br>$$f_n(A)=\frac{n_A}{n}$$ </li>
+<li><strong>频率的性质</strong>  <ol>
+<li>$0\leq f_n(A)\leq 1$</li>
+<li>$f_n(\varOmega)=1$</li>
+<li>若$A_1, A_2,\cdots, A_n$互不相容, 则<br>$$f_n(\bigcup_{i=1}^nA_i)=\sum_{i=1}^nf_n(A_i)$$</li>
+</ol>
+</li>
+<li><strong>频率的稳定性</strong>与<strong>统计概率</strong><br>随试验次数的增加, 事件的频率将在某个数值附近稳定地摆动, 此数值定义为$A$发生的概率, 称为统计概率</li>
+</ul>
+<h3 id="概率的定义及性质"><a href="#概率的定义及性质" class="headerlink" title="概率的定义及性质"></a>概率的定义及性质</h3><ul>
+<li><strong>定义1.1</strong><br>设$E$是随机实验, $\varOmega$为其样本空间。对于$E$的每一个随机事件$A$, 对应一个实数$P(A)$, 如果几何函数$P(\cdot)$满足：  <ol>
+<li>非负性 $P(A)\geq 0$</li>
+<li>规范性 $P(\varOmega)=1$</li>
+<li>可列可加性 若$A_1, A_2,\cdots, A_n,\cdots$两两互不相容, 则<br>$$P(\bigcup_{i=1}^\infty A_i)=\sum_{i=1}^\infty P(A_i)$$<br>则称$P(A)$为事件$A$的概率</li>
+</ol>
+</li>
+<li><strong>概率的性质</strong><ol>
+<li>$P(\varPhi)=0$</li>
+<li>若$A_1, A_2,\cdots, A_n$为$n$个两两互不相容事件, 则有<br>$$P(\bigcup_{i=1}^nA_i)=\sum_{i=1}^nP(A_i)$$</li>
+<li>对任意两事件$A,B$有<br>$$P(A-B)=P(A)-P(AB)$$</li>
+<li>对任意两事件$A,B$有<strong>加法定理</strong><br>$$P(A\cup B)=P(A)+P(B)-P(A\cap B)$$<br>利用归纳法推广：<br>$$P(\bigcup_{i=1}^nA_i)=\sum_{i=1}^nP(A_i)-\sum_{1\leq i\leq j\leq n}P(A_iA_j)+\sum_{1\leq i\leq j\leq k\leq n}P(A_iA_jA_k)+\cdots+(-1)^{n-1}P(A_1A_2\cdots A_n)$$</li>
+<li>对任意事件$A$, $P(\bar{A})=1-P(A)$</li>
+</ol>
+</li>
+</ul>
+<h2 id="等可能概型（古典概型）"><a href="#等可能概型（古典概型）" class="headerlink" title="等可能概型（古典概型）"></a>等可能概型（古典概型）</h2><ul>
+<li><strong>古典概型</strong>  <ol>
+<li>样本空间$\varOmega$的元素个数为有限个</li>
+<li>样本空间中每个基本事件（基本点）发生的可能性相同</li>
+</ol>
+</li>
+<li><strong>计算</strong><br>  $$P(A)=\frac{m}{n}=\frac{A包含的样本点数}{样本点总数}$$</li>
+<li><strong>不放回抽样</strong><br>$N$件产品, $M$件次品, 取出$n$件, 有$k$件次品<br>  $$p = \frac{C_m^kC_{N-M}^{n-k}}{C_N^n}$$</li>
+<li><strong>有放回抽样</strong><br>$N$件产品, $M$件次品, 取出$n$件, 有$k$件次品<br> $$p=\frac{C_n^kM^k(N-M)^{n-k}}{N^n}=C_n^k(\frac{M}{N})^k(1-\frac{M}{N})^{n-k}$$</li>
+</ul>
+<h2 id="几何概率"><a href="#几何概率" class="headerlink" title="几何概率"></a>几何概率</h2><ul>
+<li><strong>定义1.2</strong><br>若随机试验的样本空间对应一个度量有限的几何区域$S$, 每一基本事件与$S$内任意点一一对应, 则任一随机事件对应$n$中的某一子区域$D$.若事件的概率只和对应的区域$D$的度量成正比, 与的形状及$D$在$S$中的位置无关。发生的概率定义为<br>$$P(A)=\frac{m(A)}{n(\Omega)}=\frac{A对应区域D的度量}{\Omega对应区域S的度量}$$</li>
+</ul>
+<h2 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h2><h3 id="条件概率-1"><a href="#条件概率-1" class="headerlink" title="条件概率"></a>条件概率</h3><ul>
+<li><p><strong>定义1.3</strong><br>设$A$, $B$为两个随机事件, 且$P(B)&gt;0$, 称<br>$$P(A|B)=\frac{P(AB)}{P(B)}$$  </p>
+<p>为在事件$B$发生的条件下, 事件$A$发生的概率, 概率的性质仍适用  </p>
+</li>
+</ul>
+<h3 id="乘法公式"><a href="#乘法公式" class="headerlink" title="乘法公式"></a>乘法公式</h3><ul>
+<li><p><strong>乘法公式</strong><br>由条件概率公式可以得到, 当$P(B)&gt;0$时,<br>$P(AB)=P(B)P(A|B)$<br>$P(AB)=P(A)P(B|A)$</p>
+<p>推广：设$A_1,A_2,\cdots,A_n$为$n$个随机事件, 当$P(A_1,A_2,\cdots,A_n)&gt;0$时,<br>$P(A_1A_2\cdots A_n)=P(A_1)P(A_2|A_1)P(A_3|A_1A_2)\cdots P(A_n|A_1A_2\cdots A_{n-1})$ </p>
+</li>
+</ul>
+<h3 id="全概率公式与贝叶斯公式"><a href="#全概率公式与贝叶斯公式" class="headerlink" title="全概率公式与贝叶斯公式"></a>全概率公式与贝叶斯公式</h3><ul>
+<li><strong>定义1.4</strong><br>若$n$个事件$A_1,A_2,\cdots,A_n$满足<ol>
+<li>$A_1,A-2,\cdots,A_n$两两互不相容</li>
+<li>$A_1\cup A_2\cup\cdots\cup A_n=\varOmega$<br>则称$A_1,A_2,\cdots,A_n$为样本空间$\varOmega$的一个<strong>划分</strong>或<strong>完备事件组</strong><br>若事件$A_1,A_2,\cdots,A_n$为完备事件组, 则在随机试验的每次试验中, $A_1,A_2,\cdots,A_n$必发生且仅发生一个</li>
+</ol>
+</li>
+<li><strong>定理1.1</strong>（全概率公式）<br>设$A_1,A_2,\cdots,A_n$为完备事件组, 则对事件$B$有<br>$$P(B)=\sum_{k=1}^nP(A_k)P(B|A_k)$$</li>
+<li><strong>定理1.2</strong>（贝叶斯公式）<br>设$A_1,A_2,\cdots,A_n$为完备事件组, 则对事件$B$有<br>$$P(A_i|B)=\frac{P(A_i)P(B|A_i)}{\sum_{k=1}^nP(A_k)P(B|A_k)}$$  </li>
+</ul>
+<h2 id="独立性"><a href="#独立性" class="headerlink" title="独立性"></a>独立性</h2><h3 id="独立性定义"><a href="#独立性定义" class="headerlink" title="独立性定义"></a>独立性定义</h3><ul>
+<li><strong>定义1.5</strong><br>设$A$, $B$是两个随机事件, 若满足等式<br>$$P(AB)=P(A)P(B)$$<br>则称事件$A$, $B$<strong>相互独立</strong>, 简称<strong>独立</strong></li>
+<li><strong>定理1.3</strong><br>若随机事件$A$与$B$相互独立, 则$\bar{A}$与$B$, $A$与$\bar{B}$, $\bar{A}$与$\bar{B}$也相互独立  </li>
+</ul>
+<h3 id="多个事件的独立性"><a href="#多个事件的独立性" class="headerlink" title="多个事件的独立性"></a>多个事件的独立性</h3><ul>
+<li><strong>定理1.4</strong>（分组独立性定理）<br>设事件$A_1,A_2,\cdots,A_n$相互独立, 将其任意分为没有公共事件的$k$个组, 每个组任意做事件运算, 得到一个新事件, 则这$k$个新事件相互独立</li>
+<li><p><strong>$n$个事件独立性</strong><br>对$n$个事件$A_1,A_2,\cdots,A_n$, 如果下列等式成立<br>$$\begin{cases}<br>  P(A_iA_j)=P(A_i)P(A_j) \\<br>  P(A_iA_jA_k)=P(A_i)P(A_j)P(A_k) \\<br>  \cdots \cdots \\<br>  P(A_{i_1}A_{i_2}\cdots A_{i_m})=P(A_{i_1})P(A_{i_2})\cdots P(A_{i_m})\\<br>  \cdots \cdots \\<br>  P(A_1A_2\cdots A_n) = P(A_1)P(A_2)\cdots P(A_n)<br>\end{cases}$$<br>则称事件$A_1,A_2,\cdots,A_n$相互独立</p>
+</li>
+<li><p><strong>小概率事件原理</strong><br>设随机试验中某事件$A$发生的概率为$p$, 无论$p$多么小, 只要不断重复独立地做$n$次实验, $A$迟早会发生的概率为1<br>$$P(A_1\cup A_2 \cup\cdots A_n)=1-(1-p)^n\to 1$$</p>
+</li>
+</ul>
+<h3 id="可靠性分析"><a href="#可靠性分析" class="headerlink" title="可靠性分析"></a>可靠性分析</h3><p>设有$n$个独立工作的原件构成的系统, 第$i$个原件正常工作的事件记为$A_i$, 正常工作的概率$P(A_i)=p_i$, 系统正常工作的概率记为$B$</p>
+<ol>
+<li><strong>串联方式</strong>构成的系统<br>$$P(B_1)=P(A_1A_2\cdots A_n)=P(A_1)P(A_2)\cdots P(A_n)=p_1p_2\cdots p_n$$</li>
+<li><strong>并联方式</strong>构成的系统<br>$$P(B_2)=P(A_1\cup A_2\cup\cdots\cup A_n)=1-P(\bar{A_1}\bar{A_2}\cdots \bar{A_n})=1-\prod_{i=1}^n(1-p_i)$$</li>
+</ol>
+<h2 id="独立重复试验模型"><a href="#独立重复试验模型" class="headerlink" title="独立重复试验模型"></a>独立重复试验模型</h2><ul>
+<li><strong>$n$重伯努利试验</strong><ol>
+<li>每次实验只有两个结果, $A$与$\bar{A}$, 且$P(A)=p$, $P(\bar{A})=1-p=q$</li>
+<li>试验进行$n$次, 每次试验结果相互独立</li>
+</ol>
+</li>
+<li><strong>定理1.5</strong><br>$n$重伯努利试验中, $A$发生$k$次的概率记为$P_n(k)$<br>$$P_n(k)=C_n^kp^kq^{n-k},(k=0,1,\cdots,n;q=1-p)$$<br>注意$\sum_{k=0}^nP_n(k)=\sum_{k=0}^nC_n^kp^kq^{n-k}=(p+q)^n=1$</li>
+<li><strong>定理1.6</strong>（泊松定理）<br>设$n$为正整数, $\lambda=np_n$为常数, 则对任意正整数$k$有<br>$$\lim_{n\to\infty}C_n^kp_n^k(1-p_n)^{n-k}=\frac{\lambda^k}{k!}e^{-\lambda}$$<br>用于在$n$较大, $p$较小时进行近似计算</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-27T01:12:26.000Z" itemprop="dateUpdated">2019-04-27 09:12:26</time>
+</span><br>
+
+
+        
+        Link：<a href="/2019/02/28/Learn-PMS-20190228-PMS-01/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Course/">Course</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Probability-and-Mathematical-Statistics/">Probability and Mathematical Statistics</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/&title=《Probability Ch1》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/&title=《Probability Ch1》 — Maxwell's Blog&source=Probability Course in 2019 Spring" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Probability Ch1》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/01/Learn-ML-20190301-ML-01/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Logic Ch1</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/30/Learn-PS-20190130-PS-IV-01/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Problem Solving IV 01</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019 - 2021</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/&title=《Probability Ch1》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/&title=《Probability Ch1》 — Maxwell's Blog&source=Probability Course in 2019 Spring" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Probability Ch1》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2019/02/28/Learn-PMS-20190228-PMS-01/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

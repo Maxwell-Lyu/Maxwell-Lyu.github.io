@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>Problem Solving IV 02 | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Course,Problem Solving,Abstract Algebra">
+    <meta name="description" content="My note when  previewing Copying the Textbook of   abstract algebra.">
+<meta name="keywords" content="Course,Problem Solving,Abstract Algebra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Problem Solving IV 02">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="My note when  previewing Copying the Textbook of   abstract algebra.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-06-19T09:39:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Problem Solving IV 02">
+<meta name="twitter:description" content="My note when  previewing Copying the Textbook of   abstract algebra.">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Problem Solving IV 02</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Problem Solving IV 02</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-07T12:15:53.000Z" itemprop="datePublished" class="page-time">
+  2019-03-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Chapter-5-Permutation-Groups"><span class="post-toc-number">1.</span> <span class="post-toc-text">Chapter 5: Permutation Groups</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Definitions-and-Notation"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Definitions and Notation</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Symmetric-Group"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">Symmetric Group</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Cycle-Notation"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">Cycle Notation</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Transpositions"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">Transpositions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#The-Alternating-Groups"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">The Alternating Groups</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Dihedral-Groups"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Dihedral Groups</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#The-Motion-Group-of-a-Cube"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">The Motion Group of a Cube</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Chapter-6-Cosets-and-Lagrange’s-Theorem"><span class="post-toc-number">2.</span> <span class="post-toc-text">Chapter 6: Cosets and Lagrange’s Theorem</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Cosets"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Cosets</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Lagrange’s-Theorem"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Lagrange’s Theorem</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Fermat’s-and-Euler’s-Theorems"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Fermat’s and Euler’s Theorems</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Learn-PS-20190307-PS-IV-02"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Problem Solving IV 02</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-07 20:15:53" datetime="2019-03-07T12:15:53.000Z"  itemprop="datePublished">2019-03-07</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>My note when <ruby> previewing<rt> Copying the Textbook of</rt> </ruby>  abstract algebra.<br><a id="more"></a> </p>
+<h1 id="Chapter-5-Permutation-Groups"><a href="#Chapter-5-Permutation-Groups" class="headerlink" title="Chapter 5: Permutation Groups"></a>Chapter 5: Permutation Groups</h1><h2 id="Definitions-and-Notation"><a href="#Definitions-and-Notation" class="headerlink" title="Definitions and Notation"></a>Definitions and Notation</h2><h3 id="Symmetric-Group"><a href="#Symmetric-Group" class="headerlink" title="Symmetric Group"></a>Symmetric Group</h3><ul>
+<li><strong>Symmetric Group</strong> on n letters 对称群  <blockquote>
+<p>$S_X=S_n$ is the permutation of a set $X=\{1,2,\cdots,n\}$  </p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 5.1</strong></p>
+<blockquote>
+<p>The symmetric group on n letters, $S_n$, is a group with $n!$ elements, where the binary operation is the composition of maps.<br>It is not necessarily commutative</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:  </p>
+<ol>
+<li>Identity: $\forall x\in X, x\to x$  </li>
+<li>Associative: map composition is associative  </li>
+<li>Inverse: $f^{-1}$ exists since $f$ is one-to-one and onto  </li>
+<li>Size: number of permutations is $n!$  </li>
+</ol>
+</blockquote>
+</li>
+<li><strong>Permutation Group</strong><blockquote>
+<p>A subgroup of $S_n$</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Cycle-Notation"><a href="#Cycle-Notation" class="headerlink" title="Cycle Notation"></a>Cycle Notation</h3><ul>
+<li><strong>Cycle</strong> of Length $k$ 轮换<blockquote>
+<p>A permutation $\sigma\in S_X$<br>There exists elements $a_1$, $a_2$, $\cdots$, $a_k\in X$ such that<br>$\sigma(a_1)=a_2$, $\sigma(a_2)=a_3$, $\cdots$, $\sigma(a_k)=a_1$<br>$\{a_1,a_2,\cdots,a_k\}$ denotes the cycle $\sigma$<br>Not every permutation is a cycle.</p>
+</blockquote>
+</li>
+<li><strong>Disjoint Cycle</strong><blockquote>
+<p>$\forall i,j,\ a_i\ne b_j$</p>
+</blockquote>
+</li>
+<li><p><strong>Proposition 5.8</strong></p>
+<blockquote>
+<p>Let $\sigma$ and $\tau$ be two disjoint cycles in $S_X$. Then $\sigma\tau=\tau\sigma$</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:</p>
+<ol>
+<li>$x$ is neither in $\{a_1,a_2,\cdots,a_k\}$ nor $\{b_1,b_2,\cdots,b_l\}$<br>$\sigma(x)=\tau(x)=x\Rightarrow\sigma\tau(x)=\tau\sigma(x)=x$</li>
+<li>$x$ in $\{a_1,a_2,\cdots,a_k\}$<br>Then $x$ is not in $\{b_1,b_2,\cdots,b_l\}$<br>Because they are disjoint, $\sigma(x)\notin\{b_1,b_2,\cdots,b_l\}$<br>Then $\sigma\tau(x) = \sigma(x)$, and $\tau\sigma(x) = \tau(\sigma(x))=\sigma(x)$</li>
+<li>$\sigma\tau=\tau\sigma$</li>
+</ol>
+</blockquote>
+</li>
+<li><p><strong>Theorem 5.9</strong></p>
+<blockquote>
+<p>Every permutation in $S_n$ can be written as the product of disjoint cycles.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>: 咕咕咕</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Transpositions"><a href="#Transpositions" class="headerlink" title="Transpositions"></a>Transpositions</h3><ul>
+<li><strong>Transpositions</strong> 对换<blockquote>
+<p>Permutation which is a cycle of length 2</p>
+</blockquote>
+</li>
+<li><strong>Proposition 5.12</strong><blockquote>
+<p>Any permutation of a finite set containing at least two elements can be written as the product of transpositions.</p>
+</blockquote>
+</li>
+<li><p><strong>Lemma 5.14</strong></p>
+<blockquote>
+<p>If the identity is written as the product of r transpositions, $id=\tau_1\tau_2\cdots \tau_r$ then r is an even number.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>: 咕咕咕 </p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 5.15</strong> </p>
+<blockquote>
+<p>If a permutation $\tau$ can be expressed as the product of an even number of transpositions, then any other product of transpositions equaling $\tau$ must also contain an even number of transpositions.<br>Similarly, if $\tau$ can be expressed as the product of an odd number of transpositions, then any other product of transpositions equaling $\tau$ must also contain an odd number of transpositions.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>$\sigma=\sigma_1\sigma_2\cdots\sigma_m=\tau_1\tau_2\cdots\tau_n$<br>$id=\sigma\sigma^{-1}=\sigma_1\sigma_2\cdots\sigma_m(\tau_1\tau_2\cdots\tau_n)^{-1}=\sigma_1\sigma_2\cdots\sigma_m\tau_1\tau_2\cdots\tau_n$<br>Then $m+n$ must be even.<br>So even+even or odd+odd</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="The-Alternating-Groups"><a href="#The-Alternating-Groups" class="headerlink" title="The Alternating Groups"></a>The Alternating Groups</h3><ul>
+<li>The <strong>Alternation Group</strong> on $n$ <strong>Letters</strong> 交代群<blockquote>
+<p>The set of all even permutations $A_n$ </p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 5.16</strong></p>
+<blockquote>
+<p>The set $A_n$ is a subgroup of $S_n$</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong></p>
+<ol>
+<li>The product of 2 even permutations is even</li>
+<li>The identity is even</li>
+<li>The inverse is even</li>
+</ol>
+</blockquote>
+</li>
+<li><p><strong>Proposition 5.17</strong></p>
+<blockquote>
+<p>The number of even permutations in $S_n$, $n\geq2$, is equal to the number of odd permutations.<br>Hence, the order of $A_n$ is $n!/2$.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>Prove a bijection $\lambda_\sigma(\tau)=\sigma\tau$</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Dihedral-Groups"><a href="#Dihedral-Groups" class="headerlink" title="Dihedral Groups"></a>Dihedral Groups</h2><ul>
+<li>The n-th <strong>Dihedral Group</strong> 二面体群  <blockquote>
+<p>The group of rigid motions of a regular $n-gon$</p>
+</blockquote>
+</li>
+<li><strong>Theorem 5.20</strong><blockquote>
+<p>The dihedral group, $D_n$, is a subgroup of $S_n$ of order $2n$</p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 5.23</strong></p>
+<blockquote>
+<p>The group $D_n$, $n\geq 3$, consists of all products of the two elements $r$ and $s$, satisfying the relations<br>$$r^n=1$$<br>$$s^2=1$$<br>$$srs = r^{-1}$$</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>$r$ is the rotation $r^k=k\frac{360\degree}{n}$, $1,r,r^2\cdots r^{n-1}$<br>$s_i$ is the mirror. If $n$ is even, then there are $n/2$   $s_i$ for each pair of across vertices, and $n/2$ $s_i$ for each pair of across edges. If $n$ is odd, then there are $n$ $s_i$ for each vertex.</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="The-Motion-Group-of-a-Cube"><a href="#The-Motion-Group-of-a-Cube" class="headerlink" title="The Motion Group of a Cube"></a>The Motion Group of a Cube</h3><ul>
+<li>The across vertices of the cube is labeled the same number.  </li>
+<li><strong>Proposition 5.24</strong><blockquote>
+<p>The group of rigid motions of a cube contains 24 elements.</p>
+</blockquote>
+</li>
+<li><strong>Theorem 5.28</strong><blockquote>
+<p>The group of rigid motions of a cube is $S_4$.</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="Chapter-6-Cosets-and-Lagrange’s-Theorem"><a href="#Chapter-6-Cosets-and-Lagrange’s-Theorem" class="headerlink" title="Chapter 6: Cosets and Lagrange’s Theorem"></a>Chapter 6: Cosets and Lagrange’s Theorem</h1><h2 id="Cosets"><a href="#Cosets" class="headerlink" title="Cosets"></a>Cosets</h2><ul>
+<li><strong>Left Coset</strong> of $H$ with <strong>Representative</strong> $g\in G$ 陪集<blockquote>
+<p>$gH=\{gh:h\in H\}$</p>
+</blockquote>
+</li>
+<li><strong>Right Coset</strong> of $H$<blockquote>
+<p>$Hg=\{hg:h\in H\}$</p>
+</blockquote>
+</li>
+<li><strong>Lemma 6.3</strong><blockquote>
+<p>Let $H$ be a subgroup of a group $G$ and suppose that $g_1, g_2 \in G$. The following conditions are equivalent.</p>
+<ol>
+<li>$g_1H=g_2H$</li>
+<li>$Hg_1^{-1}=Hg_2^{-1}$</li>
+<li>$g_1H\subset g_2H$</li>
+<li>$g_2\in g_1H$</li>
+<li>$g_1^{-1}g_2\in H$</li>
+</ol>
+</blockquote>
+</li>
+<li><p><strong>Theorem 6.4</strong>  </p>
+<blockquote>
+<p>Let $H$ be a subgroup of a group $G$. Then the left cosets ofH in $G$ partition $G$. That is, the group $G$ is the disjoint union of the left cosets of $H$ in $G$.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>$g_1H\cap g_2H\ne\emptyset\Rightarrow\exists a=g_1h_1=g_2h_2\Rightarrow g_1=g_2h_2h_1^{-1}\Rightarrow g_1\subset g_2H$<br>By Lemma 6.3, $g_1H=g_2H$</p>
+</blockquote>
+</li>
+<li>The <strong>Index</strong> of $H$ in $G$<blockquote>
+<p>$[G:H]$ the number of left cosets of $H$ in $G$</p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 6.8</strong></p>
+<blockquote>
+<p>Let $H$ be a subgroup of a group $G$. The number of left cosets of $H$ in $G$ is the same as the number of right cosets of $H$ in $G$.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>Find a bijective map $\phi:\mathcal {L}_H\to\mathcal {R}_H$, $\phi(gH)=Hg^{-1}$<br>$Hg_1^{-1}=\phi(g_1H)=\phi(g_2H)=Hg_2^{-1}$<br>By Lemma 6.3</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Lagrange’s-Theorem"><a href="#Lagrange’s-Theorem" class="headerlink" title="Lagrange’s Theorem"></a>Lagrange’s Theorem</h2><ul>
+<li><p><strong>Proposition 6.9</strong></p>
+<blockquote>
+<p>Let $H$ be a subgroup of $G$ with $g \in G$ and define a map $\phi :H \to gH$ by $\phi(h) = gh$. The map $\phi$ is bijective; hence, the number of elements in $H$ is the same as the number of elements in $gH$.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>: 咕咕咕</p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 6.10</strong> Lagrange</p>
+<blockquote>
+<p>Let $G$ be a finite group and let $H$ be a subgroup of $G$. Then $|G|/|H| = [G : H]$ is the number of distinct left cosets of $H$ in $G$. In particular, the number of elements in $H$ must divide the number of elements in $G$.<br>The converse is false.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>The group $G$ is partitioned into $[G : H]$ distinct left cosets. Each left coset has $|H|$ elements; therefore, $|G| = [G : H]|H|$.</p>
+</blockquote>
+</li>
+<li><strong>Corollary 6.11</strong><blockquote>
+<p>Suppose that $G$ is a finite group and $g \in G$. Then the order of $g$ must divide the number of elements in $G$.</p>
+</blockquote>
+</li>
+<li><p><strong>Corollary 6.12</strong></p>
+<blockquote>
+<p>Let $|G| = p$ with $p$ a prime number. Then $G$ is cyclic and any $g \in G$ such that $g \ne e$ is a generator.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>: 咕咕咕</p>
+</blockquote>
+</li>
+<li><p><strong>Corollary 6.13</strong></p>
+<blockquote>
+<p>Let $H$ and $K$ be subgroups of a finite group $G$ such that $G\supset H\supset K$. Then<br>$$[G:K]=[G:H][H:K]$$</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>$$[G:K]=\frac{|G|}{|K|}=\frac{|G|}{|H|}\frac{|H|}{|K|}=[G:H][H:K]$$</p>
+</blockquote>
+</li>
+<li><p><strong>Proposition 6.15</strong></p>
+<blockquote>
+<p>The group $A_4$ has no subgroup of order 6.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>: 咕咕咕</p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 6.16</strong></p>
+<blockquote>
+<p>Two cycles $\tau$ and $\mu$ in $S_n$ have the same length if and only if there exists a $\sigma\in S_n$ such that $\mu = \sigma\tau\sigma^{-1}$.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>: 咕咕咕</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Fermat’s-and-Euler’s-Theorems"><a href="#Fermat’s-and-Euler’s-Theorems" class="headerlink" title="Fermat’s and Euler’s Theorems"></a>Fermat’s and Euler’s Theorems</h2><ul>
+<li>The <strong>Euler $\phi$-Function</strong><blockquote>
+<p>the map $\phi: \mathbb{N}\to\mathbb{N}$ defined by $\phi(n)=1$ for $n = 1$, and, for $n &gt; 1$, $\phi(n)$ is the number of positive integers $m$ with $1 ≤ m &lt; n$ and $gcd(m,n) = 1$.<br>$$\phi(n)=n\prod_{p|n\textrm{ and }p\textrm{ is prime}}(1-\frac{1}{p})$$<br>一个因子一次，例如$8$只需计算一次$p=2$</p>
+</blockquote>
+</li>
+<li><strong>Theorem 6.17</strong> <blockquote>
+<p>Let $U(n)$ be the group of units in $\mathbb{Z}_n$. Then $|U(n)| = \phi(n)$.</p>
+</blockquote>
+</li>
+<li><p><strong>Theorem 6.18</strong> Euler’s Theorem</p>
+<blockquote>
+<p>Let $a$ and $n$ be integers such that $n &gt; 0$ and $gcd(a, n) = 1$. Then $a^{\phi(n)} \equiv 1 (mod\ n)$.</p>
+</blockquote>
+<blockquote>
+<p><strong>Proof</strong>:<br>$|U(n)|=\phi(n)$ by Theorem 6.17<br>$\forall a\in U(n), a^{\phi(n)}=1$<br>$a^{\phi(n)} \equiv 1 (mod\ n)$</p>
+</blockquote>
+</li>
+<li><strong>Theorem 6.19</strong> Fermat’s Little Theorem<blockquote>
+<p>Let $p$ be any prime number and suppose that $p \nmid a$ ($p$ does not divide $a$). Then<br>$$a^{p-1}\equiv 1(mod\ p)$$<br>For any integer $b$, $b^p\equiv b(mod\ p)$</p>
+</blockquote>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-06-19T09:39:20.000Z" itemprop="dateUpdated">2019-06-19 17:39:20</time>
+</span><br>
+
+
+        
+        Link：<a href="/2019/03/07/Learn-PS-20190307-PS-IV-02/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Abstract-Algebra/">Abstract Algebra</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Course/">Course</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Problem-Solving/">Problem Solving</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/&title=《Problem Solving IV 02》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/&title=《Problem Solving IV 02》 — Maxwell's Blog&source=My note when  previewing Copying the Textbook of   abstract algebra." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Problem Solving IV 02》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/12/Learn-PS-20190312-PS-IV-03/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Problem Solving IV 03</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/03/07/Learn-PMS-20190307-PMS-02/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Probability Ch2</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019 - 2021</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/&title=《Problem Solving IV 02》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/&title=《Problem Solving IV 02》 — Maxwell's Blog&source=My note when  previewing Copying the Textbook of   abstract algebra." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Problem Solving IV 02》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2019/03/07/Learn-PS-20190307-PS-IV-02/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

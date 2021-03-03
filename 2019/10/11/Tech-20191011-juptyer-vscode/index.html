@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>在VSCode中使用Jupyter Notebook | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Utility">
+    <meta name="description" content="这个不是Jupyter Notebook的介绍啦, 默认本文的读者拥有使用Jupyter Notebook的经验">
+<meta name="keywords" content="Utility">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在VSCode中使用Jupyter Notebook">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="这个不是Jupyter Notebook的介绍啦, 默认本文的读者拥有使用Jupyter Notebook的经验">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-11T03:30:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在VSCode中使用Jupyter Notebook">
+<meta name="twitter:description" content="这个不是Jupyter Notebook的介绍啦, 默认本文的读者拥有使用Jupyter Notebook的经验">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在VSCode中使用Jupyter Notebook</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在VSCode中使用Jupyter Notebook</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-10-11T02:04:03.000Z" itemprop="datePublished" class="page-time">
+  2019-10-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Technique/">Technique</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装Python插件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">安装Python插件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#重启VSCode"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">重启VSCode</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装Jupyter及其依赖"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">安装Jupyter及其依赖</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#重启VSCode-1"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">重启VSCode</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Tech-20191011-juptyer-vscode"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在VSCode中使用Jupyter Notebook</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-10-11 10:04:03" datetime="2019-10-11T02:04:03.000Z"  itemprop="datePublished">2019-10-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Technique/">Technique</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>这个不是Jupyter Notebook的介绍啦, 默认本文的读者拥有使用Jupyter Notebook的经验<br><a id="more"></a> </p>
+</blockquote>
+<p>环境:  </p>
+<ul>
+<li>Python 3.7.4 64-bit  </li>
+<li>VSCode 1.39.0</li>
+<li>Windows 10 1903 <del>x64, 废话</del>  </li>
+</ul>
+<p>2019年10月9日, M$发布了Python插件的更新, 提供对<code>*.ipynb</code>文件的支持, 即Jupyter支持. 于是就可以通过更新Python插件, 直接在VSCode里面使用Jupyter nb啦</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="安装Python插件"><a href="#安装Python插件" class="headerlink" title="安装Python插件"></a>安装Python插件</h2><p>点击插件信息页, 查看Extensions-Installed, 确认你的插件版本是<code>2019.10.41019</code>, 若不是, 请检查自动更新插件设置, 应当为以下:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"extensions.autoUpdate": true</span><br></pre></td></tr></table></figure></p>
+<p>或者手动点击<code>Update</code>, 或者卸载插件重装</p>
+<p>你可能会遇到以下问题:  </p>
+<ul>
+<li>我不是<strong>Insider</strong>: 根本不需要Insider版</li>
+<li>没安装过Python插件: <del>咋回事啊小老弟</del> 在Extensions当中搜索<code>python @sort:installs</code>, 列表顶端的即为所需的插件, 点击<code>Install</code>安装  </li>
+</ul>
+<h2 id="重启VSCode"><a href="#重启VSCode" class="headerlink" title="重启VSCode"></a>重启VSCode</h2><p><strong>重启VSCode</strong>,请<strong>重启VSCode</strong><br>这个重启可以解决: </p>
+<ul>
+<li><strong>Command Panel</strong> 没有 Jupyter NB 相关命令</li>
+<li>我没遇到的<strong>疑难杂症</strong>中的一部分</li>
+</ul>
+<h2 id="安装Jupyter及其依赖"><a href="#安装Jupyter及其依赖" class="headerlink" title="安装Jupyter及其依赖"></a>安装Jupyter及其依赖</h2><blockquote>
+<p>如果你已经在用Jupyter NB, 这段不用看辣  </p>
+</blockquote>
+<p>按下组合键<code>Ctrl+Shift+P</code>, 输入<code>&gt; Python: Create New Blank Jupyter Notebook</code>, 按<code>Enter</code>, 可以建立一个<code>*.ipynb</code>文件<br>在一个新的cell当中写<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'anything'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>点按钮执行cell, 如果未曾安装过Jupyter, 将会报错, 点击报错信息中的<code>Install</code>按钮, VSCode会帮你<strong>搞定一切</strong>, 除非你网络不好</p>
+<h2 id="重启VSCode-1"><a href="#重启VSCode-1" class="headerlink" title="重启VSCode"></a>重启VSCode</h2><p><strong>重启VSCode</strong>,请<strong>重启VSCode</strong><br>这个重启可以解决: </p>
+<ul>
+<li><code>*.ipynb</code>文件<strong>没有Intellisense</strong></li>
+<li>我没遇到的<strong>疑难杂症</strong>中的一部分</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>这里主要说点废话  </p>
+<ul>
+<li>打开VSCode后, 如果你的Jupyter Server是local, 建议你随便执行点什么cell, 这时会start jupyter server(嗯, 半自动), 要等一会儿, 之后就可以丝滑写码了  </li>
+<li><strong>导出图像</strong>, 想要啥配色就先换VSCode的color theme, 导出图像目前还是只能按照这个来</li>
+<li><p><strong>远程配置</strong>? 我不会, 用的local, url贴在这里, token应该包含在url里面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"python.dataScience.jupyterServerURI": "&gt;&gt;&gt;YOUR URL HERE&lt;&lt;&lt;"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>BUG: </p>
+<ul>
+<li>没法<strong>折叠执行结果框</strong></li>
+<li>文件末尾的cell执行时, 会<strong>自动创建一个新cell</strong>, 有时候很烦, 这其实可以说是feature</li>
+<li><del>convert to python script 之后, 里面还会显示<code>Run Cell</code>等按钮, 尽量别点, 有可能<strong>VSCode直接崩溃</strong></del><br>当我没说, 重启VSCode之后问题就消失了, 重启大法好</li>
+</ul>
+</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://zhuanlan.zhihu.com/p/85445777" target="_blank" rel="noopener">韩骏的知乎专栏</a><br>请给这篇文章点赞, 另外评论区有很多问题的解决方案, 遇到问题可以看下评论区</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-10-11T03:30:42.000Z" itemprop="dateUpdated">2019-10-11 11:30:42</time>
+</span><br>
+
+
+        
+        Link：<a href="/2019/10/11/Tech-20191011-juptyer-vscode/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Utility/">Utility</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/&title=《在VSCode中使用Jupyter Notebook》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/&title=《在VSCode中使用Jupyter Notebook》 — Maxwell's Blog&source=
+这个不是Jupyter Notebook的介绍啦, 默认本文的读者拥有使用Jupyter Notebook的经验" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在VSCode中使用Jupyter Notebook》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/10/31/Learn-CN-20191031-CN-ALT/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">CN-ALT</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/09/12/Learn-DIP-20190912-DIP-ALL/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">DIP-ALL</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019 - 2021</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/&title=《在VSCode中使用Jupyter Notebook》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/&title=《在VSCode中使用Jupyter Notebook》 — Maxwell's Blog&source=
+这个不是Jupyter Notebook的介绍啦, 默认本文的读者拥有使用Jupyter Notebook的经验" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在VSCode中使用Jupyter Notebook》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2019/10/11/Tech-20191011-juptyer-vscode/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>编译原理 4 | Maxwell&#39;s Blog | Think &amp; Write</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#1976D2">
+    
+    
+    <meta name="keywords" content="Course,Principles and Techniques of Compilers">
+    <meta name="description" content="第四章: 语法分析语法分析器 基本作用 从词法分析器获得词法单元序列, 判断能否由该语言的文法生成 错误, 则报错 正确, 则生成语法树    分类 自顶向下分析器: 根部开始构造(LL文法) 自底向上分析器: 从叶开始构造(LR文法) 总是从左到右扫描, 只处理特定类型的文法    上下文无关文法 终结符号: 组成串的基本符号 非终结符号: 表示串集合的语法变量 开始符号: 某个被指定的非终结符">
+<meta name="keywords" content="Course,Principles and Techniques of Compilers">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理 4">
+<meta property="og:url" content="https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/index.html">
+<meta property="og:site_name" content="Maxwell&#39;s Blog">
+<meta property="og:description" content="第四章: 语法分析语法分析器 基本作用 从词法分析器获得词法单元序列, 判断能否由该语言的文法生成 错误, 则报错 正确, 则生成语法树    分类 自顶向下分析器: 根部开始构造(LL文法) 自底向上分析器: 从叶开始构造(LR文法) 总是从左到右扫描, 只处理特定类型的文法    上下文无关文法 终结符号: 组成串的基本符号 非终结符号: 表示串集合的语法变量 开始符号: 某个被指定的非终结符">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-03-19T09:32:31.251Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编译原理 4">
+<meta name="twitter:description" content="第四章: 语法分析语法分析器 基本作用 从词法分析器获得词法单元序列, 判断能否由该语言的文法生成 错误, 则报错 正确, 则生成语法树    分类 自顶向下分析器: 根部开始构造(LL文法) 自底向上分析器: 从叶开始构造(LR文法) 总是从左到右扫描, 只处理特定类型的文法    上下文无关文法 终结符号: 组成串的基本符号 非终结符号: 表示串集合的语法变量 开始符号: 某个被指定的非终结符">
+    
+        <link rel="alternate" type="application/atom+xml" title="Maxwell&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Maxwell Lyu</h5>
+          <a href="mailto:maxwell.lyu@foxmail.com" title="maxwell.lyu@foxmail.com" class="mail">maxwell.lyu@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Index
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                Friends
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Maxwell-Lyu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://maxwell-lyu.github.io/"  >
+                <i class="icon icon-lg icon-link"></i>
+                Link
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">编译原理 4</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">编译原理 4</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-02-27T02:14:32.000Z" itemprop="datePublished" class="page-time">
+  2020-02-27
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第四章-语法分析"><span class="post-toc-number">1.</span> <span class="post-toc-text">第四章: 语法分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语法分析器"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">语法分析器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上下文无关文法"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">上下文无关文法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#推导"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">推导</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#句型句子语言"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">句型句子语言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#语法分析树"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">语法分析树</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二义性"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">二义性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#上下文无关文法与正则表达式"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">上下文无关文法与正则表达式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文法及其生成的语言"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">文法及其生成的语言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设计文法"><span class="post-toc-number">1.2.7.</span> <span class="post-toc-text">设计文法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语法分析技术"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">语法分析技术</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自顶向下"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">自顶向下</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LL-1-文法"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">LL(1)文法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自底向上"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">自底向上</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LR-1"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">LR(1)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LALR语法分析表"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">LALR语法分析表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#语法错误的处理"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text">语法错误的处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二义性文法的使用"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">二义性文法的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#优先级-结合性消除冲突"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">优先级/结合性消除冲突</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语法分析器生成工具"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">语法分析器生成工具</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Learn-PTC-20200227-PTC-04"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">编译原理 4</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-02-27 10:14:32" datetime="2020-02-27T02:14:32.000Z"  itemprop="datePublished">2020-02-27</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="第四章-语法分析"><a href="#第四章-语法分析" class="headerlink" title="第四章: 语法分析"></a>第四章: 语法分析</h1><h2 id="语法分析器"><a href="#语法分析器" class="headerlink" title="语法分析器"></a>语法分析器</h2><ul>
+<li>基本作用<ul>
+<li>从词法分析器获得词法单元序列, 判断能否由该语言的文法生成</li>
+<li>错误, 则报错</li>
+<li>正确, 则生成语法树 </li>
+</ul>
+</li>
+<li>分类<ul>
+<li>自顶向下分析器: 根部开始构造(LL文法)</li>
+<li>自底向上分析器: 从叶开始构造(LR文法)</li>
+<li>总是从左到右扫描, 只处理特定类型的文法</li>
+</ul>
+</li>
+</ul>
+<h2 id="上下文无关文法"><a href="#上下文无关文法" class="headerlink" title="上下文无关文法"></a>上下文无关文法</h2><ul>
+<li>终结符号: 组成串的基本符号</li>
+<li>非终结符号: 表示串集合的语法变量</li>
+<li>开始符号: 某个被指定的非终结符号(其对应的集合, 就是文法的语言)</li>
+<li>产生式: 描述终结符号和非终结符号组成串的方法<ul>
+<li>形式: 头部(左部)-&gt;体部(右部)</li>
+<li>头部是非终结符, 体部是符号串</li>
+</ul>
+</li>
+<li>元符号: 文法描述用的符号</li>
+</ul>
+<h3 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h3><ul>
+<li>将待处理的串中的某个非终结符号替换为这个符号某个产生式的体</li>
+<li>不断替换, 就能得到文法的不同句型</li>
+<li>正则定义<ul>
+<li>如果$A\to\gamma$是一个产生式, 那么$\alpha A\beta\Rightarrow \alpha\gamma\beta$</li>
+<li>最左(右)推导: $\alpha(\beta)$中不包含非终结符号<ul>
+<li>含有多个非终结符, 始终坚持替换最左侧的非终结符</li>
+<li>$\xRightarrow[lm]{<em>}$ $\xRightarrow[rm]{</em>}$</li>
+</ul>
+</li>
+<li>零步或多步: $\xRightarrow{*}$</li>
+<li>一步或多步: $\xRightarrow{+}$, 等价于$\alpha\xRightarrow{*}\beta\wedge \alpha\ne\beta$</li>
+</ul>
+</li>
+</ul>
+<h3 id="句型句子语言"><a href="#句型句子语言" class="headerlink" title="句型句子语言"></a>句型句子语言</h3><ul>
+<li>句型: $S\xRightarrow{*}\alpha$, $S$为开始符号</li>
+<li>句子: 不包含非终结符号的句型</li>
+<li>语言: 文法$G$的语言, 是$G$句子的集合, $L(G)$. $w\in G\Leftrightarrow S\xRightarrow{*}w$</li>
+</ul>
+<h3 id="语法分析树"><a href="#语法分析树" class="headerlink" title="语法分析树"></a>语法分析树</h3><ul>
+<li>根结点的标号是文法的开始符号</li>
+<li>叶子结点的标号是非终结符号, 终结符号或空字符</li>
+<li>内部结点的标号是非终结符号</li>
+<li>每个内部结点代表了某个产生式的一次应用<ul>
+<li>结点标号为产生式头, 其子节点从左到右为产生式的体</li>
+</ul>
+</li>
+<li>叶子的序列是一个句型</li>
+<li>一个语法分析树, 可对应多个推导序列<ul>
+<li>但只有唯一的最左推导和最右推导</li>
+</ul>
+</li>
+</ul>
+<h3 id="二义性"><a href="#二义性" class="headerlink" title="二义性"></a>二义性</h3><ul>
+<li>一个文法可以为某个句子生成多课语法分析树, 则这个文法就是二义的</li>
+</ul>
+<h3 id="上下文无关文法与正则表达式"><a href="#上下文无关文法与正则表达式" class="headerlink" title="上下文无关文法与正则表达式"></a>上下文无关文法与正则表达式</h3><ul>
+<li>上下文无关文法更强</li>
+<li>正则表达式不足以表达<ul>
+<li>直观例子: 有穷自动机不能计数</li>
+</ul>
+</li>
+<li>上下文无关文法能表达任意正则语言<ul>
+<li>对于NFA, 构造上下上下文无关文法</li>
+<li>状态$i$, 构造非终结符$A_i$</li>
+<li>输入$a$的转换, 则$A_i\yo aA_j$</li>
+<li>空输入转换, 则$A_i\to A_j$</li>
+<li>接受状态, 则$A_i\to\epsilon$</li>
+<li>开始状态, 为开始符号</li>
+</ul>
+</li>
+</ul>
+<h3 id="文法及其生成的语言"><a href="#文法及其生成的语言" class="headerlink" title="文法及其生成的语言"></a>文法及其生成的语言</h3><ul>
+<li>证明$G$生成的每个串都在$L$中</li>
+<li>证明$L$中每个串都能被$G$生成</li>
+</ul>
+<h3 id="设计文法"><a href="#设计文法" class="headerlink" title="设计文法"></a>设计文法</h3><ul>
+<li>消除二义性</li>
+<li>消除左递归: $A\xRightarrow{+}A\alpha$<ul>
+<li>左递归的定义: 存在非终结符号$A\xRightarrow{+}A\alpha$, 则它是左递归的</li>
+<li>立即左递归: 存在形如$A\to A\alpha$的规则</li>
+<li>自顶向下: 不能处理左递归</li>
+</ul>
+</li>
+<li>消除立即左递归<ul>
+<li>$$A\to A\alpha|\beta \equiv \begin{cases}<br>A&amp;\to\beta A’\\<br>A’&amp;\to\alpha A’|\epsilon\\<br>\end{cases}$$</li>
+</ul>
+</li>
+<li>消除多步左递归<ul>
+<li>算法: 消除所有左递归</li>
+<li>所有非终结符排序</li>
+<li>对每一个原有的$A_i\to A_j\gamma, j &lt; i$的产生式, 换成一系列$A_i\to \sigma_k\gamma$, 其中$\sigma_k$来自$A_j\to \sigma_k$的产生式</li>
+<li>完成对一个$A_i$的转化后, 消除其立即左递归</li>
+</ul>
+</li>
+<li>预测分析法: 试图从开始符号推导出输入符号串<ul>
+<li>两个产生式有相同前缀时, 无法预测</li>
+<li>消除相同前缀: 提取左公因子</li>
+</ul>
+</li>
+</ul>
+<h2 id="语法分析技术"><a href="#语法分析技术" class="headerlink" title="语法分析技术"></a>语法分析技术</h2><h3 id="自顶向下"><a href="#自顶向下" class="headerlink" title="自顶向下"></a>自顶向下</h3><ul>
+<li>从分析树根节点开始, 按照先根次序, 深度优先, 创建节点</li>
+<li>对应于最左推导</li>
+<li>步骤<ul>
+<li>确定最左边的非终结符应当应用那个产生式</li>
+<li>用产生式去匹配</li>
+<li>关键: 选择合适的 产生式</li>
+</ul>
+</li>
+<li>递归下降<ul>
+<li>搜索回溯<ul>
+<li>回溯: 遇到错误, 退回之前的扫描结果</li>
+<li>错误: 可能是输入的不是句子, 也可能选错产生式</li>
+<li>改进选择产生式: 做记录, 一个产生式选一次, 都不行, 则输入不是句子</li>
+</ul>
+</li>
+<li>问题<ul>
+<li>回溯需要来回扫描, 甚至撤销已完成的语义动作</li>
+<li>有可能明明是句子, 却不能被回溯出来</li>
+</ul>
+</li>
+<li>预测分析法<ul>
+<li>向前看几个符号, 确定产生式(通常只看1个), 若可能的产生式仅有一个, 则避免回溯. 对于句型$xA\beta$和输入$xa…$, 选择$A\to\alpha$可能性有:<ul>
+<li>$\alpha\xRightarrow{*}a$</li>
+<li>$\alpha\xRightarrow{<em>}\epsilon$, 且$\beta\xRightarrow{</em>}a$</li>
+</ul>
+</li>
+<li>FIRST和FOLLOW<ul>
+<li>FIRST<ul>
+<li>$\mathrm{FIRST}(\alpha)$: 可以从$a$推导得到串的首符号的集合</li>
+<li>例: $A\to \alpha | \beta$, 且$\mathrm{FIRST}(\alpha)$与$\mathrm{FIRST}(\beta)$不相交, 输入属于哪个, 就选哪个产生式</li>
+<li>计算<ul>
+<li>$\mathrm{FIRST}(X_1X_2\cdots X_n)$<ul>
+<li>加入$X_1$中所有非$\epsilon$符号</li>
+<li>若$\epsilon$在$\mathrm{FIRST}(X_1)$中, 则加入$\mathrm{FIRST}(X_2)$中所有非$\epsilon$符号, 对每一个都是其前面的都含有$\epsilon$</li>
+<li>$X_i$都含有$\epsilon$, 也加入$\epsilon$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>FOLLOW<ul>
+<li>$\mathrm{FOLLOW}(A)$: 可能在某些句型中紧跟在$A$右边的终结符号的集合</li>
+<li>计算<ul>
+<li>右端结束标记$$$加入$\mathrm{FOLLOW}(S)$</li>
+<li>按照以下两个规则迭代, 直到不再增长<ul>
+<li>存在产生式$A\to\alpha B\beta$, 那么$\mathrm{FIRST}(\beta)$中的所有非$\epsilon$符号加入$\mathrm{FOLLOW}(B)$</li>
+<li>存在产生式$A\to\alpha B$, 或者$A\to\alpha B\beta$且$\mathrm{FIRST}(\beta)$中包含$\epsilon$, 那么$\mathrm{FOLLOW}(A)$中的所有符号加入$\mathrm{FOLLOW}(B)$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h3><ul>
+<li>对于文法的任意两个产生式$A\to\alpha|\beta$<ul>
+<li>不存在终结符$a$, 使得$\alpha$和$\beta$都推导出以$a$开头的串</li>
+<li>$\alpha$和$\beta$至多一个可推出空串</li>
+<li>如果$\beta$可推导出空串, 那么$\alpha$不能推导出以$\mathrm{FOLLOW}(A)$中任何终结符号开头的串</li>
+</ul>
+</li>
+<li>等价于<ul>
+<li>$\mathrm{FIRST}(\alpha)\cap\mathrm{FIRST}(\beta)  =\emptyset$</li>
+<li>若$\epsilon\in\mathrm{FIRST}(\beta)$, 那么$\mathrm{FIRST}(\alpha)\cap\mathrm{FOLLOW}(A)=\emptyset$, 反之亦然</li>
+</ul>
+</li>
+<li>预测分析表构造算法<ul>
+<li>输入: 文法G</li>
+<li>输出: 预测分析表M</li>
+<li>方法: <ul>
+<li>对于文法$G$的每个产生式$A\to \alpha$<ul>
+<li>对于$\mathrm{FIRST}(\alpha)$中的每个终结符号$a$, 将$A\to \alpha$加入到$M[A,a]$</li>
+<li>如果$\epsilon\in\mathrm{FIRST}(\alpha)$, 那么对于$\mathrm{FOLLOW}(A)$中的每个符号$b$, 将$A\to \alpha$加入到$M[A,b]$</li>
+</ul>
+</li>
+<li>剩下的空白条目填写error</li>
+</ul>
+</li>
+<li>一格内仅有一个产生式, 否则二义性</li>
+</ul>
+</li>
+<li>LL(1)文法的递归下降分析<ul>
+<li>构造预测分析表后, 可以用当前的输入符号选择唯一的产生式</li>
+</ul>
+</li>
+<li>非递归的预测分析<ul>
+<li>总是匹配掉句型左边的所有终结符号</li>
+<li>接下来的动作均发生于左边, 用栈完成</li>
+<li>处理过程<ul>
+<li>初始化时, 栈中仅有开始符号$S$(和$)</li>
+<li>若栈顶是终结符号, 那么进行匹配</li>
+<li>若是非终结符号, 用分析表选择产生式, 并用它的右部替换栈顶的左部(选不出来, 报错)</li>
+</ul>
+</li>
+<li>算法<ul>
+<li>输入: 串w, 预测分析表M</li>
+<li>输出: w是句子, 则输出最左推导, 否则报错</li>
+<li>初始化: 栈中S$, 输入缓冲区w$, ip指向w第一个符号</li>
+<li>令X=栈顶符号, ip指向输入符号a<ul>
+<li>if(X==a), X出栈, ip移动—&gt;匹配到终结符号</li>
+<li>else if(X是终结符号) error—&gt;失配</li>
+<li>else if(M[X,a]是报错条目) error—&gt;没有产生式</li>
+<li>else if(M[X,a]=$X\to Y_1Y_2\cdots Y_k$)<ul>
+<li>输出产生式$X\to Y_1Y_2\cdots Y_k$</li>
+<li>弹出栈顶符号$X$, 并将$Y_1Y_2\cdots Y_k$放入(左边的在顶部)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不断执行, 直到栈空或报错</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="自底向上"><a href="#自底向上" class="headerlink" title="自底向上"></a>自底向上</h3><ul>
+<li>为一个输入串构造语法分析树的过程<ul>
+<li>从叶子开始向上到达根节点</li>
+<li>移入-归约 框架</li>
+<li>简单LR技术(SLR), LR技术(LR)</li>
+</ul>
+</li>
+<li>归约: 右部换成左部(何时归约, 归约成什么符号串)</li>
+<li>句柄<ul>
+<li>对输入从左到右扫描, 自底向上分析, 可反向构造出最右推导</li>
+<li>句柄：最右句型中和某个产生式体相匹配的字串, 对他的归约代表了该最右句型的最右推导的最后一步</li>
+<li>句柄右边只有终结符号</li>
+<li>如果文法是无二义的, 每个句型有且仅有一个句柄</li>
+<li>正则定义: $S\xRightarrow[rm]{*}\alpha A w\xRightarrow[rm] \alpha\beta w$, 那么紧跟在$\alpha$后的$\beta$是$A\to \beta$的一个句柄</li>
+</ul>
+</li>
+<li>移入-归约<ul>
+<li>使用一个栈: 栈中符号描述了一个最右句型</li>
+<li>开始: 栈中只有$, 输入为w$</li>
+<li>结束时刻: 栈中S$, 输入为$</li>
+<li>不断移入符号, 识别到句柄就归约</li>
+<li>分析动作<ul>
+<li>移入: 将下一个输入符号移到栈顶</li>
+<li>归约: 将句柄归约为对应的非终结符<ul>
+<li>句柄总在栈顶</li>
+<li>具体操作时, 弹出句柄, 压入被归约到的非终结符号</li>
+</ul>
+</li>
+<li>接受: 宣布分析成功完成</li>
+<li>报错: 发现语法错误, 调用错误恢复子程序</li>
+</ul>
+</li>
+<li>冲突<ul>
+<li>移入-归约冲突: 不知道是否应该继续移入, 因为移不移都能归约</li>
+<li>归约-归约冲突: 多个产生式, 右部相同</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>LR(k)分析: 向前看k个, k一般不超过1<ul>
+<li>优点<ul>
+<li>表格驱动, 通用方法, 无回溯移入-归约分析, 能分析的文法多</li>
+</ul>
+</li>
+<li>LR(0)项<ul>
+<li>文法的产生式, 在右部加一个点, 每个空位都可能加</li>
+<li>点: 代表阶段性成果: 其前部已经被扫描, 后部是期望扫描到的东西</li>
+</ul>
+</li>
+<li>LR(0)项集规范族的构造<ul>
+<li>增广文法: 原文法加新开始符号S’, 并添加产生式$S’\to S$</li>
+<li>项集闭包: CLOSURE(I): 根据以下规则构造, I为文法G的一个顶集<ul>
+<li>I中各项加入CLOSURE(I)</li>
+<li>如果$A\to\alpha \cdot B\beta$在CLOSURE(I), 而$B\to\cdot\gamma$不在, 则加入其中, 并不断迭代</li>
+</ul>
+</li>
+<li>GOTO函数:<ul>
+<li>GOTO(I,X): I中所有形如$[A\to \alpha\cdot X\beta]$对应的项$[A\to \alpha X\cdot\beta]$的集合的闭包</li>
+</ul>
+</li>
+<li>求规范族<ul>
+<li>从初始项集开始, 不断计算各种可能的后继, 直到生成所有可能的项集</li>
+<li>对C中每个项集I, 对每个文法符号X, 如果GOTO(I,X)非空且不在C中, 将GOTO(I,X)加入C</li>
+<li>直到某一轮没有新的项集被加入</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>LR(0)自动机的构造<ul>
+<li>构造方法<ul>
+<li>根据项集族构造</li>
+<li>每个项集族的顶集对应于自动机的一个状态</li>
+<li>状态转换: GOTO(I,X)=J, 则从I到J有标号X的转换</li>
+<li>开始状态为CLOSURE({$S’\to \cdot S$})</li>
+</ul>
+</li>
+<li>作用<ul>
+<li>假设输入$\gamma$使自动机从开始状态运行到状态j</li>
+<li>如果j中存在项$A\to\alpha\cdot$<ul>
+<li>$\gamma$后添加一些终结符可以得到一个最右句型</li>
+<li>$\alpha$是$\gamma$的后缀, 且是句型的句柄</li>
+<li>表示可能找到了当前最右句型的句柄, 可以归约</li>
+</ul>
+</li>
+<li>如果j中存在项$B\to \alpha\cdot X\beta$, 那么<ul>
+<li>在$\gamma$后添加$X\beta$和一些终结符号, 可得到一个最右句型</li>
+<li>该句型中$\alpha X \beta$是句柄, 但还没找到, 应当移入</li>
+</ul>
+</li>
+<li>如果能给出明确的移入-归约建议, 则可以用来分析句型<ul>
+<li>已得到的文法符号序列对应于自动机的一条路径</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>LR语法分析器的结构<ul>
+<li>输入, 栈, 分析程序, 输出</li>
+<li>栈中存放状态序列, 可求出符号序列</li>
+<li>分析表确定动作: ACTION和GOTO</li>
+<li>LR分析表的结构<ul>
+<li>ACTION: 参数: 状态i, 终结符号a<ul>
+<li>移入j: j是新状态, 将j压入栈, 同时移入a</li>
+<li>归约$A\to \beta$: 栈顶的$\beta$归约成A, 因此根据GOTO表项压入新状态</li>
+<li>接受</li>
+<li>报错</li>
+</ul>
+</li>
+<li>GOTO: 如果GOTO($I_i$,A) = $I_j$(函数), 则GOTO[$i$,A] = $j$(表项)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>语法分析器的格局<ul>
+<li>栈中内容和余下输入</li>
+<li>每一个状态都对应一个文法符号(进入该状态的边的标号), 除了$s_0$</li>
+<li>动作与格局<ul>
+<li>移入: 输入拿掉一个, 栈增加一个</li>
+<li>归约: 输入不变, 栈拿掉r个(右部长度), 加上1个(左部)</li>
+<li>接受</li>
+<li>报错</li>
+</ul>
+</li>
+<li>ACTION表<ul>
+<li>s5: 表示移入, 并压入状态5</li>
+<li>r8: 表示用8号产生式归约</li>
+</ul>
+</li>
+<li>GOTO表: 3表示弹出之后的栈顶, 根据归约产生式左部 , 应当压入状态3</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SLR语法分析表<ul>
+<li>构造<ul>
+<li>以自动机为基础, 构造规范族</li>
+<li>状态$i$对应项集$I_i$, 相关的ACTION和GOTO如下<ul>
+<li>$[A\to\alpha\cdot a\beta]$在$I_i$中, 且GOTO($I_i$,a) = $I_j$, 则ACTION[i,a]=移入j</li>
+<li>$[A\to\alpha\cdot]$在$I_i$中, 那么对FOLLOW(S)中的所有a, ACTION[$I_i$, a]</li>
+<li>=按$A\to\alpha$归约</li>
+<li>如果$[S’\to S\cdot]$在$I_i$中, 那么将ACTION[$I_i$,$]设为接受</li>
+<li>如果GOTO($I_i$, A)=$I_j$, 那么在GOTO表中, GOTO[i,A]=j</li>
+<li>空白的是error</li>
+</ul>
+</li>
+<li>SLR表无冲突, 则该文法是SLR的</li>
+</ul>
+</li>
+<li>弱点<ul>
+<li>项集包含$[A\to\alpha\cdot]$, 按照$A\to \alpha$归约的条件是, 下一个输入符号$a$在某个句型中可以跟在$A$后</li>
+<li>假设此时栈中的符号串为$\beta\alpha$, 如果$\beta Aa$不是任何最右句型的前缀, 那么即使a满足FOLLOW这个条件, 依然不应当按照$A\to\alpha$归约</li>
+</ul>
+</li>
+<li>改进<ul>
+<li>$[A\to\alpha\cdot]$在顶集中的条件是, $[A\to \cdot\alpha]$出现在某个顶集中, 而这个的条件是, $B\to\beta\cdot A\gamma$出现在项中</li>
+<li>据此, 按此归约, 需要下一个输入符号是$\gamma$的第一个符号, 但LR(0)项集中不能确定这个信息</li>
+</ul>
+</li>
+<li>更强大的分析器<ul>
+<li>规范LR方法: LR(1)顶集, 把期望的向前看符号也加入项, 状态很多</li>
+<li>向前看LR方法: LALR方法, 基于LR(0)项集族, 但每个项都带有向前看符号, 强于SLR, 但表一样大</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="LR-1"><a href="#LR-1" class="headerlink" title="LR(1)"></a>LR(1)</h3><ul>
+<li>LR(1)项<ul>
+<li>$[A\to \alpha\cdot\beta, a]$: 向前看符号为$a$</li>
+<li>按照该产生式归约, 则下一个输入必须是$a$, 同一产生式可以配上不同的向前看符号, 有更多状态</li>
+<li>$\beta$非空, 则移入动作不考虑$a$</li>
+</ul>
+</li>
+<li>构造项<ul>
+<li>增广文法<ul>
+<li>$[S’\to S, $]$</li>
+<li>$[A\to \alpha\cdot B\beta, a]$对于可行前缀$\gamma$有效, 那么$[B\to\cdot\theta, b]$有效的条件$b$是什么</li>
+<li>$S\xRightarrow[rm]{<em>}\delta Aw\xRightarrow[rm]{}\delta\alpha B \beta w\xRightarrow[rm]{</em>}\delta\alpha B x w\xRightarrow[rm]{}\delta\alpha \theta x w$</li>
+<li>$b$应当是FIRST(xw), 或$xw$为空时, $b=$$</li>
+<li>若$[A\to \alpha\cdot X\beta, a]$对于可行前缀$\gamma$有效, $[A\to \alpha X\cdot \beta, a]$对$\gamma X$有效</li>
+</ul>
+</li>
+<li>项集<ul>
+<li>CLOSURE中, $[A\to \alpha\cdot B\beta, a]$生成$[B\to\cdot\theta, b]$时, $b$必须在FIRST($\beta a$)</li>
+<li>总有$a$在FOLLOW($A$)中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>构造分析表<ul>
+<li>做修改: 按照产生式归约的条件, 从FOLLOW(A)改为: 项集的向前看符号a, ACTION[i,a]=按照….归约</li>
+</ul>
+</li>
+</ul>
+<h3 id="LALR语法分析表"><a href="#LALR语法分析表" class="headerlink" title="LALR语法分析表"></a>LALR语法分析表</h3><ul>
+<li>LR(1)语法分析表的合并<ul>
+<li>寻找相同核心(不考虑向前看符号)的LR(1)项集(项的第一分量相同, 向前看符号可能不同), 合并为1个项集</li>
+<li>GOTO(I,X)也可合并, 因GOTO(I,X)的核心只由I的核心决定</li>
+</ul>
+</li>
+<li>合并引起的冲突<ul>
+<li>不会导致移入归约冲突, 若原来无冲突<ul>
+<li>若有, 则合并前, 这两个项也冲突, 于是原来的LR(1)已经存在冲突</li>
+</ul>
+</li>
+<li>归约归约冲突</li>
+</ul>
+</li>
+<li>分析表构造算法<ul>
+<li>先构造LR(1)项集规范族</li>
+<li>对于每个核心, 找出有该核心的项集, 用并集代替他们</li>
+<li>按照LR分析表的方法得到ACTION, 注意检查冲突</li>
+<li>GOTO表, 原目标是项集, 替换为该项集在新的项集规范族中对应的项集(即替换为并集)</li>
+</ul>
+</li>
+<li>比较<ul>
+<li>处理正确的输入, LALR与LR的动作相同</li>
+<li>错误的输入, LALR可能进行额外的归约, 但不会额外移入</li>
+<li>LALR与SLR状态相同, 拥有LR(1)的向前看符号</li>
+</ul>
+</li>
+</ul>
+<h3 id="语法错误的处理"><a href="#语法错误的处理" class="headerlink" title="语法错误的处理"></a>语法错误的处理</h3><ul>
+<li>错误处理的目标: 报错, 指出位置, 错误恢复</li>
+<li>错误恢复<ul>
+<li>出错后继续进行处理</li>
+<li>可能恢复的不成功</li>
+<li>可用信息: 栈中的符号, 待分析的符号</li>
+<li>恢复方法<ul>
+<li>恐慌模式(跳过当前结构, 通用)<ul>
+<li>忽略输入中的一些符号, 直到出现由设计者选定的某个同步词法单元</li>
+<li>同步词法单元<ul>
+<li>将FOLLOW(A)中的所有符号放入A的同步集合中</li>
+<li>高层次开始符号集合, 加入低层次同步集合</li>
+<li>多了: FIRST(A)加入A的同步集合</li>
+<li>漏了: 栈顶终结符错误, 可直接弹出该符号, 并发出消息称, 已经插入了该符号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>短语层次的恢复(专用)</li>
+</ul>
+</li>
+<li>LR语法分析中的错误恢复<ul>
+<li>报错: 栈顶符号串$\alpha$, 输入$a$, 不存在终结符号$x$, 使得$\alpha a x$是最右句型</li>
+<li>恢复(恐慌恢复)<ul>
+<li>栈顶向下扫描, 找到状态s, s有一对应于终结符号A的GOTO目标(s之上的状态被丢弃)</li>
+<li>输入中丢弃一些符号, 直到一个可以跟在A后的符号b(不丢弃b), 并将GOTO(s,A)压栈, 继续分析</li>
+<li>总结: 设法(扔掉一些状态和输入)扫描完带错的A字串, 假装找到了A的实例</li>
+<li>短语恢复: 不详细讲 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="二义性文法的使用"><a href="#二义性文法的使用" class="headerlink" title="二义性文法的使用"></a>二义性文法的使用</h2><ul>
+<li>对于某些二义性文法, 可通过消除二义性规则, 保证每个句子只有一颗语法树</li>
+</ul>
+<h3 id="优先级-结合性消除冲突"><a href="#优先级-结合性消除冲突" class="headerlink" title="优先级/结合性消除冲突"></a>优先级/结合性消除冲突</h3><ul>
+<li>优先级: 不同时判断顺序(高低)</li>
+<li>结合性: 相同优先级, 判断顺序(左右)</li>
+</ul>
+<h2 id="语法分析器生成工具"><a href="#语法分析器生成工具" class="headerlink" title="语法分析器生成工具"></a>语法分析器生成工具</h2>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-19T09:32:31.251Z" itemprop="dateUpdated">2020-03-19 17:32:31</time>
+</span><br>
+
+
+        
+        Link：<a href="/2020/02/27/Learn-PTC-20200227-PTC-04/" target="_blank" rel="external">https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://Maxwell-lyu.github.io">
+            <img src="/img/avatar.png" alt="Maxwell Lyu">
+            Maxwell Lyu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">
+        <i class="icon icon-coffee"></i>
+    </a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Course/">Course</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Principles-and-Techniques-of-Compilers/">Principles and Techniques of Compilers</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/&title=《编译原理 4》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/&title=《编译原理 4》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《编译原理 4》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/03/17/Learn-PTC-20200317-PTC-05/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">编译原理 5</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/02/18/Learn-PTC-20200218-PTC-03/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">编译原理 3</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "mVhn5w80vLd48Du7XTGLVw71-9Nh9j0Va",
+            appKey: "mpnUAHaby8utnEkqWK354Q3w",
+            avatar: "mm",
+            placeholder: "Empty here...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10", 
+            lang:'en' 
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Buy Maxwell a Coffee
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">Wechat</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">Alipay</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total Visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total Visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Maxwell Lyu &copy; 2019 - 2021</span>
+            <span>
+                
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/&title=《编译原理 4》 — Maxwell's Blog&pic=https://Maxwell-lyu.github.io/img/avatar.png" data-title="Weibo">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="WeChat">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/&title=《编译原理 4》 — Maxwell's Blog&source=The Personal Blog of Maxwell Lyu" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《编译原理 4》 — Maxwell's Blog&url=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/&via=https://Maxwell-lyu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://Maxwell-lyu.github.io/2020/02/27/Learn-PTC-20200227-PTC-04/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '_(:з」∠)_';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ヾ(^▽^*)';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
